@@ -17,6 +17,7 @@ module.exports = {
     entry: {
         vendor: [
             '@angular/common',
+            '@angular/forms',
             '@angular/compiler',
             '@angular/core',
             '@angular/http',
@@ -31,6 +32,7 @@ module.exports = {
             'es6-shim',
             'es6-promise',
             'jquery',
+            'rxjs',
             'zone.js',
         ]
     },

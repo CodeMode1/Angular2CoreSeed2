@@ -1,20 +1,8 @@
-﻿<h1>{{titreWeather}}</h1>
+﻿<h2>{{messageDetails}}</h2>
 
-<input [(ngModel)]="weather1.date"/>
-<h2>{{weather1.date | date:'medium'}}</h2>
+<div *ngIf="weather">
+    <h1>Weather Detail</h1>
 
-<!-- JSON in string format (what you have to send to the server )-->
-{{diagnostic}}
-
-<div>
-    <button class="btn btn-primary" (click)="showWeatherForm()">Create new Weather</button>
-</div>
-
-<div *ngIf="showForm" class="col-md-12">
-    <weather-form [weatherToSave]="weather1" (newWeather)="postWeather($event)"></weather-form>
-</div>
-
-<div *ngIf="weathers">
     <h3>Weather for {{weather?.city}}</h3>
 
     <table class="table table-bordered table-striped">
@@ -31,9 +19,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let weather of weathers">
+            <tr>
                 <td>{{weather?.id}}</td>
-                <td><a [routerLink]="['at', weather.name]">{{weather?.name}}</a></td>
+                <td>{{weather?.name}}</td>
                 <td>{{weather?.date}}</td>
                 <td>{{weather?.dateFormatted}}</td>
                 <td>{{weather?.tempC}}</td>
@@ -43,12 +31,5 @@
             </tr>
         </tbody>
     </table>
-    
 </div>
-
-<router-outlet></router-outlet>
-
-
-
-
 
