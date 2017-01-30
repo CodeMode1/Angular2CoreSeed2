@@ -24,35 +24,37 @@ namespace Angular2CoreSeed.Controllers
         {
             try
             {
+                _logger.LogInformation("trying get weathers");
                 var results = _repository.GetAll();
-                if (results != null)
+                if(results == null)
                 {
-                    return Ok(results);
+                    return NotFound($"Couldnt get weathers : {results}");
                 }
-                throw new Exception();
+                return Ok(results);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to get all weathers {ex}");
-                return BadRequest($"Error occured getting weathers{ex}");
+                _logger.LogError($"Failed to get all weathers : {ex}");              
             }
+            _logger.LogWarning($"Could get weather objects");
+            return BadRequest($"Error occured getting weathers");
         }
 
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]Weather weather)
         {
-            _logger.LogInformation("trying save objet weather : " + weather.Name);
             try
             {
+                _logger.LogInformation("trying save objet weather : " + weather.Name);
                 if (!ModelState.IsValid)
                 {
-                    throw new Exception();
+                    return BadRequest($"Model State is invalid cant create : {weather}");
                 }
                 if (weather == null)
                 {
-                    throw new Exception();
+                    return BadRequest($"weather object is null cant create : {weather}");
                 }
-                _logger.LogInformation("lobjet weather : " + weather.Name + weather.Date);
+                _logger.LogInformation("objet weather : " + weather.Name + weather.Date);
                 var newWeather = new Weather()
                 {
                     Name = weather.Name,
@@ -79,10 +81,10 @@ namespace Angular2CoreSeed.Controllers
         [HttpPut]
         [HttpPatch]
         public async Task<IActionResult> Put([FromBody]Weather weather)
-        {
-            _logger.LogInformation("trying save objet weather : " + weather.Name);
+        {          
             try
             {
+                _logger.LogInformation("trying put objet weather : " + weather.Name);
                 var oldWeather = _repository.GetById(weather.Id);
                 if(oldWeather == null)
                 {
@@ -105,7 +107,7 @@ namespace Angular2CoreSeed.Controllers
             {
                 _logger.LogError($"Failed to edit weather: {ex}");
             }
-
+            _logger.LogWarning($"Could not put the weather object : {weather}");
             return BadRequest($"CAnnot editweather {weather}");
         }
 
@@ -114,18 +116,20 @@ namespace Angular2CoreSeed.Controllers
         {
             try
             {
+                _logger.LogInformation($"Trying to get a weather by name : {name}");
                 var result = _repository.GetByName(name);
-                if (result != null)
+                if (result == null)
                 {
-                    return Ok(result);
+                    return NotFound($"Couldnt get weather with name : {name}");
                 }
-                throw new Exception();
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to get Weather {ex}");
-                return BadRequest($"Error occured: {ex}");
+                _logger.LogError($"Failed to get Weather {ex}");             
             }
+            _logger.LogWarning($"Could not put the weather object with name : {name}");
+            return BadRequest($"Error occured cant get weather with name : {name}");
         }
 
         [HttpDelete("{id}")]
