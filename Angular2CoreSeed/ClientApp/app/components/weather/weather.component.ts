@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Weather, IWeather } from './weather';
@@ -12,15 +12,22 @@ import 'rxjs/add/operator/do';
 
 @Component({
     selector: 'weather',
-    template: require('./weather.component.html')
+    template: require('./weather.component.html'),
+    styles: [require('./weather.component.css')]
 })
 export class WeatherComponent implements OnInit {
+    public inputDelete: boolean;
+    public inputIdDelete: number;
     public weathers: Weather[];
     public weather1: Weather;
     public showForm: boolean;
     public titreWeather: string;
+    public editForm: boolean;
 
     constructor(private _http: Http, private _route: ActivatedRoute, private _weatherService: WeatherService) {
+        this.editForm = false;
+        this.inputDelete = false;
+        this.inputIdDelete = null;
         this.titreWeather = "Weather Check";
         this.showForm = false;
         // class weather object to bind to.
@@ -54,6 +61,18 @@ export class WeatherComponent implements OnInit {
         console.log(this.showForm);
     }
 
+    goDelete(idToDelete: number) {
+        this.inputIdDelete = idToDelete;
+        this.inputDelete = true;
+    }
+
+    // refresh the results after the child component has emitted the deletion was successfull.
+    refreshResults($event) {
+        if ($event == true) {
+            this.getAllWeathers();
+        }
+    }
+
     // take a js object  (usually object or array) convert it to JSON string notation
     // to get JSON object use parse method
     get diagnostic(): string {
@@ -78,6 +97,13 @@ export class WeatherComponent implements OnInit {
 
         // method to edit a weather
         this.putWeather(this.weather1);
+    }
+
+    // edit a weather when clicking a link on weather objects table.
+    goEdit(weather: Weather) {
+        this.weather1 = weather;
+        this.showForm = true;
+        this.editForm = true;
     }
 
     // POST : call the post action on backend to create new weather object.

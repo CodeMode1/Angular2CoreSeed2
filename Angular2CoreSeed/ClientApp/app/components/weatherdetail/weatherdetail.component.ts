@@ -39,6 +39,9 @@ export class WeatherDetailComponent{
                 result => {
                     console.log("this is the weather by name : " + JSON.stringify(result));
                     this.weather = result;
+                },
+                error => {
+                    console.log("Cant get details by name : " + JSON.stringify(error));
                 }
             );
     }

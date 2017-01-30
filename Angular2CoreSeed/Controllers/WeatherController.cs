@@ -62,8 +62,10 @@ namespace Angular2CoreSeed.Controllers
                     City = weather.City
                 };
                 _repository.AddWeather(newWeather);
-                await _repository.SaveChangesAsync();
-                return CreatedAtAction("Post", newWeather);
+                if(await _repository.SaveChangesAsync())
+                {
+                    return CreatedAtAction("Post", newWeather);
+                }             
             }
             catch (Exception ex)
             {
@@ -94,8 +96,10 @@ namespace Angular2CoreSeed.Controllers
                 oldWeather.Summary = weather.Summary ?? oldWeather.Summary;
                 oldWeather.City = weather.City ?? oldWeather.City;
 
-                await _repository.SaveChangesAsync();
-                return Ok(oldWeather);
+                if(await _repository.SaveChangesAsync())
+                {
+                    return Ok(oldWeather);
+                }
             }
             catch (Exception ex)
             {
@@ -124,25 +128,29 @@ namespace Angular2CoreSeed.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                _logger.LogInformation($"Trying to get a new weather by id : {id}");
+                _logger.LogInformation($"Trying to delete a weather by id : {id}");
                 var result = _repository.GetById(id);
                 if (result == null)
                 {
                     return NotFound($"Didnt found by id : {id}");
                 }
-                return Ok(result);
+                _repository.DeleteWeather(id);
+                if(await _repository.SaveChangesAsync())
+                {
+                    return Ok($"Deleted weather successfull by id {id}");
+                }               
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Cant recuperate from error at get weather by id : {id}", ex);
+                _logger.LogError($"Cant recuperate from error at delete weather by id : {id}", ex);
             }
-            _logger.LogWarning($"Could not get the weather obejct with id : {id}");
-            return BadRequest($"Bad request to get weather with id : {id}");
+            _logger.LogWarning($"Could not delete the weather obejct with id : {id}");
+            return BadRequest($"Bad request to delete weather with id : {id}");
         }
     }
 }

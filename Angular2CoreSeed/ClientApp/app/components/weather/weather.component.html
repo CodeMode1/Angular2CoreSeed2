@@ -9,8 +9,10 @@
     <button class="btn btn-primary" (click)="showWeatherForm()">Create new Weather</button>
 </div>
 
+<helloworld [onDelete]="inputDelete" [weatherToDeleteId]="inputIdDelete" (deleteSuccess)="refreshResults($event)"></helloworld>
+
 <div *ngIf="showForm" class="col-md-12">
-    <weather-form [weatherToSave]="weather1" (newWeather)="postWeather($event)" (edWeather)="editWeather($event)"></weather-form>
+    <weather-form [weatherToSave]="weather1" (newWeather)="postWeather($event)" (edWeather)="editWeather($event)" [modeEdit]="editForm"></weather-form>
 </div>
 
 <div *ngIf="weathers">
@@ -26,6 +28,8 @@
                 <th>Summary</th>
                 <th>City</th>
                 <th>Temp F</th>
+                <th>Delete</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -37,11 +41,15 @@
                 <td>{{weather?.summary}}</td>
                 <td>{{weather?.city}}</td>
                 <td>{{weather?.temperatureF}}</td>
+                <td><a (click)="goDelete(weather.id)"><i class="glyphicon glyphicon-scissors">Delete</i></a></td>
+                <td><a (click)="goEdit(weather)"><i class="glyphicon glyphicon-pencil">Edit</i></a></td>
             </tr>
         </tbody>
     </table>
     
 </div>
+
+<helloworld></helloworld>
 
 <router-outlet></router-outlet>
 

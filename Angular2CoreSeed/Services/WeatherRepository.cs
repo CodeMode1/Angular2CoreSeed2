@@ -55,5 +55,15 @@ namespace Angular2CoreSeed.Services
             _logger.LogInformation("save fail bd");
             return false;
         }
+
+        public void DeleteWeather(int id)
+        {
+            Weather weatherToDelete = 
+                _context.Weathers
+                .Where(weather => weather.Id == id)
+                .FirstOrDefault();
+
+            _context.Remove(weatherToDelete);
+        }
     }
 }

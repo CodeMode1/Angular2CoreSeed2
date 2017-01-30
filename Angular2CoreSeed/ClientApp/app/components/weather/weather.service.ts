@@ -51,9 +51,9 @@ export class WeatherService {
     }
 
     // GET:     1 weather object details by id
-    getWeatherByIdAPI(id: number): Observable<IWeather> {
-        return this._http.get(this.urlWeather + "/" + id)
-            .map((response: Response) => <IWeather>response.json())
+    deleteWeatherByIdAPI(id: number): Observable<any> {
+        return this._http.delete(this.urlWeather + "/" + id)
+            .map((response: Response) => <any>response.json())
             .catch((error: Response) => <any>error.json()) 
     }
 

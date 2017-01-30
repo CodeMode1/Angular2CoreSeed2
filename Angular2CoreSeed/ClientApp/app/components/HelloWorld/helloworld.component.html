@@ -1,9 +1,10 @@
-﻿<div class="panel panel-info">
+﻿<div *ngIf="onDelete" class="panel panel-success">
     <div class="panel-heading">
-        Hello World
+        <p>You deleted the wheather successfully.</p>        
     </div>
     <div class="panel-body">
-        Here's some text to get us started....
+        <h2>Success deleting the weather #  : </h2>
+        <h3>{{idToDelete}}</h3>
     </div>
 </div>
 
