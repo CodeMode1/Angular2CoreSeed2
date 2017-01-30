@@ -12,8 +12,6 @@ namespace Angular2CoreSeed.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
-        [Editable(false)]
-        public string DateFormatted { get; set; }
         public int TempC { get; set; }
         public string Summary { get; set; }
         public string City { get; set; }

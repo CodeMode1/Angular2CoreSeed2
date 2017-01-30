@@ -25,7 +25,6 @@ namespace Angular2CoreSeed.Models
                    {
                        Name = "CityWeather" + i,
                        Date = DateTime.UtcNow,
-                       DateFormatted = DateTime.UtcNow.ToString("d"),
                        Summary = "This is a new weather #" + i,
                        City = "City#" + i
                    };

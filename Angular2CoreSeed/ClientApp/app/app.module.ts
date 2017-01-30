@@ -4,8 +4,6 @@ import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { HelloWorldComponent } from './components/HelloWorld/helloworld.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { WeatherDetailComponent } from './components/weatherdetail/weatherdetail.component';
@@ -18,8 +16,6 @@ import { WeatherService } from './components/weather/weather.service';
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
         HomeComponent,
         HelloWorldComponent,
         WeatherComponent,
@@ -36,12 +32,10 @@ import { WeatherService } from './components/weather/weather.service';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'hello', component: HelloWorldComponent },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
             {
-                path: 'weather', component: WeatherComponent, children: [
+                path: 'weathers', component: WeatherComponent, children: [
                     { path: '', component: WeatherDetailComponent },
-                    { path: 'at/:name', component: WeatherDetailComponent }
+                    { path: 'detail/:name', component: WeatherDetailComponent }
                 ]
             },
             { path: '**', redirectTo: 'home' }

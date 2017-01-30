@@ -1,7 +1,7 @@
 ﻿export interface IWeather {
+    id: number;
     name: string;
     date: Date;
-    dateFormatted?: string;
     tempC?: number;
     summary?: string;
     city?: string;
@@ -11,9 +11,9 @@
 
 export class Weather implements IWeather {
     constructor(
+        public id: number,
         public name: string,
         public date: Date,
-        public dateFormatted?: string,
         public tempC?: number,
         public summary?: string,
         public city?: string,

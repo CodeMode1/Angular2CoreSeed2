@@ -1,7 +1,6 @@
 ﻿<h1>{{titreWeather}}</h1>
 
 <input [(ngModel)]="weather1.date"/>
-<h2>{{weather1.date | date:'medium'}}</h2>
 
 <!-- JSON in string format (what you have to send to the server )-->
 {{diagnostic}}
@@ -23,7 +22,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Date</th>
-                <th>DateFormatted</th>
                 <th>TempC</th>
                 <th>Summary</th>
                 <th>City</th>
@@ -32,10 +30,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let weather of weathers">
-                <td>{{weather?.id}}</td>
-                <td><a [routerLink]="['at', weather.name]">{{weather?.name}}</a></td>
-                <td>{{weather?.date}}</td>
-                <td>{{weather?.dateFormatted}}</td>
+                <td><a>{{weather?.id}}</a></td>
+                <td><a [routerLink]="['detail', weather.name]">{{weather?.name}}</a></td>
+                <td>{{weather?.date | date}}</td>
                 <td>{{weather?.tempC}}</td>
                 <td>{{weather?.summary}}</td>
                 <td>{{weather?.city}}</td>

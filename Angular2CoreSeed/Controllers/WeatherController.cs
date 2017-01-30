@@ -3,8 +3,6 @@ using Angular2CoreSeed.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Angular2CoreSeed.Controllers
@@ -29,11 +27,11 @@ namespace Angular2CoreSeed.Controllers
                 var results = _repository.GetAll();
                 if (results != null)
                 {
-                    return Ok(results); 
+                    return Ok(results);
                 }
                 throw new Exception();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Failed to get all weathers {ex}");
                 return BadRequest("Error occured getting weathers" + ex.Message.ToString());
@@ -50,7 +48,7 @@ namespace Angular2CoreSeed.Controllers
                 {
                     throw new Exception();
                 }
-                if(weather == null)
+                if (weather == null)
                 {
                     throw new Exception();
                 }
@@ -58,26 +56,29 @@ namespace Angular2CoreSeed.Controllers
                 var newWeather = new Weather()
                 {
                     Name = weather.Name,
-                    Date = weather.Date
+                    Date = weather.Date,
+                    TempC = weather.TempC,
+                    Summary = weather.Summary,
+                    City = weather.City
                 };
                 _repository.AddWeather(newWeather);
                 await _repository.SaveChangesAsync();
-                return CreatedAtAction("Post", weather);
+                return CreatedAtAction("Post", newWeather);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("Failed to save new weather", ex.Message);
                 return BadRequest($"CAnnot save new weather : {ex.Message.ToString()}");
             }
         }
 
-        [HttpGet("[action]/{name}")]
-        public IActionResult WeatherByName(string name)
+        [HttpGet("{name}")]
+        public IActionResult Get(String name)
         {
             try
             {
                 var result = _repository.GetByName(name);
-                if(result != null)
+                if (result != null)
                 {
                     return Ok(result);
                 }

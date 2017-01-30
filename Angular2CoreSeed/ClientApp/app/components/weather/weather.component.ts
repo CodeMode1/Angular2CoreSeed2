@@ -23,7 +23,8 @@ export class WeatherComponent implements OnInit {
     constructor(private _http: Http, private _route: ActivatedRoute, private _weatherService: WeatherService) {
         this.titreWeather = "Weather Check";
         this.showForm = false;
-        this.weather1 = new Weather("4343", new Date(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), new Date().getHours(), new Date().getMinutes()));
+        // class weather object to bind to.
+        this.weather1 = new Weather(1, "HotWeather", new Date(2017, 0, 27));
         console.log(this.weather1.date);
     }
 
@@ -34,12 +35,16 @@ export class WeatherComponent implements OnInit {
     }
 
     // GET : all weather objects from db
-    getAllWeathers(): Subscription{
-
-        return this._http.get('/api/weather')
+    getAllWeathers(){
+        this._weatherService
+            .getAllWeathersAPI()
             .subscribe(
-                result => {
-                    this.weathers = <IWeather[]>result.json();
+                data => {
+                    console.log("Get all weather objets : " + JSON.stringify(data));
+                    this.weathers = data;
+                },
+                error => {
+                    console.log("Erreur du serveur :  " + error);
                 }
             );
     }
@@ -62,21 +67,21 @@ export class WeatherComponent implements OnInit {
         console.log(this.weather1);
 
         // Method to save new weather object
-        this.saveWeather();
+        this.saveWeather(this.weather1);
     }
 
     // POST : call the post action on backend to create new weather object.
-    saveWeather(): Subscription{
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let body = JSON.stringify(this.weather1);
+    saveWeather(weather: Weather): Subscription{
 
-        return this._http.post('/api/weather', body, { headers: headers })
-            .map((res: Response) => res.json())
+        return this._weatherService
+            .postWeatherAPI(weather)
             .subscribe(
-                data => {
+            data => {
+                    this.weather1 = data;
                     console.log("saved new weather : ");
                     console.log(data);
+                    // refresh the data in the browser to get he newly sabed weather object.
+                    this.getAllWeathers();
                 },
                 error => {
                     console.log("error saving weather : " + error);

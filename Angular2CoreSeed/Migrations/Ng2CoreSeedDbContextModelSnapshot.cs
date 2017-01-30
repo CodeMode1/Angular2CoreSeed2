@@ -25,15 +25,11 @@ namespace Angular2CoreSeed.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("DateFormatted");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("Summary");
 
                     b.Property<int>("TempC");
-
-                    b.Property<int>("TemperatureF");
 
                     b.HasKey("Id");
 

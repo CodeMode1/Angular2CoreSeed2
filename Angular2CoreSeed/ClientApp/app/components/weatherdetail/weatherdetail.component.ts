@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Http } from '@angular/http';
+import { WeatherService } from '../weather/weather.service';
 import { ActivatedRoute } from '@angular/router';
+import { Weather } from '../weather/weather';
 
 
 @Component({
@@ -14,40 +15,35 @@ export class WeatherDetailComponent{
     weather: Weather;
     public messageDetails: string;
 
-    constructor(private route: ActivatedRoute, private http: Http) {
+    constructor(private _weatherService: WeatherService, private _route: ActivatedRoute) {
         this.messageDetails = "";
     }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
+        this.sub = this._route.params.subscribe(params => {
             this.name = params['name'];
             if (this.name != null || this.name != undefined) {
-                this.getDetails();
-            } else {
+                this.getDetails(this.name);
+            }
+            else {
                 this.messageDetails = "Aucuns détails à afficher";
             }           
         });      
     }
 
-    getDetails() {
-        this.http.get('api/weather/weatherbyname/'+this.name).subscribe(result => {
-            this.weather = result.json();
-        });
+    getDetails(name: string) {
+        // call getDetails method in the nservice
+        this._weatherService.getWeatherByNameAPI(name)
+            .subscribe(
+                result => {
+                    console.log("this is the weather by name : " + JSON.stringify(result));
+                    this.weather = result;
+                }
+            );
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
 
-}
-
-interface Weather {
-    id: number;
-    name: string;
-    date: Date;
-    dateFormatted: string;
-    tempC: number;
-    summary: string;
-    city: string;
-    temperatureF: number;
 }
