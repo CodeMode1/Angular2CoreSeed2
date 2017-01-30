@@ -10,7 +10,7 @@
 </div>
 
 <div *ngIf="showForm" class="col-md-12">
-    <weather-form [weatherToSave]="weather1" (newWeather)="postWeather($event)"></weather-form>
+    <weather-form [weatherToSave]="weather1" (newWeather)="postWeather($event)" (edWeather)="editWeather($event)"></weather-form>
 </div>
 
 <div *ngIf="weathers">
@@ -30,7 +30,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let weather of weathers">
-                <td><a>{{weather?.id}}</a></td>
+                <td>{{weather?.id}}</td>
                 <td><a [routerLink]="['detail', weather.name]">{{weather?.name}}</a></td>
                 <td>{{weather?.date | date}}</td>
                 <td>{{weather?.tempC}}</td>

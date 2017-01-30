@@ -16,22 +16,23 @@ export class WeatherDetailComponent{
     public messageDetails: string;
 
     constructor(private _weatherService: WeatherService, private _route: ActivatedRoute) {
+        this.name = "";
         this.messageDetails = "";
     }
 
     ngOnInit() {
         this.sub = this._route.params.subscribe(params => {
-            this.name = params['name'];
-            if (this.name != null || this.name != undefined) {
-                this.getDetails(this.name);
-            }
+            if (params['name'] != null || params['name'] != undefined) {
+                this.name = params['name'];
+                this.getDetailsByName(this.name);
+            } 
             else {
                 this.messageDetails = "Aucuns détails à afficher";
             }           
         });      
     }
 
-    getDetails(name: string) {
+    getDetailsByName(name: string) {
         // call getDetails method in the nservice
         this._weatherService.getWeatherByNameAPI(name)
             .subscribe(

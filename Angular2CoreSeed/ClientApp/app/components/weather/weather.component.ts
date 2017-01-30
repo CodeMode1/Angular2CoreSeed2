@@ -70,21 +70,53 @@ export class WeatherComponent implements OnInit {
         this.saveWeather(this.weather1);
     }
 
+    // edit a weather
+    editWeather($event) {
+        this.weather1 = $event;
+        console.log("editing a weather : ");
+        console.log(this.weather1);
+
+        // method to edit a weather
+        this.putWeather(this.weather1);
+    }
+
     // POST : call the post action on backend to create new weather object.
     saveWeather(weather: Weather): Subscription{
 
         return this._weatherService
             .postWeatherAPI(weather)
             .subscribe(
-            data => {
+                data => {
+                        this.weather1.id = data.id;
+                        this.weather1.name = data.name;
+                        this.weather1.date = data.date;
+                        this.weather1.tempC = data.tempC;
+                        this.weather1.summary = data.summary;
+                        this.weather1.city = data.city;
+                        this.weather1.temperatureF = data.temperatureF;
+                        console.log("saved new weather : ");
+                        console.log(data);
+                        // refresh the data in the browser to get he newly sabed weather object.
+                        this.getAllWeathers();
+                    },
+                    error => {
+                        console.log("error saving weather : " + error);
+                    }
+            );
+    }
+
+    putWeather(weather: Weather): Subscription {
+        return this._weatherService
+            .putWeatherAPI(weather)
+            .subscribe(
+                data => {
                     this.weather1 = data;
-                    console.log("saved new weather : ");
+                    console.log("edited weather : ");
                     console.log(data);
-                    // refresh the data in the browser to get he newly sabed weather object.
                     this.getAllWeathers();
                 },
                 error => {
-                    console.log("error saving weather : " + error);
+                    console.log("error editing weather : " + error);
                 }
             );
     }
