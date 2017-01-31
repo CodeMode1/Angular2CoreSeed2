@@ -27,10 +27,7 @@ export class WeatherFormComponent{
 
     // on veut voir le edit form : quand soumis est true, for edit s'affiche.
     ngOnChanges() {
-        if (this.modeEdit) {
-            this.submitted = false;
-            this.onEdit = true;
-        }
+        this.submitted = false;
     }
 
     // renvoyer le weatherform object au weather component
@@ -38,12 +35,12 @@ export class WeatherFormComponent{
         console.log(weatherForm.value);
         console.log(weatherForm.valid);
 
-        // Edit mode
-        if (this.onEdit) {
-            this.edWeather.emit(this.weatherToSave);          
+        if (this.modeEdit) {
+            this.edWeather.emit(this.weatherToSave);
+            this.modeEdit = false; 
         } else {
             this.newWeather.emit(weatherForm.value);
-            
+            this.modeEdit = true;
         }
 
         this.submitted = true;

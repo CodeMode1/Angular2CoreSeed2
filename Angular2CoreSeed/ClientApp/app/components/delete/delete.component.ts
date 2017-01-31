@@ -4,10 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Weather } from '../weather/weather';
 
 @Component({
-    selector: 'helloworld',
-    template: require('./helloworld.component.html')
+    selector: 'delete',
+    template: require('./delete.component.html')
 })
-export class HelloWorldComponent {
+export class DeleteComponent {
     @Input() onDelete: boolean;
     @Input() weatherToDeleteId: number;
     @Output() deleteSuccess: EventEmitter<boolean>;

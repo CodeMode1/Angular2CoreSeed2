@@ -4,7 +4,7 @@ import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { HelloWorldComponent } from './components/HelloWorld/helloworld.component';
+import { DeleteComponent } from './components/delete/delete.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { WeatherDetailComponent } from './components/weatherdetail/weatherdetail.component';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +12,12 @@ import { WeatherFormComponent } from './components/weatherform/weatherform.compo
 import { WeatherService } from './components/weather/weather.service';
 
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     declarations: [
         AppComponent,
         NavMenuComponent,
         HomeComponent,
-        HelloWorldComponent,
+        DeleteComponent,
         WeatherComponent,
         WeatherDetailComponent,
         WeatherFormComponent
@@ -30,7 +30,6 @@ import { WeatherService } from './components/weather/weather.service';
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'hello', component: HelloWorldComponent },
             { path: 'home', component: HomeComponent },
             {
                 path: 'weathers', component: WeatherComponent, children: [

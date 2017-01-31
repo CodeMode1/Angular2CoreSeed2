@@ -1,15 +1,10 @@
 ﻿<h1>{{titreWeather}}</h1>
 
-<input [(ngModel)]="weather1.date"/>
-
-<!-- JSON in string format (what you have to send to the server )-->
-{{diagnostic}}
-
 <div>
     <button class="btn btn-primary" (click)="showWeatherForm()">Create new Weather</button>
 </div>
 
-<helloworld [onDelete]="inputDelete" [weatherToDeleteId]="inputIdDelete" (deleteSuccess)="refreshResults($event)"></helloworld>
+<delete [onDelete]="inputDelete" [weatherToDeleteId]="inputIdDelete" (deleteSuccess)="refreshResults($event)"></delete>
 
 <div *ngIf="showForm" class="col-md-12">
     <weather-form [weatherToSave]="weather1" (newWeather)="postWeather($event)" (edWeather)="editWeather($event)" [modeEdit]="editForm"></weather-form>
@@ -49,9 +44,11 @@
     
 </div>
 
-<helloworld></helloworld>
+<delete></delete>
 
 <router-outlet></router-outlet>
+
+<button class="btn btn-lg btn-primary" (click)="goHome()">Home</button>
 
 
 

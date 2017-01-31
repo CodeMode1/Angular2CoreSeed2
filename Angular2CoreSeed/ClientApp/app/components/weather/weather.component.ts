@@ -24,7 +24,8 @@ export class WeatherComponent implements OnInit {
     public titreWeather: string;
     public editForm: boolean;
 
-    constructor(private _http: Http, private _route: ActivatedRoute, private _weatherService: WeatherService) {
+    constructor(private _http: Http, private _route: ActivatedRoute,
+        private _weatherService: WeatherService, private _router: Router) {
         this.editForm = false;
         this.inputDelete = false;
         this.inputIdDelete = null;
@@ -39,6 +40,10 @@ export class WeatherComponent implements OnInit {
 
         // Method to get weather objects
         this.getAllWeathers();        
+    }
+
+    goHome() {
+        this._router.navigateByUrl("/");
     }
 
     // GET : all weather objects from db
@@ -58,6 +63,7 @@ export class WeatherComponent implements OnInit {
 
     showWeatherForm() {
         this.showForm = !this.showForm;
+        this.editForm = false;
         console.log(this.showForm);
     }
 

@@ -40,6 +40,26 @@ namespace Angular2CoreSeed.Controllers
             return BadRequest($"Error occured getting weathers");
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var result = _repository.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"coulnt find weather with id : {id}");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get all weathers {ex}");
+            }
+            _logger.LogWarning($"Could get weather object with id : {id}");
+            return BadRequest($"Error occured getting weather with id  : {id}");
+        }
+
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]Weather weather)
         {
@@ -133,7 +153,7 @@ namespace Angular2CoreSeed.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
