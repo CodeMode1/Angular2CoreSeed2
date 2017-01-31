@@ -20,6 +20,10 @@ export class DeleteComponent {
     ngOnInit() {
     }
 
+    hideDeleteNotif() {
+        this.onDelete = false;
+    }
+
     ngOnChanges() {
         if (this.onDelete) {
             this.idToDelete = this.weatherToDeleteId;

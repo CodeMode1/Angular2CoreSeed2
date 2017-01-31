@@ -81,7 +81,8 @@ namespace Angular2CoreSeed.Controllers
                     Date = weather.Date,
                     TempC = weather.TempC,
                     Summary = weather.Summary,
-                    City = weather.City
+                    City = weather.City,
+                    Constraints = weather.Constraints
                 };
                 _repository.AddWeather(newWeather);
                 if(await _repository.SaveChangesAsync())
@@ -98,8 +99,8 @@ namespace Angular2CoreSeed.Controllers
             return BadRequest($"CAnnot save new weather : {weather}");
         }
 
-        [HttpPut]
-        [HttpPatch]
+        [HttpPut("")]
+        [HttpPatch("")]
         public async Task<IActionResult> Put([FromBody]Weather weather)
         {          
             try
@@ -118,6 +119,7 @@ namespace Angular2CoreSeed.Controllers
                 oldWeather.Summary = weather.Summary ?? oldWeather.Summary;
                 oldWeather.City = weather.City ?? oldWeather.City;
 
+                _repository.PutWeather(oldWeather);
                 if(await _repository.SaveChangesAsync())
                 {
                     return Ok(oldWeather);
