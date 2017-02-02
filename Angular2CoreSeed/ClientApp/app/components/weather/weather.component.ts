@@ -75,6 +75,8 @@ export class WeatherComponent implements OnInit {
     // refresh the results after the child component has emitted the deletion was successfull.
     refreshResults($event) {
         if ($event == true) {
+            // delete the weather client side :
+            this.weathers.splice(this.inputIdDelete, 1);
             this.getAllWeathers();
         }
     }

@@ -2,6 +2,8 @@
 import { WeatherService } from '../weather/weather.service';
 import { ActivatedRoute } from '@angular/router';
 import { Weather } from '../weather/weather';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 @Component({
     selector: 'delete',
@@ -34,12 +36,15 @@ export class DeleteComponent {
     deleterWeatherById(id: number) {
         this._weatherService.deleteWeatherByIdAPI(id)
             .subscribe(
-                data => {
+                result => {
                     this.deleteSuccess.emit(true);
-                    console.log("OK, deleted the weather : " + JSON.stringify(data));
+                    console.log("SUCCESS DELETE : ");
+                    // result est un object JSON
+                    console.log(result);
                 },
                 error => {
-                    console.log("ERROR, cannot delete weather : " + JSON.stringify(error));
+                    console.log("ERROR DELETE : ");
+                    console.log(error);
                 }
             );
     }

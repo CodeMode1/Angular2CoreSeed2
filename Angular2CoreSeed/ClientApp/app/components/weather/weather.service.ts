@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class WeatherService {
@@ -18,7 +19,7 @@ export class WeatherService {
     getAllWeathersAPI(): Observable<IWeather[]> {
         return this._http.get(this.urlWeather)
             .map((response: Response) => <IWeather[]>response.json())
-            .catch((error: Response) => <any>error.json())
+            .catch((error: any) => <any>error.json())
     }
 
     // POST:    1 weather object
@@ -29,7 +30,7 @@ export class WeatherService {
 
         return this._http.post(this.urlWeather, body, { headers })
             .map((response: Response) => <IWeather>response.json())
-            .catch((error: Response) => <any>error.json())
+            .catch((error: any) => <any>error.json())
     }
 
     // PUT:     1 weather object
@@ -40,22 +41,21 @@ export class WeatherService {
 
         return this._http.put(this.urlWeather, body, { headers })
             .map((response: Response) => <IWeather>response.json())
-            .catch((error: Response) => <any>error.json())
+            .catch((error: any) => <any>error.json())
     }
 
     // GET:     1 weather object details by name
     getWeatherByNameAPI(name: string): Observable<IWeather> {
         return this._http.get(this.urlWeather + "/ByName/" + name)
             .map((response: Response) => <IWeather>response.json())
-            .catch((error: Response) => <any>error.json())
+            .catch((error: any) => <any>error.json())
     }
 
     // GET:     1 weather object details by id
     deleteWeatherByIdAPI(id: number): Observable<any> {
-        return this._http.delete(this.urlWeather + "/" + id)
-            .map((response: Response) => <any>response.json())
-            .catch((error: Response) => <any>error.json()) 
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http.delete(this.urlWeather + "/" + id, { headers: headers })      
     }
-
 
 }
