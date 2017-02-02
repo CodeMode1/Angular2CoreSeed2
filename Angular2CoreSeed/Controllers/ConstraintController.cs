@@ -35,14 +35,14 @@ namespace Angular2CoreSeed.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"cant recuperate from error, cant find constraint for temp id : {id}");
+                _logger.LogError($"cant recuperate from error, cant find constraint for temp id : {id} with ex : {ex}");
             }
             _logger.LogInformation($"exiting method without constraints at id : {id} ");
             return BadRequest($"400 cant get constraints at temp id : {id}");
         }
 
         // save a constraint object : constraint, for a certain temperature object that has the id : id
-        [HttpPost]
+        [HttpPost("")]
         public async Task<IActionResult> Post(int id, [FromBody]Constraint constraint)
         {
             try

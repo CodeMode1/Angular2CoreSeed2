@@ -1,0 +1,9 @@
+﻿<h2>Weathers</h2>
+
+<h3>Choose a weather to get weather constraints from : </h3>
+
+<ul>
+    <li *ngFor="let weather of weathers">
+        <a [routerLink]="[weather.id]">{{weather?.name}}</a>
+    </li>
+</ul>

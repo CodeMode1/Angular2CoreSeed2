@@ -10,6 +10,9 @@ import { WeatherDetailComponent } from './components/weatherdetail/weatherdetail
 import { FormsModule } from '@angular/forms';
 import { WeatherFormComponent } from './components/weatherform/weatherform.component';
 import { WeatherService } from './components/weather/weather.service';
+import { WeatherConstraintsComponent } from './components/weatherconstraints/weatherconstraints.component';
+import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
+import { WeatherConstraintComponent } from './components/weatherconstraints/weatherconstraint.component';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -20,10 +23,13 @@ import { WeatherService } from './components/weather/weather.service';
         DeleteComponent,
         WeatherComponent,
         WeatherDetailComponent,
-        WeatherFormComponent
+        WeatherFormComponent,
+        WeatherConstraintsComponent,
+        WeatherConstraintComponent
     ],
     providers: [
-        WeatherService
+        WeatherService,
+        WeatherConstraintsService
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -37,6 +43,8 @@ import { WeatherService } from './components/weather/weather.service';
                     { path: 'detail/:name', component: WeatherDetailComponent }
                 ]
             },
+            { path: 'weatherConstraints', component: WeatherConstraintsComponent },
+            { path: 'weatherConstraints/:id', component: WeatherConstraintComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -1,0 +1,57 @@
+﻿<h2>Constraints for the temperature : # {{this.id}}</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th>
+            Wind
+        </th>
+        <th>
+            Gust
+        </th>
+        <th>
+            Humidity
+        </th>
+        <th>
+            Sun Rising
+        </th>
+        <th>
+            Sun Set
+        </th>
+        <th>
+            Clear
+        </th>
+        <th>
+            Feels Like
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let constraint of constraints">
+            <td>
+                {{constraint?.wind}}
+            </td>
+            <td>
+                {{constraint?.gust}}
+            </td>
+            <td>
+                {{constraint?.humidity}}
+            </td>
+            <td>
+                {{constraint?.sunRising}}
+            </td>
+            <td>
+                {{constraint?.sunSet}}
+            </td>
+            <td>
+                {{constraint?.clear}}
+            </td>
+            <td>
+                {{constraint?.feelsLike}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<button (click)="goBack()" class="btn btn-lg btn-primary">Back</button>

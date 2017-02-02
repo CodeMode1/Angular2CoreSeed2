@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Angular2CoreSeed.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Angular2CoreSeed.Services
 {
@@ -72,30 +73,42 @@ namespace Angular2CoreSeed.Services
                 .Where(weather => weather.Id == id)
                 .FirstOrDefault();
 
-            _context.Remove(weatherToDelete);
+            if(weatherToDelete != null)
+            {
+                _context.Remove(weatherToDelete);
+            }           
         }
 
         public IEnumerable<Constraint> GetConstraintsById(int id)
         {
             Weather weather =
                 _context.Weathers
+                .Include("Constraints")
                 .Where(w => w.Id == id)
                 .FirstOrDefault();
 
-            return weather.Constraints.ToList();
+            if(weather != null)
+            {
+                return weather.Constraints.ToList();
+            }
+            return null;
         }
 
         public void AddConstraints(int id, Constraint constraint)
         {
             Weather weather =
                 _context.Weathers
+                .Include("Constraints")
                 .Where(w => w.Id == id)
                 .FirstOrDefault();
-
-            //ajouter la contrainte pour une certainte temp.
-            weather.Constraints.Add(constraint);
-            //ajouter la contrainte a la collection.
-            _context.Add(constraint);
+            
+            if(weather != null)
+            {
+                //ajouter la contrainte pour une certainte temp.
+                weather.Constraints.Add(constraint);
+                //ajouter la contrainte a la collection.
+                _context.Add(constraint);
+            }
         }
 
         public void PutWeather(Weather weather)

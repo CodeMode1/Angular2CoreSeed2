@@ -42,10 +42,6 @@ export class WeatherComponent implements OnInit {
         this.getAllWeathers();        
     }
 
-    goHome() {
-        this._router.navigateByUrl("/");
-    }
-
     // GET : all weather objects from db
     getAllWeathers(){
         this._weatherService

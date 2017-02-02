@@ -55,7 +55,12 @@ export class WeatherService {
     deleteWeatherByIdAPI(id: number): Observable<any> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this._http.delete(this.urlWeather + "/" + id, { headers: headers })      
+        return this._http.delete(this.urlWeather + "/" + id, { headers: headers })
+            .map((response: Response) => {
+                console.log("succes delete weather, resp we get in service : ");
+                console.log(response);
+            })
+            .catch((error: any) => <any>console.log("succes delete weather, resp we get in service : " + error))      
     }
 
 }

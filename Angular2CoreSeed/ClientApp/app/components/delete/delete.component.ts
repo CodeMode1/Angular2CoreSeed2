@@ -38,13 +38,10 @@ export class DeleteComponent {
             .subscribe(
                 result => {
                     this.deleteSuccess.emit(true);
-                    console.log("SUCCESS DELETE : ");
-                    // result est un object JSON
-                    console.log(result);
+                    console.log("SUCCESS DELETE in component");
                 },
                 error => {
-                    console.log("ERROR DELETE : ");
-                    console.log(error);
+                    console.log("ERROR DELETE in component");
                 }
             );
     }
