@@ -1,6 +1,36 @@
-﻿.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+﻿html{
+    font-size: 10px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 0.5rem solid #42A948; /* green */
 }
 .ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+  border-left: 0.5rem solid #a94442; /* red */
 }
+
+.k-invalid {
+  color: red;
+  padding: 0.5rem 0;
+}
+
+/*#date, #date > table, #data > div.k-content.k-scrollable, kendo-calendar-monthview, table.k-calendar-weekdays{
+    padding: 0;
+    width: 100%;
+}*/
+
+/*.k-calendar.k-calendar-infinite {
+    padding: 0;
+}
+
+.form-group table{
+    width: 100%;
+}
+
+form-group div.k-content.k-scrollable{
+    width: 100%;
+}
+
+kendo-calendar-monthview.k-calendar-monthview{
+    width: 100%;
+}*/

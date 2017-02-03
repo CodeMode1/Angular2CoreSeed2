@@ -13,6 +13,8 @@ import { WeatherService } from './components/weather/weather.service';
 import { WeatherConstraintsComponent } from './components/weatherconstraints/weatherconstraints.component';
 import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
 import { WeatherConstraintComponent } from './components/weatherconstraints/weatherconstraint.component';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { DatePipeLocal } from './components/weatherform/weatherform.pipe';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -25,7 +27,8 @@ import { WeatherConstraintComponent } from './components/weatherconstraints/weat
         WeatherDetailComponent,
         WeatherFormComponent,
         WeatherConstraintsComponent,
-        WeatherConstraintComponent
+        WeatherConstraintComponent,
+        DatePipeLocal
     ],
     providers: [
         WeatherService,
@@ -34,6 +37,7 @@ import { WeatherConstraintComponent } from './components/weatherconstraints/weat
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
+        DateInputsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

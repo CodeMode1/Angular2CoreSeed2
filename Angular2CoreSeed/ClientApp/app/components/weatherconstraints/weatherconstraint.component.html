@@ -39,10 +39,10 @@
                 {{constraint?.humidity}}
             </td>
             <td>
-                {{constraint?.sunRising}}
+                {{constraint?.sunRising | fmDateLocal}}
             </td>
             <td>
-                {{constraint?.sunSet}}
+                {{constraint?.sunSet | fmDateLocal}}
             </td>
             <td>
                 {{constraint?.clear}}
