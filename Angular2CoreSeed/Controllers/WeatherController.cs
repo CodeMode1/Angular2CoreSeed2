@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Angular2CoreSeed.Controllers
 {
@@ -46,6 +47,8 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 var result = _repository.GetById(id);
+                _logger.LogInformation("type de l'instance : " + result.Date);
+                _logger.LogInformation("type" + result.Date.Kind);
                 if (result == null)
                 {
                     return NotFound($"coulnt find weather with id : {id}");
@@ -88,7 +91,7 @@ namespace Angular2CoreSeed.Controllers
                 if(await _repository.SaveChangesAsync())
                 {
                     return CreatedAtAction("Post", newWeather);
-                }             
+                }           
             }
             catch (Exception ex)
             {

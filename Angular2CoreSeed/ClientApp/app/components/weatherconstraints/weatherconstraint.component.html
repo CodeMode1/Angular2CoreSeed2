@@ -3,28 +3,29 @@
 <table class="table table-striped">
     <thead>
         <tr>
-        <th>
-            Wind
-        </th>
-        <th>
-            Gust
-        </th>
-        <th>
-            Humidity
-        </th>
-        <th>
-            Sun Rising
-        </th>
-        <th>
-            Sun Set
-        </th>
-        <th>
-            Clear
-        </th>
-        <th>
-            Feels Like
-        </th>
-    </tr>
+            <th>
+                Wind km/h
+                <!--<img src="../../../../wwwroot/dist/img/wind.png"/>-->
+            </th>
+            <th>
+                Gust km/h
+            </th>
+            <th>
+                Humidity %
+            </th>
+            <th>
+                Sun Rising AM
+            </th>
+            <th>
+                Sun Set PM
+            </th>
+            <th>
+                Clear
+            </th>
+            <th>
+                Feels Like °C
+            </th>
+        </tr>
     </thead>
     <tbody>
         <tr *ngFor="let constraint of constraints">

@@ -9,7 +9,7 @@ var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
 var sharedConfig = {
     resolve: { extensions: [ '', '.js', '.ts' ] },
     output: {
-        filename: '[name].js',
+        filename: '[name].js', 
         publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
     },
     module: {

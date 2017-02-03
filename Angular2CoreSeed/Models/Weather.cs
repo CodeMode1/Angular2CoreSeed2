@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +14,19 @@ namespace Angular2CoreSeed.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        private DateTime date;
+
+        public DateTime Date
+        {
+            get
+            {
+                return this.date.ToUniversalTime();
+            }
+            set
+            {
+                this.date = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+            }
+        }
         public int TempC { get; set; }
         public string Summary { get; set; }
         public string City { get; set; }

@@ -128,6 +128,8 @@ export class WeatherComponent implements OnInit {
                         console.log(data);
                         // refresh the data in the browser to get he newly sabed weather object.
                         this.getAllWeathers();
+                        console.log("type of date sent back to client : ");
+                        console.log(typeof (this.weather1.date));
                     },
                     error => {
                         console.log("error saving weather : " + error);
