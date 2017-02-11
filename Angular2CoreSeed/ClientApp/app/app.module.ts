@@ -1,20 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+
 import { DeleteComponent } from './components/delete/delete.component';
 import { WeatherComponent } from './components/weather/weather.component';
-import { WeatherDetailComponent } from './components/weatherdetail/weatherdetail.component';
-import { FormsModule } from '@angular/forms';
 import { WeatherFormComponent } from './components/weatherform/weatherform.component';
-import { WeatherService } from './components/weather/weather.service';
+import { WeatherDetailComponent } from './components/weatherdetail/weatherdetail.component';
+
 import { WeatherConstraintsComponent } from './components/weatherconstraints/weatherconstraints.component';
-import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
 import { WeatherConstraintComponent } from './components/weatherconstraints/weatherconstraint.component';
+
+import { TripComponent } from './components/trip/trip.component';
+import { TripDetailComponent } from './components/tripdetail/tripdetail.component';
+
+import { StopComponent } from './components/stop/stop.component';
+
+import { TripService } from './components/trip/trip.service';
+import { TripDetailService } from './components/tripdetail/tripdetail.service';
+import { StopService } from './components/stop/stop.service';
+import { WeatherService } from './components/weather/weather.service';
+import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
+
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-import { DatePipeLocal } from './components/weatherform/weatherform.pipe';
+import { FormatHour } from './components/weatherform/weatherform.pipe';
+import { TripDate } from './components/trip/trip.pipe'
 import { DialogModule } from '@progress/kendo-angular-dialog';
 
 @NgModule({
@@ -29,9 +43,17 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         WeatherFormComponent,
         WeatherConstraintsComponent,
         WeatherConstraintComponent,
-        DatePipeLocal
+        TripComponent,
+        TripDetailComponent,
+        StopComponent,
+        // pipes
+        FormatHour,
+        TripDate
     ],
     providers: [
+        TripService,
+        TripDetailService,
+        StopService,
         WeatherService,
         WeatherConstraintsService
     ],
@@ -43,10 +65,17 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
+            { path: 'trips', component: TripComponent },
+            {
+                path: 'trips/:id', component: TripDetailComponent, children: [
+                    { path: '', component: StopComponent },
+                    { path: 'stop', component: StopComponent }
+                ]
+            },
             {
                 path: 'weathers', component: WeatherComponent, children: [
                     { path: '', component: WeatherDetailComponent },
-                    { path: 'detail/:name', component: WeatherDetailComponent }
+                    { path: 'detail/:id', component: WeatherDetailComponent }
                 ]
             },
             { path: 'weatherConstraints', component: WeatherConstraintsComponent },

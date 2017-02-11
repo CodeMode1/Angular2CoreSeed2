@@ -1,0 +1,24 @@
+﻿ul{
+    list-style-type: none;
+}
+
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.infosTrip{
+    width: auto;
+    height: auto;
+    background-color:#9de6ff;
+    color: darkblue;
+    border: 1px solid black;
+    float: left;
+    margin: 1%;
+    opacity: 0.6;
+}
+
+.infosTrip:hover{
+    opacity: 0.9;
+    cursor: pointer;
+}

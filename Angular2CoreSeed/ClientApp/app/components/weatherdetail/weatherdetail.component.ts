@@ -10,21 +10,21 @@ import { Weather } from '../weather/weather';
 })
 
 export class WeatherDetailComponent{
-    name: string;
+    public id: number;
     private sub: any;
     weather: Weather;
     public messageDetails: string;
 
     constructor(private _weatherService: WeatherService, private _route: ActivatedRoute) {
-        this.name = "";
+        this.id = null;
         this.messageDetails = "";
     }
 
     ngOnInit() {
         this.sub = this._route.params.subscribe(params => {
-            if (params['name'] != null || params['name'] != undefined) {
-                this.name = params['name'];
-                this.getDetailsByName(this.name);
+            if (params['id'] != null || params['id'] != undefined) {
+                this.id = params['id'];
+                this.getWeatherBydId(this.id);
             } 
             else {
                 this.messageDetails = "Aucuns détails à afficher";
@@ -32,16 +32,16 @@ export class WeatherDetailComponent{
         });      
     }
 
-    getDetailsByName(name: string) {
+    getWeatherBydId(id: number) {
         // call getDetails method in the nservice
-        this._weatherService.getWeatherByNameAPI(name)
+        this._weatherService.getWeatherByIdAPI(id)
             .subscribe(
                 result => {
-                    console.log("this is the weather by name : " + JSON.stringify(result));
+                    console.log("this is the weather by id : " + JSON.stringify(result));
                     this.weather = result;
                 },
                 error => {
-                    console.log("Cant get details by name : " + JSON.stringify(error));
+                    console.log("Cant get details by id : " + JSON.stringify(error));
                 }
             );
     }

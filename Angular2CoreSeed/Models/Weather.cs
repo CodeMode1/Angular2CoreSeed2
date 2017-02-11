@@ -11,25 +11,23 @@ namespace Angular2CoreSeed.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
-        private DateTime date;
+        // hour taking temp.
+        private TimeSpan hour;
 
-        public DateTime Date
+        public TimeSpan Hour
         {
             get
             {
-                return this.date.ToUniversalTime();
+                return this.hour;
             }
             set
             {
-                this.date = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                this.hour = value;
             }
         }
         public int TempC { get; set; }
         public string Summary { get; set; }
-        public string City { get; set; }
         [Editable(false)]
         public int TemperatureF
         {
@@ -38,6 +36,8 @@ namespace Angular2CoreSeed.Models
                 return 32 + (int)(TempC / 0.5556);
             }
         }
-        public ICollection<Constraint> Constraints { get; set; }
+        public int StopId { get; set; }
+        public Stop Stop { get; set; }
+        public Constraint Constraint { get; set; }
     }
 }

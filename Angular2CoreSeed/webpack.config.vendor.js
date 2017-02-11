@@ -38,7 +38,8 @@ module.exports = {
             '@progress/kendo-angular-dateinputs',
             '@progress/kendo-theme-default/dist/all.css',
             '@progress/kendo-angular-dialog',
-            'moment'
+            'moment',
+            'font-awesome/css/font-awesome.css'
         ]
     },
     output: {

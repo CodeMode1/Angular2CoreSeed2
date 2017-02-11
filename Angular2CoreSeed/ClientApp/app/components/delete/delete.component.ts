@@ -47,14 +47,14 @@ export class DeleteComponent {
     deleterWeatherById(id: number) {
         this._weatherService.deleteWeatherByIdAPI(id)
             .subscribe(
-            result => {
-                this.deleteSuccess.emit(true);
-                this.isShowDelete = true;
-                console.log("SUCCESS DELETE in component");
-            },
-            error => {
-                console.log("ERROR DELETE in component");
-            }
+                result => {
+                    this.deleteSuccess.emit(true);
+                    this.isShowDelete = true;
+                    console.log("SUCCESS DELETE in component");
+                },
+                error => {
+                    console.log("ERROR DELETE in component");
+                }
             );
     }
 

@@ -11,17 +11,15 @@
 </div>
 
 <div *ngIf="weathers">
-    <h3>Weather for {{weather?.city}}</h3>
 
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Date</th>
+                <th>Hour AM/PM</th>
                 <th>TempC</th>
                 <th>Summary</th>
-                <th>City</th>
                 <th>Temp F</th>
                 <th>Delete</th>
                 <th>Edit</th>
@@ -29,12 +27,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let weather of weathers">
-                <td>{{weather?.id}}</td>
-                <td><a [routerLink]="['detail', weather.name]">{{weather?.name}}</a></td>
-                <td>{{weather?.date | fmDateLocal}}</td>
+                <td><a [routerLink]="['detail', weather.id]">{{weather?.id}}</a></td>
+                <td>{{weather?.name}}</td>
+                <td>{{weather?.hour | fmHourLocal}}</td>
                 <td>{{weather?.tempC}}</td>
                 <td>{{weather?.summary}}</td>
-                <td>{{weather?.city}}</td>
                 <td>{{weather?.temperatureF}}</td>
                 <td><a (click)="goDelete(weather.id)"><i class="glyphicon glyphicon-scissors">Delete</i></a></td>
                 <td><a (click)="goEdit(weather)"><i class="glyphicon glyphicon-pencil">Edit</i></a></td>

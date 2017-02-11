@@ -6,14 +6,20 @@ namespace Angular2CoreSeed.Services
 {
     public interface IWeatherRepository
     {
+        void AddTrip(Trip trip);
+        void PutTrip(Trip trip);
+        void DeleteTrip(int id);
+        IEnumerable<Trip> GetAllTrips();
+        Trip GetTripById(int id);
+        void AddStop(int id, Stop stop);
         void AddWeather(Weather newWeather);
         void PutWeather(Weather weather);
         void DeleteWeather(int id);
-        IEnumerable<Weather> GetAll();
-        Weather GetById(int id);
-        Weather GetByName(string name);
-        IEnumerable<Constraint> GetConstraintsById(int id);
-        void AddConstraints(int id, Constraint constraint);
+        IEnumerable<Weather> GetAllWeathers();
+        Weather GetWeatherById(int id);
+        Weather GetWeatherByName(string name);
+        Constraint GetConstraintById(int id);
+        void AddConstraint(int id, Constraint constraint);
         Task<bool> SaveChangesAsync();
     }
 }

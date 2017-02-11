@@ -1,0 +1,29 @@
+﻿<h2>Détails Trip</h2>
+
+<ul *ngIf="selectedTrip" class="col-md-6">
+    <li><i class="fa fa-address-book"></i><span>{{selectedTrip?.id}}</span></li>
+    <li><i class="fa fa-location-arrow"></i><span>{{selectedTrip?.name}}</span></li>
+    <li><i class="fa fa-hourglass"></i><span>{{selectedTrip?.leaving | fmTripDate}}</span></li>
+    <li><i class="fa fa-hotel"></i><span>{{selectedTrip?.country}}</span></li>
+    <li><i class="fa-home"></i><span>{{selectedTrip?.continent}}</span></li>
+    <li><h3>Stops</h3></li>
+    <li *ngFor="let stop of selectedTrip.stops">
+        <span><i class="fa fa-spinner fa-spin"></i></span>
+        <a> 
+            {{stop?.name}}, {{stop?.arrival | fmTripDate}}, {{stop?.leaving | fmTripDate}},
+            {{stop?.city}}
+        </a>
+        <span><a class="btn btn-sm btn-success">Ajouter</a></span>
+    </li>
+</ul>
+<ul class="col-md-6">
+    <li>Create a new Stop<span><a [routerLink]="['stop']" class="btn btn-sm btn-primary"><i class="fa fa-arrow-up"></i></a></span></li>
+    <li><a>View my stops</a></li>
+    <li><a>Delete stops</a></li>
+</ul>
+
+<router-outlet></router-outlet>
+
+<div class="col-md-12">
+    <button (click)="goBack()" class="btn btn-lg btn-primary">Back</button>
+</div>

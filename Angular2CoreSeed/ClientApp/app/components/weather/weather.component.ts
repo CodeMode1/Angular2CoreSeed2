@@ -9,6 +9,7 @@ import { WeatherService } from './weather.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import * as moment from 'moment';
 
 @Component({
     selector: 'weather',
@@ -23,6 +24,7 @@ export class WeatherComponent implements OnInit {
     public showForm: boolean;
     public titreWeather: string;
     public editForm: boolean;
+    public fmDate: any;
 
     constructor(private _http: Http, private _route: ActivatedRoute,
         private _weatherService: WeatherService, private _router: Router) {
@@ -31,13 +33,15 @@ export class WeatherComponent implements OnInit {
         this.inputIdDelete = null;
         this.titreWeather = "Weather Check";
         this.showForm = false;
-        // class weather object to bind to.
-        this.weather1 = new Weather(1, "HotWeather", new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
-        console.log(this.weather1.date);
+        // moment js format a date with a string format, returns a date.
+        moment.locale('en-ca');
+        this.fmDate = moment(new Date()).format('HH:mm');
+        console.log(this.fmDate);
     }
 
     ngOnInit(): void {
-
+        // class weather object to bind to.
+        this.weather1 = new Weather(1, "AutomnWeather", this.fmDate, 14, "Température Automne");
         // Method to get weather objects
         this.getAllWeathers();
     }
@@ -47,13 +51,13 @@ export class WeatherComponent implements OnInit {
         this._weatherService
             .getAllWeathersAPI()
             .subscribe(
-            data => {
-                console.log("Get all weather objets : " + JSON.stringify(data));
-                this.weathers = data;
-            },
-            error => {
-                console.log("Erreur du serveur :  " + error);
-            }
+                data => {
+                    console.log("Get all weather objets : " + JSON.stringify(data));
+                    this.weathers = data;
+                },
+                error => {
+                    console.log("Erreur du service :  " + error);
+                }
             );
     }
 
@@ -121,24 +125,23 @@ export class WeatherComponent implements OnInit {
         return this._weatherService
             .postWeatherAPI(weather)
             .subscribe(
-            data => {
-                this.weather1.id = data.id;
-                this.weather1.name = data.name;
-                this.weather1.date = data.date;
-                this.weather1.tempC = data.tempC;
-                this.weather1.summary = data.summary;
-                this.weather1.city = data.city;
-                this.weather1.temperatureF = data.temperatureF;
-                console.log("saved new weather : ");
-                console.log(data);
-                // refresh the data in the browser to get he newly sabed weather object.
-                this.getAllWeathers();
-                console.log("type of date sent back to client : ");
-                console.log(typeof (this.weather1.date));
-            },
-            error => {
-                console.log("error saving weather : " + error);
-            }
+                data => {
+                    this.weather1.id = data.id;
+                    this.weather1.name = data.name;
+                    this.weather1.hour = data.hour;
+                    this.weather1.tempC = data.tempC;
+                    this.weather1.summary = data.summary;
+                    this.weather1.temperatureF = data.temperatureF;
+                    console.log("saved new weather : ");
+                    console.log(data);
+                    // refresh the data in the browser to get he newly sabed weather object.
+                    this.getAllWeathers();
+                    console.log("type of date sent back to client : ");
+                    console.log(typeof (this.weather1.hour));
+                },
+                error => {
+                    console.log("error saving weather : " + error);
+                }
             );
     }
 
@@ -146,15 +149,19 @@ export class WeatherComponent implements OnInit {
         return this._weatherService
             .putWeatherAPI(weather)
             .subscribe(
-            data => {
-                this.weather1 = data;
-                console.log("edited weather : ");
-                console.log(data);
-                this.getAllWeathers();
-            },
-            error => {
-                console.log("error editing weather : " + error);
-            }
+                data => {
+                    this.weather1.hour = data.hour;
+                    this.weather1.id = data.id;
+                    this.weather1.name = data.name;
+                    this.weather1.summary = data.summary;
+                    this.weather1.tempC = data.tempC;
+                    console.log("edited weather : ");
+                    console.log(data);
+                    this.getAllWeathers();
+                },
+                error => {
+                    console.log("error editing weather : " + error);
+                }
             );
     }
 

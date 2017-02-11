@@ -14,6 +14,7 @@ namespace Angular2CoreSeed.Models
         public int Wind { get; set; }
         public int Gust { get; set; }
         public int Humidity { get; set; }
+        // hour-time precision
         private DateTime sunRising;
         public DateTime SunRising
         {
@@ -45,6 +46,8 @@ namespace Angular2CoreSeed.Models
         }
         public Boolean Clear { get; set; }
         public int FeelsLike { get; set; }
+        public int WeatherId { get; set; }
+        public Weather Weather { get; set; }
     }
 }
 

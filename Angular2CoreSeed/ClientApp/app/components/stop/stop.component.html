@@ -1,0 +1,34 @@
+﻿
+<div class="col-md-2">
+    <h4>{{message}}</h4>
+</div>
+
+<div class="col-md-6 col-md-offset-3" *ngIf="isShowForm">
+    <button class="btn btn-sm btn-success" (click)="addStop()"><i class="fa fa-plus"></i></button>
+    <form #formCreateStop="ngForm" (ngSubmit)="onSubmit(formCreateStop)" *ngIf="isCreateForm">
+
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" name="name" id="name" class="form-control" [(ngModel)]="selectedStop.name" required />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="arrival">Date Arrivée</label>
+            <kendo-calendar name="arrival" id="arrival" [focusedDate]="selectedStop.arrival" [(ngModel)]="selectedStop.arrival" required></kendo-calendar>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="leaving">Date Départ</label>
+            <kendo-calendar name="leaving" id="leaving" [focusedDate]="selectedStop.leaving" [(ngModel)]="selectedStop.leaving" required></kendo-calendar>
+        </div>
+
+        <div class="form-group">
+            <label for="city">Ville</label>
+            <input type="text" name="city" id="city" [(ngModel)]="selectedStop.city" class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-success">Ajouter</button>
+
+    </form>
+
+</div>

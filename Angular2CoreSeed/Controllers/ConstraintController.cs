@@ -1,5 +1,7 @@
 ﻿using Angular2CoreSeed.Models;
 using Angular2CoreSeed.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace Angular2CoreSeed.Controllers
 {
+    //[Authorize]
+    [EnableCors("AnyGet")]
     [Route("api/weather/{id}/constraints")]
     public class ConstraintController : Controller
     {
@@ -26,12 +30,12 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 _logger.LogInformation($"Trying to get constraints for a temp id : {id}");
-                var constraints = _repository.GetConstraintsById(id);
-                if (constraints == null)
+                var constraint = _repository.GetConstraintById(id);
+                if (constraint == null)
                 {
                     return NotFound($"404 cant find constraints for this id : {id}");
                 }
-                return Ok(constraints);
+                return Ok(constraint);
             }
             catch (Exception ex)
             {
@@ -66,7 +70,7 @@ namespace Angular2CoreSeed.Controllers
                     Clear = constraint.Clear,
                     FeelsLike = constraint.FeelsLike
                 };
-                _repository.AddConstraints(id, newConstraint);
+                _repository.AddConstraint(id, newConstraint);
                 if(await _repository.SaveChangesAsync())
                 {
                     return CreatedAtAction("Post", newConstraint);

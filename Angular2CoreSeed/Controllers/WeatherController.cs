@@ -5,9 +5,13 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Angular2CoreSeed.Controllers
 {
+    //[Authorize]
+    [EnableCors("AnyGet")]
     [Route("api/[controller]")]
     public class WeatherController : Controller
     {
@@ -26,7 +30,7 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 _logger.LogInformation("trying get weathers");
-                var results = _repository.GetAll();
+                var results = _repository.GetAllWeathers();
                 if(results == null)
                 {
                     return NotFound($"Couldnt get weathers : {results}");
@@ -46,9 +50,9 @@ namespace Angular2CoreSeed.Controllers
         {
             try
             {
-                var result = _repository.GetById(id);
-                _logger.LogInformation("type de l'instance : " + result.Date);
-                _logger.LogInformation("type" + result.Date.Kind);
+                var result = _repository.GetWeatherById(id);
+                _logger.LogInformation("type de l'instance : " + result.Hour);
+                _logger.LogInformation("type" + result.Hour);
                 if (result == null)
                 {
                     return NotFound($"coulnt find weather with id : {id}");
@@ -77,15 +81,14 @@ namespace Angular2CoreSeed.Controllers
                 {
                     return BadRequest($"weather object is null cant create : {weather}");
                 }
-                _logger.LogInformation("objet weather : " + weather.Name + weather.Date);
+                _logger.LogInformation("objet weather : " + weather.Name + weather.Hour);
                 var newWeather = new Weather()
                 {
                     Name = weather.Name,
-                    Date = weather.Date,
+                    Hour = weather.Hour,
                     TempC = weather.TempC,
                     Summary = weather.Summary,
-                    City = weather.City,
-                    Constraints = weather.Constraints
+                    StopId = 41
                 };
                 _repository.AddWeather(newWeather);
                 if(await _repository.SaveChangesAsync())
@@ -109,7 +112,7 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 _logger.LogInformation("trying put objet weather : " + weather.Name);
-                var oldWeather = _repository.GetById(weather.Id);
+                var oldWeather = _repository.GetWeatherById(weather.Id);
                 if(oldWeather == null)
                 {
                     return NotFound($"Cant find weather with this id : {weather.Id}");
@@ -117,10 +120,9 @@ namespace Angular2CoreSeed.Controllers
 
                 // map old weather to the new weather values if they are different
                 oldWeather.Name = weather.Name ?? oldWeather.Name;
-                oldWeather.Date = weather.Date;
+                oldWeather.Hour = weather.Hour;
                 oldWeather.TempC = weather.TempC;
                 oldWeather.Summary = weather.Summary ?? oldWeather.Summary;
-                oldWeather.City = weather.City ?? oldWeather.City;
 
                 _repository.PutWeather(oldWeather);
                 if(await _repository.SaveChangesAsync())
@@ -142,7 +144,7 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 _logger.LogInformation($"Trying to get a weather by name : {name}");
-                var result = _repository.GetByName(name);
+                var result = _repository.GetWeatherByName(name);
                 if (result == null)
                 {
                     return NotFound($"Couldnt get weather with name : {name}");
@@ -163,7 +165,7 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 _logger.LogInformation($"Trying to delete a weather by id : {id}");
-                var result = _repository.GetById(id);
+                var result = _repository.GetWeatherById(id);
                 if (result == null)
                 {
                     return NotFound($"Didnt found by id : {id}");

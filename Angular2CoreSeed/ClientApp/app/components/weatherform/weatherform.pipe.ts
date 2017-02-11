@@ -2,14 +2,12 @@
 import * as moment from 'moment';
 
 @Pipe({
-    name: 'fmDateLocal',
+    name: 'fmHourLocal',
     pure: false
 })
 
-export class DatePipeLocal implements PipeTransform {
+export class FormatHour implements PipeTransform {
     transform(date: any, args?: any): any {
-        let d = new Date(date);
-        // February 3, 2017 2:29 PM . Doc: https://momentjs.com/
-        return moment(d).format('LL');
+        return date.toString().substring(0,5);
     }
 }
