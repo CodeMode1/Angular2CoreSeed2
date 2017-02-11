@@ -86,6 +86,9 @@ namespace Angular2CoreSeed.Controllers
                     return BadRequest($"trip object is null cant create : {trip}");
                 }
 
+                // Test to get a trip with all its associated users - m-m
+                var tripA = _repository.GetTripById(52);
+
                 var newTrip = new Trip()
                 {
                     Name = trip.Name,
@@ -93,6 +96,12 @@ namespace Angular2CoreSeed.Controllers
                     Country = trip.Country,
                     Continent = trip.Continent
                 };
+                _repository.AddTrip(newTrip);
+                if (await _repository.SaveChangesAsync() == false)
+                {
+                    // TODO Error scenario??
+                    _logger.LogInformation("Add trip failed: " + trip.Name);
+                }
                 // get userName (unique) of logged in user using Identity.
                 var userNameLoggedIn = this.User.Identity.Name;
 
@@ -101,16 +110,15 @@ namespace Angular2CoreSeed.Controllers
 
                 if (user != null)
                 {
-                    _logger.LogInformation(newTrip.AppUserTrips.Count() + "");
-                    
-                    var trips = user.AppUserTrips.Select(mc => mc.Trip);
+                    // _logger.LogInformation(newTrip.AppUserTrips.Count() + "");
                     //user.AppUserTrips.Add(new AppUserTrip() { AppUserId = user.Id, TripId = newTrip.Id });
-                    AppUserTrip test = new AppUserTrip() { TripId = 1, AppUserId = "rere" };
-                    user.AppUserTrips.Add(test);
+                    AppUserTrip test = new AppUserTrip() { TripId = newTrip.Id, AppUserId = user.Id };
+                    //user.AppUserTrips.Add(test);
 
-                    _repository.AddTrip(newTrip);
+                    _repository.AddUserTrip(test);
                     if (await _repository.SaveChangesAsync())
                     {
+                        var trips = user.AppUserTrips.Select(mc => mc.Trip);  // TODO DOES NOT WORK
                         return CreatedAtAction("Post", newTrip);
                     }
                 }           

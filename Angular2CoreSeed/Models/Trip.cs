@@ -8,6 +8,14 @@ namespace Angular2CoreSeed.Models
 {
     public class Trip
     {
+        private readonly ICollection<AppUserTrip> _appUserTrips;
+
+        public Trip()
+            : base()
+        {
+            _appUserTrips = new List<AppUserTrip>();
+        }
+
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

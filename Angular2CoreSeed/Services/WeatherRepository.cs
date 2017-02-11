@@ -30,6 +30,7 @@ namespace Angular2CoreSeed.Services
         {
             return _context.Trips
                 .Where(trip => trip.Id == id)
+                .Include("AppUserTrips.AppUser")
                 .Include("Stops")
                 .FirstOrDefault();
         }
@@ -55,6 +56,11 @@ namespace Angular2CoreSeed.Services
             {
                 _context.Remove(tripToDelete);
             }
+        }
+
+        public void AddUserTrip(AppUserTrip userTrip)
+        {
+            _context.Add(userTrip);
         }
 
         public void AddStop(int id, Stop stop)

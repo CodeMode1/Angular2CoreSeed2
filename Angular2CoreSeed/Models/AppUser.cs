@@ -9,9 +9,23 @@ namespace Angular2CoreSeed.Models
 {
     public class AppUser : IdentityUser
     {
-        public override string Id { get; set; }
+        private readonly ICollection<AppUserTrip> _appUserTrips;
+
+        public AppUser()
+            : base()
+        {
+            _appUserTrips = new List<AppUserTrip>();
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public ICollection<AppUserTrip> AppUserTrips { get; set; }
+        public ICollection<AppUserTrip> AppUserTrips
+        {
+            get
+            {
+                return _appUserTrips;
+            }
+        }
+
     }
 }
