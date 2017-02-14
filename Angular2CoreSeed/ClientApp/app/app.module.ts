@@ -3,6 +3,11 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 import { FormsModule } from '@angular/forms';
 
+// login
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './components/guards/auth.guard';
+
+// main components
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -20,12 +25,15 @@ import { TripDetailComponent } from './components/tripdetail/tripdetail.componen
 
 import { StopComponent } from './components/stop/stop.component';
 
+// services
+import { LoginService } from './components/login/login.service';
 import { TripService } from './components/trip/trip.service';
 import { TripDetailService } from './components/tripdetail/tripdetail.service';
 import { StopService } from './components/stop/stop.service';
 import { WeatherService } from './components/weather/weather.service';
 import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
 
+// pipes, external modules
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { FormatHour } from './components/weatherform/weatherform.pipe';
 import { TripDate } from './components/trip/trip.pipe'
@@ -46,11 +54,14 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         TripComponent,
         TripDetailComponent,
         StopComponent,
+        LoginComponent,
         // pipes
         FormatHour,
         TripDate
     ],
     providers: [
+        AuthGuard,
+        LoginService,
         TripService,
         TripDetailService,
         StopService,
@@ -65,7 +76,8 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'trips', component: TripComponent },
+            { path: 'login', component: LoginComponent },
+            { path: 'trips', component: TripComponent, canActivate: [AuthGuard] },
             {
                 path: 'trips/:id', component: TripDetailComponent, children: [
                     { path: '', component: StopComponent },

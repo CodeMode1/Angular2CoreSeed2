@@ -1,8 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+
 
 @Component({
     selector: 'home',
     template: require('./home.component.html')
 })
+
+
 export class HomeComponent {
+    constructor(){}
+
+    ngOnInit() {
+    }
+   
 }

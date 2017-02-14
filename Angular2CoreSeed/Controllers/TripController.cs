@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Angular2CoreSeed.Controllers
 {
     [Authorize]
-    [EnableCors("AnyGet")]
+    //[EnableCors("AnyGet")]
     [Route("api/[controller]")]
     public class TripController : Controller
     {
@@ -72,6 +72,7 @@ namespace Angular2CoreSeed.Controllers
         }
 
         [HttpPost("")]
+        //[Authorize(Policy = "SuperUsers")]
         public async Task<IActionResult> Post([FromBody] Trip trip)
         {
             try
@@ -86,9 +87,6 @@ namespace Angular2CoreSeed.Controllers
                     return BadRequest($"trip object is null cant create : {trip}");
                 }
 
-                // Test to get a trip with all its associated users - m-m
-                var tripA = _repository.GetTripById(52);
-
                 var newTrip = new Trip()
                 {
                     Name = trip.Name,
@@ -102,23 +100,22 @@ namespace Angular2CoreSeed.Controllers
                     // TODO Error scenario??
                     _logger.LogInformation("Add trip failed: " + trip.Name);
                 }
-                // get userName (unique) of logged in user using Identity.
-                var userNameLoggedIn = this.User.Identity.Name;
+
+                //  get userName (unique) of logged in user using Identity.
+                // var userName = this.User.Identity.Name;
+                var userNameLoggedIn = this.User.Claims.ElementAt(0).Value;
 
                 // find the logged in user object using the userName.
                 var user = await _usrMng.FindByNameAsync(userNameLoggedIn);
 
                 if (user != null)
                 {
-                    // _logger.LogInformation(newTrip.AppUserTrips.Count() + "");
-                    //user.AppUserTrips.Add(new AppUserTrip() { AppUserId = user.Id, TripId = newTrip.Id });
                     AppUserTrip test = new AppUserTrip() { TripId = newTrip.Id, AppUserId = user.Id };
-                    //user.AppUserTrips.Add(test);
 
                     _repository.AddUserTrip(test);
                     if (await _repository.SaveChangesAsync())
                     {
-                        var trips = user.AppUserTrips.Select(mc => mc.Trip);  // TODO DOES NOT WORK
+                        //var trips = user.AppUserTrips.Select(mc => mc.Trip);  // TODO DOES NOT WORK
                         return CreatedAtAction("Post", newTrip);
                     }
                 }           

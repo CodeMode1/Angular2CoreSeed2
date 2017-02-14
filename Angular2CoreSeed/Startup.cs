@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Angular2CoreSeed
 {
@@ -42,6 +44,8 @@ namespace Angular2CoreSeed
             // transient : new instance of the service created for each request
             // scoped : same instance of the debug service for each same request
             // singleton : same instance for all the app
+
+            services.AddSingleton(Configuration);
 
             // Add DbContext services for the app so it can connect to a db instance with ConnectionString
             services.AddDbContext<DemoAppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Ng2CoreSeed")));
@@ -100,6 +104,15 @@ namespace Angular2CoreSeed
                 });
             });
 
+            //  POLICY & CLAIMS : better way handling authorization than traditional asp.net roles
+                // claims allow a bundle of tests, more flexibility
+
+            //services.AddAuthorization(cfg =>
+            //{
+            //    // creating a policy based on that the user has a claim SuperUser
+            //    cfg.AddPolicy("SuperUsers", p => p.RequireClaim("SuperUser", "True"));
+            //});
+
             services.AddMvc()
                 .AddJsonOptions(options => {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -127,6 +140,8 @@ namespace Angular2CoreSeed
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseStaticFiles();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -139,11 +154,32 @@ namespace Angular2CoreSeed
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            //app.UseCors(cfg =>
+            //{
+            //  cfg.AllowAnyHeader()
+            //     .AllowAnyMethod()
+            //     .WithOrigins("http://wildermuth.com");
+            //});
 
             // identity to protect mvc routes from unauthorized users
 
             app.UseIdentity();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = Configuration["Tokens:Issuer"],
+                    ValidAudience = Configuration["Tokens:Audience"],
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                    ValidateLifetime = true
+                }
+            });
 
             app.UseMvc(routes =>
             {

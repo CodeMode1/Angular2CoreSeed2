@@ -22,8 +22,8 @@
                         <span class="glyphicon glyphicon-user"></span> Sign Up
                     </a>
                 </li>
-                <li>
-                    <a>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/login']">
                         <span class="glyphicon glyphicon-log-in"></span> Sign In
                     </a>
                 </li>
@@ -40,6 +40,11 @@
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/weatherConstraints']">
                         <span class="glyphicon glyphicon-star-empty"></span> Weather Constraints
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/login']">
+                        <span class="glyphicon glyphicon-log-out"></span> LogOut
                     </a>
                 </li>
             </ul>

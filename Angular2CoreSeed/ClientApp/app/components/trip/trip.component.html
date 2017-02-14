@@ -1,6 +1,6 @@
-﻿<h2>{{titreTrip}}</h2>
+﻿<h1>Bienvenue {{userName}}</h1>
+<h2>{{titreTrip}}</h2>
 <h3>Disponibles présentement</h3>
-
 
 <div *ngFor="let trip of trips" class="infosTrip">
     <ul>
@@ -9,6 +9,6 @@
         <li>{{trip?.continent}}</li>
     </ul>
     <p>Date de Départ : {{trip?.leaving | fmTripDate}}</p>
-    <a class="btn btn-sm btn-primary" [routerLink]="[trip.id]">Acheter Trip</a>
+    <a class="btn btn-sm btn-primary" [routerLink]="[trip.id]">Voir Trip</a>
 </div>
 
