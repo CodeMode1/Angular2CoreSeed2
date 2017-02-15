@@ -45,7 +45,8 @@
     "webpack-externals-plugin": "^1.0.0",
     "webpack-hot-middleware": "^2.10.0",
     "webpack-merge": "^0.14.1",
-    "zone.js": "^0.6.21"
+    "zone.js": "^0.6.21",
+    "angular-2-local-storage": "~1.0.1"
   },
   "devDependencies": {
     "@types/jquery": "^2.0.40"

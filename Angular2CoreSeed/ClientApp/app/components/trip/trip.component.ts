@@ -2,6 +2,7 @@
 import { ITrip, Trip } from './trip';
 import { TripService } from './trip.service';
 import { Subscription } from 'rxjs/Subscription';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'trip',
@@ -14,15 +15,18 @@ export class TripComponent {
     public titreTrip: string;
     public userName: string;
 
-    constructor(public _tripService: TripService) {
+    constructor(public _tripService: TripService, private _loginService: LoginService) {
         this.titreTrip = "Les Forfaits Voyages";
         this.trips = [];
         this.getAllTrips();
+        if (this._loginService.userName != null && typeof (this._loginService.userName) != "undefined") {
+            this.userName = this._loginService.userName;
+        } else {
+            this.userName = null;
+        }
     }
 
     ngOnInit() {
-        console.log(JSON.parse(localStorage.getItem('token')).userName);
-        this.userName = JSON.parse(localStorage.getItem('token')).userName);
     }
 
     //  get methos sur service.
@@ -39,15 +43,5 @@ export class TripComponent {
             );
     }
 
-    acheterTrip(trip: Trip): Subscription {
-        return this._tripService.postTripAPI(trip)
-            .subscribe(
-                data => {
-                    console.log("succes creating trip : " + JSON.stringify(data));
-                },
-                error => {
-                    console.log("error creating trip : " + error);
-                }
-            );
-    }
+   
 }

@@ -26,6 +26,20 @@ namespace Angular2CoreSeed.Services
             return _context.Trips.ToList();
         }
 
+        public IEnumerable<Trip> GetTripsUser(AppUser user)
+        {
+            return _context.Trips
+                .Where(trips => trips.AppUserTrips
+                .Any(trip => trip.AppUserId == user.Id))
+                .Include(trip => trip.Stops)
+                .ToList();
+            //return _context.AppUsers
+            //    .Where(u => u.Id == user.Id)
+            //    .Include(u => u.AppUserTrips).ThenInclude(appUser => appUser.Trip)
+            //                                    .ThenInclude(trip => trip.Stops)
+            //    .FirstOrDefault();
+        }
+
         public Trip GetTripById(int id)
         {
             return _context.Trips
@@ -60,7 +74,14 @@ namespace Angular2CoreSeed.Services
 
         public void AddUserTrip(AppUserTrip userTrip)
         {
-            _context.Add(userTrip);
+            bool userTripExists = _context.AppUsers.Any(user => user.Id.Equals(userTrip.AppUserId));
+            if (userTripExists)
+            {
+                return;
+            }else
+            {
+                _context.Add(userTrip);
+            }         
         }
 
         public void AddStop(int id, Stop stop)

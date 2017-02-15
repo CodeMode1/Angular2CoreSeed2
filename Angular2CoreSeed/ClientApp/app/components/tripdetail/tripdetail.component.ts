@@ -13,9 +13,11 @@ import { ITrip, Trip } from '../trip/trip';
 export class TripDetailComponent {
     private sub: any;
     public selectedTrip: Trip;
+    public estAchat: boolean;
 
     constructor(public _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, public _router: Router) {
+        this.estAchat = false;
     }
 
     ngOnInit() {
@@ -49,6 +51,19 @@ export class TripDetailComponent {
                     console.log("error get back trip with id : " + id + error );     
                 }
             );
+    }
+
+    acheterTrip(trip: Trip): Subscription {
+        return this._tripdetail.postTripAPI(trip)
+            .subscribe(
+            data => {
+                console.log("succes creating trip : " + JSON.stringify(data));
+                this.estAchat = true;
+            },
+            error => {
+                console.log("error creating trip : " + error);
+            }
+        );
     }
 
     goBack() {

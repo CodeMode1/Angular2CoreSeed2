@@ -38,6 +38,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { FormatHour } from './components/weatherform/weatherform.pipe';
 import { TripDate } from './components/trip/trip.pipe'
 import { DialogModule } from '@progress/kendo-angular-dialog';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -73,6 +74,10 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         FormsModule,
         DateInputsModule,
         DialogModule,
+        LocalStorageModule.withConfig({
+            prefix: 'my-app',
+            storageType: 'localStorage'
+        }),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

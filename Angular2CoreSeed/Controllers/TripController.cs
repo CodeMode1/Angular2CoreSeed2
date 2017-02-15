@@ -50,6 +50,31 @@ namespace Angular2CoreSeed.Controllers
             return BadRequest($"Error occured getting trips");
         }
 
+        [HttpGet("user")]
+        public async Task<IActionResult> GetTripsUser()
+        {
+            try
+            {
+                //  get userName (unique) of logged in user using Identity.
+                var userNameLoggedIn = this.User.Claims.ElementAt(0).Value;
+
+                // find the logged in user object using the userName.
+                var user = await _usrMng.FindByNameAsync(userNameLoggedIn);
+                _logger.LogInformation($"trying to get trips for user {user}");
+                if(user != null)
+                {
+                    var trips = _repository.GetTripsUser(user);
+                    return Ok(trips);
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Failed to get trips for user : {ex}");
+            }
+            _logger.LogWarning($"Couldnt get trips for user");
+            return BadRequest($"Error occured getting trips for user");
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

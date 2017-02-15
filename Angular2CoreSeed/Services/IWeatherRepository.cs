@@ -6,6 +6,7 @@ namespace Angular2CoreSeed.Services
 {
     public interface IWeatherRepository
     {
+        IEnumerable<Trip> GetTripsUser(AppUser user);
         void AddTrip(Trip trip);
         void PutTrip(Trip trip);
         void DeleteTrip(int id);

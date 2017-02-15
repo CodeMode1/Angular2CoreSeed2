@@ -29,20 +29,4 @@ export class TripService {
             .catch((error: any) => <any>error.json())
     }
 
-    // POST:    1 trip object.
-    postTripAPI(trip: Trip): Observable<ITrip> {
-        var token = localStorage.getItem('token');
-        console.log(token);
-
-        // add authorization header with jwt token
-        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
-        let body = JSON.stringify(trip);
-
-        return this._http.post(this._urlTrip, body, options )
-            .map((response: Response) => <ITrip>response.json())
-            .catch((error: any) => <any>error.json())          
-    }
-
 }

@@ -39,7 +39,8 @@ module.exports = {
             '@progress/kendo-theme-default/dist/all.css',
             '@progress/kendo-angular-dialog',
             'moment',
-            'font-awesome/css/font-awesome.css'
+            'font-awesome/css/font-awesome.css',
+            'angular-2-local-storage'
         ]
     },
     output: {

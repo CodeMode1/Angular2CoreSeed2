@@ -40,7 +40,7 @@ export class LoginComponent {
                 data => {
                         var strippedToken = data.token;
                         console.log("succes login user " + JSON.stringify(this.user));
-                        localStorage.setItem('token', JSON.stringify({ token: strippedToken, userName: this.user.userName }));
+                        this._loginService.userName = this.user.userName;
                         this._loginService.token = strippedToken;
                         console.log("token du service : ");
                         console.log(this._loginService.token);
