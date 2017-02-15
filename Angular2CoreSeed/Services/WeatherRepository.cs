@@ -74,14 +74,7 @@ namespace Angular2CoreSeed.Services
 
         public void AddUserTrip(AppUserTrip userTrip)
         {
-            bool userTripExists = _context.AppUsers.Any(user => user.Id.Equals(userTrip.AppUserId));
-            if (userTripExists)
-            {
-                return;
-            }else
-            {
-                _context.Add(userTrip);
-            }         
+            _context.Add(userTrip);    
         }
 
         public void AddStop(int id, Stop stop)
@@ -101,6 +94,25 @@ namespace Angular2CoreSeed.Services
                 stop.TripId = tripToAddStop.Id;
                 // ajouter stop dans la bd
                 _context.Stops.Add(stop);
+            }
+        }
+
+        public Stop GetStopById(int id)
+        {
+            return _context.Stops
+                .Where(stop => stop.Id == id)
+                .FirstOrDefault();
+        }
+
+        public void DeleteStop(int id)
+        {
+            Stop stopToDelete =
+                _context.Stops
+                .Where(stop => stop.Id == id)
+                .FirstOrDefault();
+            if(stopToDelete != null)
+            {
+                _context.Remove(stopToDelete);
             }
         }
 

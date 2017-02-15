@@ -28,6 +28,17 @@ export class TripDetailService {
             .catch((error: any) => <any>error.json())
     }
 
+    // GET:     get trips for logged in user.
+    getUserTripAPI(): Observable<ITrip[]> {
+
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.get(this._urlTrip + "/user", options)
+            .map((response: Response) => <ITrip[]>response.json())
+            .catch((error: any) => <any>error.json())
+    }
+
     // POST:    1 trip object.
     postTripAPI(trip: Trip): Observable<ITrip> {
 

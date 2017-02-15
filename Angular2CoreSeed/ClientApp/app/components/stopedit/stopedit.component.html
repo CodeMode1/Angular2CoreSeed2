@@ -1,0 +1,25 @@
+﻿<div class="form-group col-md-12 deleteBlock">
+    <delete [isDelete]="inputDelete" [weatherToDeleteId]="inputIdDelete" [isStop]="isAStop" (deleteSuccess)="refreshResults($event)"></delete>
+</div>
+
+<ul class="col-md-12">
+    <li><h3>Stops</h3></li>
+    <li *ngFor="let stop of selectedTrip?.stops">
+        <div class="col-md-9">
+            <span><i class="fa fa-spinner fa-spin"></i></span>
+            <a>
+                {{stop?.name}}, {{stop?.arrival | fmTripDate}}, {{stop?.leaving | fmTripDate}},
+                {{stop?.city}}
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <span><a class="btn btn-sm btn-success" (click)="addStop(stop)">Ajouter</a></span>
+            <span><a class="btn btn-sm btn-danger" (click)="deleteStop(stop.id)">Supprimer</a></span>
+        </div>
+    </li>
+</ul>
+
+
+
+

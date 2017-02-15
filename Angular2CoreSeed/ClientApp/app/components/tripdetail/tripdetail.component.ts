@@ -13,11 +13,15 @@ import { ITrip, Trip } from '../trip/trip';
 export class TripDetailComponent {
     private sub: any;
     public selectedTrip: Trip;
-    public estAchat: boolean;
+    public isBought: boolean;
+    public userTrips: Trip[];
+    public isBoughtMessage: string;
 
     constructor(public _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, public _router: Router) {
-        this.estAchat = false;
+        this.isBought = false;
+        this.userTrips = [];
+        this.isBoughtMessage = "";
     }
 
     ngOnInit() {
@@ -46,6 +50,7 @@ export class TripDetailComponent {
                     data.stops);
                     console.log("succes get back trip with id : " + id);
                     console.log("trip detail : " + JSON.stringify(data));
+                    this.getTripsForUser();
                 },
                 error => {
                     console.log("error get back trip with id : " + id + error );     
@@ -53,12 +58,36 @@ export class TripDetailComponent {
             );
     }
 
-    acheterTrip(trip: Trip): Subscription {
+    getTripsForUser(): Subscription {
+        return this._tripdetail.getUserTripAPI()
+            .subscribe(
+                data => {
+                    console.log(JSON.stringify(data));
+                    this.userTrips = data;
+                    this.canAddTrip();
+                },
+                error => {
+                    console.log("error get back trip for user " + error);
+                }
+            );
+    }
+
+    canAddTrip() {
+        for (var i = 0; i < this.userTrips.length; i++) {
+            if (this.userTrips[i].id == this.selectedTrip.id) {
+                this.isBought = true;
+                this.isBoughtMessage = "Vous avez déjà acheté ce trip";
+                return;
+            }
+        }
+    }
+
+    buyTrip(trip: Trip): Subscription {
         return this._tripdetail.postTripAPI(trip)
             .subscribe(
             data => {
                 console.log("succes creating trip : " + JSON.stringify(data));
-                this.estAchat = true;
+                this.isBought = true;
             },
             error => {
                 console.log("error creating trip : " + error);

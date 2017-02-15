@@ -164,22 +164,6 @@ export class WeatherComponent implements OnInit {
                 }
             );
     }
-
-    //routeWeather(): string {
-    //    var arrayString = [];
-    //    console.log(this.route.toString());
-    //    this.route.url.forEach(function (elem) {
-    //        arrayString.push(elem);
-    //        console.log(elem);
-    //        console.log(elem["0"]["path"]);
-    //    });
-    //    if (arrayString[1] != undefined && arrayString[1]["0"]["path"] == "at") {
-    //        console.log("GOT YOU");
-    //        return "Weather Check";
-    //    } else {
-    //        return "Welcome";
-    //    }
-    //}
 }
 
 

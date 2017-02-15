@@ -1,0 +1,22 @@
+﻿span{
+    display: inline-block;
+}
+
+ul{
+    list-style-type: none;
+}
+
+ul li > div:last-of-type{
+    padding: 1%;
+    display: inline-block;
+}
+
+a{
+    cursor: pointer;
+}
+
+
+.deleteBlock{
+    float: left;
+    clear: both;
+}

@@ -22,7 +22,7 @@ export class TripComponent {
         if (this._loginService.userName != null && typeof (this._loginService.userName) != "undefined") {
             this.userName = this._loginService.userName;
         } else {
-            this.userName = null;
+            this.userName = "";
         }
     }
 

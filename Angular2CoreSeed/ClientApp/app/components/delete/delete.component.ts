@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { WeatherService } from '../weather/weather.service';
+import { StopService } from '../stop/stop.service';
 import { ActivatedRoute } from '@angular/router';
 import { Weather } from '../weather/weather';
 import { Observable } from 'rxjs/Observable';
@@ -12,10 +13,12 @@ import 'rxjs/add/observable/throw';
 export class DeleteComponent {
     @Input() isDelete: boolean;
     @Input() weatherToDeleteId: number;
+    @Input() isStop: boolean;
     @Output() deleteSuccess: EventEmitter<boolean>;
     public idToDelete: number;
     public isShowDelete: boolean;
-    constructor(private _weatherService: WeatherService, private _route: ActivatedRoute) {
+    constructor(public _weatherService: WeatherService,
+        private _route: ActivatedRoute, public _stopService: StopService) {
         this.idToDelete = null;
         this.isShowDelete = false;
         this.deleteSuccess = new EventEmitter<boolean>();
@@ -37,11 +40,30 @@ export class DeleteComponent {
 
     onDeleteData() {
         this.idToDelete = this.weatherToDeleteId;
-        this.deleterWeatherById(this.idToDelete);
+        if (this.isStop) {
+            this.deleteStopById(this.idToDelete);
+        } else {
+            this.deleterWeatherById(this.idToDelete);
+        }
+        
     }
 
     cancelDelete() {
         this.deleteSuccess.emit(false);
+    }
+
+    deleteStopById(id: number) {
+        this._stopService.deleteStopByIdAPI(id)
+            .subscribe(
+                result => {
+                    this.deleteSuccess.emit(true);
+                    this.isShowDelete = true;
+                    console.log("SUCCESS DELETE stop in delete component");
+                },
+                error => {
+                    console.log("ERROR DELETE stop in delete component");
+                }
+            );
     }
 
     deleterWeatherById(id: number) {

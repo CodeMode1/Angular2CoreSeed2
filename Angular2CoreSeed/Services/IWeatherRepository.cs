@@ -13,6 +13,8 @@ namespace Angular2CoreSeed.Services
         IEnumerable<Trip> GetAllTrips();
         Trip GetTripById(int id);
         void AddUserTrip(AppUserTrip userTrip);
+        Stop GetStopById(int id);
+        void DeleteStop(int id);
         void AddStop(int id, Stop stop);
         void AddWeather(Weather newWeather);
         void PutWeather(Weather weather);

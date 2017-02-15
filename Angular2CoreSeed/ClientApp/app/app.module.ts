@@ -23,7 +23,9 @@ import { WeatherConstraintComponent } from './components/weatherconstraints/weat
 import { TripComponent } from './components/trip/trip.component';
 import { TripDetailComponent } from './components/tripdetail/tripdetail.component';
 
+
 import { StopComponent } from './components/stop/stop.component';
+import { EditStopComponent } from './components/stopedit/stopedit.component';
 
 // services
 import { LoginService } from './components/login/login.service';
@@ -54,6 +56,7 @@ import { LocalStorageModule } from 'angular-2-local-storage';
         WeatherConstraintComponent,
         TripComponent,
         TripDetailComponent,
+        EditStopComponent,
         StopComponent,
         LoginComponent,
         // pipes
@@ -86,7 +89,8 @@ import { LocalStorageModule } from 'angular-2-local-storage';
             {
                 path: 'trips/:id', component: TripDetailComponent, children: [
                     { path: '', component: StopComponent },
-                    { path: 'stop', component: StopComponent }
+                    { path: 'stop', component: StopComponent },
+                    { path: 'edit', component: EditStopComponent }
                 ]
             },
             {

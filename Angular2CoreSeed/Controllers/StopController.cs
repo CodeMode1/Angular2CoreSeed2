@@ -61,5 +61,30 @@ namespace Angular2CoreSeed.Controllers
             _logger.LogWarning($"Could not save the stop object : {stop} at trip id {id}");
             return BadRequest($"CAnnot save new stop : {stop} at trip id : {id}");
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                _logger.LogInformation($"Trying to delete a stop at trip id : {id}");
+                var result = _repository.GetStopById(id);
+                if (result == null)
+                {
+                    return NotFound($"Didnt found stop by id : {id}");
+                }
+                _repository.DeleteStop(id);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Ok($"Deleted stop successfull by id {id}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Cant recuperate from error at delete stop by id : {id}", ex);
+            }
+            _logger.LogWarning($"Could not delete the stop object with id : {id}");
+            return BadRequest($"Bad request to stop trip with id : {id}");
+        }
     }
 }
