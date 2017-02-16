@@ -17,8 +17,8 @@ export class TripDetailComponent {
     public userTrips: Trip[];
     public isBoughtMessage: string;
 
-    constructor(public _activatedRoute: ActivatedRoute,
-        public _tripdetail: TripDetailService, public _router: Router) {
+    constructor(private _activatedRoute: ActivatedRoute,
+        public _tripdetail: TripDetailService, private _router: Router) {
         this.isBought = false;
         this.userTrips = [];
         this.isBoughtMessage = "";
@@ -41,7 +41,7 @@ export class TripDetailComponent {
         return this._tripdetail.getTripByIdAPI(id)
             .subscribe(
             data => {
-                this.selectedTrip = new Trip(
+                    this.selectedTrip = new Trip(
                     data.id,
                     data.name,
                     data.leaving,

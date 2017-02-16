@@ -22,7 +22,7 @@ import { WeatherConstraintComponent } from './components/weatherconstraints/weat
 
 import { TripComponent } from './components/trip/trip.component';
 import { TripDetailComponent } from './components/tripdetail/tripdetail.component';
-
+import { TripUserComponent } from './components/tripuser/tripuser.component';
 
 import { StopComponent } from './components/stop/stop.component';
 import { EditStopComponent } from './components/stopedit/stopedit.component';
@@ -57,6 +57,7 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         WeatherConstraintComponent,
         TripComponent,
         TripDetailComponent,
+        TripUserComponent,
         EditStopComponent,
         StopComponent,
         LoginComponent,
@@ -82,12 +83,8 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'login', component: LoginComponent },
-            {
-                path: 'trips', component: TripComponent, canActivate: [AuthGuard], children: [
-                    { path: '', component: HomeComponent },
-                    { path: 'perso', component: HomeComponent }
-                ]
-            },
+            { path: 'trips', component: TripComponent, canActivate: [AuthGuard] },
+            { path: 'trips/perso', component: TripUserComponent, canActivate: [AuthGuard] },          
             {
                 path: 'trips/:id', component: TripDetailComponent, children: [
                     { path: '', component: StopComponent },

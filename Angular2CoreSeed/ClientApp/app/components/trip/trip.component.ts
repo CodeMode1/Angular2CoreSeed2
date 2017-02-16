@@ -28,9 +28,7 @@ export class TripComponent {
     }
 
     ngOnInit() {
-        if (this._activatedRoute.snapshot.url[0].path == "trips") {
-            this.getAllTrips();
-        }
+        this.getAllTrips();
     }
 
     //  get methos sur service.

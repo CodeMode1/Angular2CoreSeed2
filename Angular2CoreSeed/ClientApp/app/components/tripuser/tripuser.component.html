@@ -1,0 +1,19 @@
+﻿<h2>{{userMessage}}</h2>
+
+<div *ngFor="let trip of mesTrips" class="col-md-12">
+    <ul class="col-md-9">
+        <li>Nom : {{trip?.name}}</li>
+        <li>Date de départ : {{trip?.leaving | fmTripDate}}</li>
+        <li>Pays : {{trip?.country}}</li>
+        <li>Continent : {{trip?.continent}}</li>
+    </ul>
+
+    <ul *ngFor="let stop of trip.stops">
+        <li>Nom : {{stop?.name}}</li>
+        <li>Date d'arrivée : {{stop?.arrival | fmTripDate}}</li>
+        <li>Date de départ : {{stop?.leaving | fmTripDate}}</li>
+        <li>Ville : {{stop?.city}}</li>
+    </ul>
+</div>
+<h2><i class="fa fa-arrow-up"></i></h2>
+<a class="btn btn-lg btn-primary" (click)="goBack()">Back</a>
