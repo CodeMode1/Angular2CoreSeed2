@@ -21,6 +21,7 @@ export class WeatherComponent implements OnInit {
     public inputIdDelete: number;
     public weathers: Weather[];
     public weather1: Weather;
+    public objectName: string;
     public showForm: boolean;
     public titreWeather: string;
     public editForm: boolean;
@@ -32,6 +33,7 @@ export class WeatherComponent implements OnInit {
         this.inputDelete = false;
         this.inputIdDelete = null;
         this.titreWeather = "Weather Check";
+        this.objectName = "";
         this.showForm = false;
         // moment js format a date with a string format, returns a date.
         moment.locale('en-ca');
@@ -71,6 +73,7 @@ export class WeatherComponent implements OnInit {
         this.inputDelete = true;
         console.log("in go delete : " + idToDelete);
         this.inputIdDelete = idToDelete;
+        this.objectName = "weather";
     }
 
     // refresh the results after the child component has emitted the deletion was successfull.
@@ -79,11 +82,9 @@ export class WeatherComponent implements OnInit {
             // delete the weather client side :
             this.weathers.splice(this.inputIdDelete, 1);
             this.getAllWeathers();
-            this.inputDelete = false;
-        } else {
-            console.log($event);
-            this.inputDelete = false;
         }
+        this.inputDelete = false;
+        this.objectName = "";
     }
 
     // take a js object  (usually object or array) convert it to JSON string notation

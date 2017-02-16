@@ -105,13 +105,13 @@ namespace Angular2CoreSeed
             });
 
             //  POLICY & CLAIMS : better way handling authorization than traditional asp.net roles
-                // claims allow a bundle of tests, more flexibility
+            // claims allow a bundle of tests, more flexibility
 
-            //services.AddAuthorization(cfg =>
-            //{
-            //    // creating a policy based on that the user has a claim SuperUser
-            //    cfg.AddPolicy("SuperUsers", p => p.RequireClaim("SuperUser", "True"));
-            //});
+            services.AddAuthorization(cfg =>
+            {
+                // creating a policy based on that the user has a claim SuperUser
+                cfg.AddPolicy("SuperUsers", p => p.RequireClaim("SuperUser", "True"));
+            });
 
             services.AddMvc()
                 .AddJsonOptions(options => {

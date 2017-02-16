@@ -17,12 +17,12 @@ export class EditStopComponent {
     public selectedTrip: Trip;
     public inputDelete: boolean;
     public inputIdDelete: number;
-    public isAStop: boolean;
+    public objectName: string;
     constructor(public _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, public _router: Router, public _stopService: StopService) {
         this.inputDelete = false;
         this.inputIdDelete = null;
-        this.isAStop = false;
+        this.objectName = "";
     }
 
     ngOnInit() {
@@ -58,24 +58,12 @@ export class EditStopComponent {
             );
     }
 
-    addStop(stop: Stop) {
-        return this._stopService.postStopByIdAPI(this.selectedTrip.id, stop)
-            .subscribe(
-                data => {
-                    console.log("saved the stop : " + data + "at id  : " + this.selectedTrip.id);
-                },
-                error => {
-                    console.log("error: " + error + "at id  : " + this.selectedTrip.id);
-                }
-            );
-    }
-
     // delete stop by its id
     deleteStop(id: number) {
         this.inputDelete = true;
         console.log("in go delete : " + id);
         this.inputIdDelete = id;
-        this.isAStop = true;
+        this.objectName = "stopAdmin";
     }
 
     // refresh the results after the child component has emitted the deletion was successfull.
@@ -85,7 +73,7 @@ export class EditStopComponent {
             this.getStopsById(this.selectedTrip.id);
 
         } 
-        this.isAStop = false;
+        this.objectName = "";
         this.inputDelete = false;
     }
 }

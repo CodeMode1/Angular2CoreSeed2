@@ -1,5 +1,6 @@
 ﻿using Angular2CoreSeed.Models;
 using Angular2CoreSeed.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -63,6 +64,7 @@ namespace Angular2CoreSeed.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "SuperUsers")]
         public async Task<IActionResult> Delete(int id)
         {
             try

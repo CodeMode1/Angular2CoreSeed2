@@ -104,6 +104,7 @@ namespace Angular2CoreSeed.Services
                 .FirstOrDefault();
         }
 
+        // admin
         public void DeleteStop(int id)
         {
             Stop stopToDelete =
@@ -115,6 +116,23 @@ namespace Angular2CoreSeed.Services
                 _context.Remove(stopToDelete);
             }
         }
+
+        //// remove stop from users trip
+        //public void DeleteStopFromUser(Stop stop, int tripId, AppUser user)
+        //{
+        //    // get a trip
+        //    Trip trip =
+        //        _context.Trips
+        //        .Where(t => t.AppUserTrips
+        //        .Any(APT => APT.TripId == tripId && APT.AppUserId == user.Id))
+        //        .Include(APT => APT.Stops)
+        //        .FirstOrDefault();
+
+        //    if(trip != null)
+        //    {
+        //        trip.Stops.Remove(stop);
+        //    }
+        //}
 
         // Works
         public Weather GetWeatherById(int id)

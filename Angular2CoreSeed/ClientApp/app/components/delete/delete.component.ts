@@ -13,7 +13,7 @@ import 'rxjs/add/observable/throw';
 export class DeleteComponent {
     @Input() isDelete: boolean;
     @Input() weatherToDeleteId: number;
-    @Input() isStop: boolean;
+    @Input() objectToDelete: string;
     @Output() deleteSuccess: EventEmitter<boolean>;
     public idToDelete: number;
     public isShowDelete: boolean;
@@ -40,12 +40,12 @@ export class DeleteComponent {
 
     onDeleteData() {
         this.idToDelete = this.weatherToDeleteId;
-        if (this.isStop) {
+        if (this.objectToDelete == "stopAdmin") {
             this.deleteStopById(this.idToDelete);
-        } else {
+        } else if(this.objectToDelete == "weather") {
             this.deleterWeatherById(this.idToDelete);
         }
-        
+        return;
     }
 
     cancelDelete() {
