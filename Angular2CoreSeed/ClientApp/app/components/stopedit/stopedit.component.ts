@@ -18,11 +18,13 @@ export class EditStopComponent {
     public inputDelete: boolean;
     public inputIdDelete: number;
     public objectName: string;
+    public showPopUp: boolean;
     constructor(public _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, public _router: Router, public _stopService: StopService) {
         this.inputDelete = false;
         this.inputIdDelete = null;
         this.objectName = "";
+        this.showPopUp = false;
     }
 
     ngOnInit() {
@@ -36,6 +38,12 @@ export class EditStopComponent {
                 }
             }
         );
+    }
+
+    //  POP UP NOT WORKIN?! test in another project
+    onTogglePopUp(): void {
+        this.showPopUp = !this.showPopUp;
+        console.log(this.showPopUp);
     }
 
     getStopsById(id: number): Subscription {

@@ -14,8 +14,10 @@
     "@progress/kendo-angular-dateinputs": "^0.3.1",
     "@progress/kendo-angular-dialog": "^0.14.1",
     "@progress/kendo-angular-intl": "^0.9.1",
+    "@progress/kendo-angular-popup": "^0.16.2",
     "@progress/kendo-theme-default": "^2.11.17",
     "@types/node": "^6.0.38",
+    "angular-2-local-storage": "~1.0.1",
     "angular2-platform-node": "~2.0.10",
     "angular2-universal": "~2.0.10",
     "angular2-universal-polyfills": "~2.0.10",
@@ -45,8 +47,7 @@
     "webpack-externals-plugin": "^1.0.0",
     "webpack-hot-middleware": "^2.10.0",
     "webpack-merge": "^0.14.1",
-    "zone.js": "^0.6.21",
-    "angular-2-local-storage": "~1.0.1"
+    "zone.js": "^0.6.21"
   },
   "devDependencies": {
     "@types/jquery": "^2.0.40"

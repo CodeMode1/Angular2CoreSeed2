@@ -1,8 +1,11 @@
 ﻿<h1>Bienvenue {{userName}}</h1>
+<a class="btn btn-sm btn-success" [routerLink]="['perso']">Voir mes trips</a>
+<router-outlet></router-outlet>
+
 <h2>{{titreTrip}}</h2>
 <h3>Disponibles présentement</h3>
 
-<div *ngFor="let trip of trips" class="infosTrip">
+<div *ngFor="let trip of trips" class="infosTrip col-md-12">
     <ul>
         <li>{{trip?.name}}</li>
         <li>{{trip?.country}}</li>

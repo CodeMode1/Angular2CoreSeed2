@@ -20,3 +20,20 @@ a{
     float: left;
     clear: both;
 }
+
+.content {
+padding: 30px;
+color: #787878;
+background-color: #fcf7f8;
+border: 1px solid rgba(0,0,0,.05);
+}
+
+.popup {
+width: 100px;
+height: 70px;
+}
+
+.popup > ul {
+    list-style-type: decimal;
+    text-align: left;
+}

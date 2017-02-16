@@ -40,7 +40,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { FormatHour } from './components/weatherform/weatherform.pipe';
 import { TripDate } from './components/trip/trip.pipe'
 import { DialogModule } from '@progress/kendo-angular-dialog';
-import { LocalStorageModule } from 'angular-2-local-storage';
+//import { PopupModule } from '@progress/kendo-angular-popup';
+//import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -77,15 +78,16 @@ import { LocalStorageModule } from 'angular-2-local-storage';
         FormsModule,
         DateInputsModule,
         DialogModule,
-        LocalStorageModule.withConfig({
-            prefix: 'my-app',
-            storageType: 'localStorage'
-        }),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'login', component: LoginComponent },
-            { path: 'trips', component: TripComponent, canActivate: [AuthGuard] },
+            {
+                path: 'trips', component: TripComponent, canActivate: [AuthGuard], children: [
+                    { path: '', component: HomeComponent },
+                    { path: 'perso', component: HomeComponent }
+                ]
+            },
             {
                 path: 'trips/:id', component: TripDetailComponent, children: [
                     { path: '', component: StopComponent },
