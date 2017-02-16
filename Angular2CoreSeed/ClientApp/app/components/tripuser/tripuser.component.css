@@ -1,0 +1,16 @@
+﻿ul{
+    list-style-type: none;
+    float: left;
+    width: auto;
+    height: auto;
+    padding: 1%;
+}
+
+div > ul{
+    background-color:ivory;
+}
+
+div div > ul{
+    background-color:aliceblue;
+    margin: 0.5%;
+}

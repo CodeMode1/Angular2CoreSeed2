@@ -33,12 +33,29 @@ namespace Angular2CoreSeed.Services
                 .Any(trip => trip.AppUserId == user.Id))
                 .Include(trip => trip.Stops)
                 .ToList();
-            //return _context.AppUsers
-            //    .Where(u => u.Id == user.Id)
-            //    .Include(u => u.AppUserTrips).ThenInclude(appUser => appUser.Trip)
-            //                                    .ThenInclude(trip => trip.Stops)
-            //    .FirstOrDefault();
         }
+
+        // supprimer le trip de la table many to many : users-trips
+        public void DeleteTripUser(AppUser user, Trip trip)
+        {
+            AppUser User =
+                _context.AppUsers
+                .Where(u => u.Id == user.Id)
+                .Include(u => u.AppUserTrips).ThenInclude(AUT => AUT.Trip)
+                                                .ThenInclude(t => t.Stops)
+                .FirstOrDefault();
+            if (User != null)
+            {
+                AppUserTrip toRemove = new AppUserTrip() { AppUser = user, Trip = trip, AppUserId = user.Id, TripId = trip.Id };
+                User.AppUserTrips.Remove(toRemove);
+            }
+        }
+
+        public void AddUserTrip(AppUserTrip userTrip)
+        {
+            _context.Add(userTrip);
+        }
+
 
         public Trip GetTripById(int id)
         {
@@ -70,11 +87,6 @@ namespace Angular2CoreSeed.Services
             {
                 _context.Remove(tripToDelete);
             }
-        }
-
-        public void AddUserTrip(AppUserTrip userTrip)
-        {
-            _context.Add(userTrip);    
         }
 
         public void AddStop(int id, Stop stop)

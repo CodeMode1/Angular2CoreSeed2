@@ -1,9 +1,9 @@
 ﻿<div *ngIf="isShowDelete" class="panel panel-success">
     <div class="panel-heading">
-        <p>The deletion was successfull.</p>        
+        <p>Action effectuée.</p>        
     </div>
     <div class="panel-body">
-        <h3>Success deleting #  : </h3>
+        <h3>Succès supprimer #</h3>
         <h4>{{idToDelete}}</h4>
     </div>
     <button class="btn btn-sm btn-success" (click)="hideNotif()">Hide</button>
@@ -12,13 +12,13 @@
 <kendo-dialog *ngIf="isDelete" (close)="cancelDelete()">
     <kendo-dialog-titlebar>
         <div style="font-size: 18px; line-height: 1.3em;">
-            <span class="k-icon k-i-warning"></span> Delete Data
+            <span class="k-icon k-i-warning"></span> Supprimer donnée
         </div>
     </kendo-dialog-titlebar>
-    <p style="margin: 30px; text-align: center;">This action cannot be undone.</p>
+    <p style="margin: 30px; text-align: center;">Action irrévocable.</p>
 
     <kendo-dialog-actions>
-        <button kendoButton (click)="cancelDelete()">Cancel</button>
-        <button kendoButton (click)="onDeleteData()">Delete</button>
+        <button class="btn btn-md btn-danger" (click)="cancelDelete()">Cancel</button>
+        <button class="btn btn-md btn-danger" (click)="onDeleteData()">Delete</button>
     </kendo-dialog-actions>
 </kendo-dialog>

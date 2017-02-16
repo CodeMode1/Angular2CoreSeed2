@@ -6,7 +6,8 @@ import { ITrip, Trip } from '../trip/trip';
 
 @Component({
     selector: 'trip-detail',
-    template: require('./tripuser.component.html')
+    template: require('./tripuser.component.html'),
+    styles: [require('./tripuser.component.css')]
 })
 
 export class TripUserComponent {
