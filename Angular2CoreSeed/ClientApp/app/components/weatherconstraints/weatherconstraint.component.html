@@ -1,4 +1,4 @@
-﻿<h2>Constraints for the temperature : # {{this.id}}</h2>
+﻿<h2>Statistiques pour la température : # {{this.id}}</h2>
 
 <table class="table table-striped">
     <thead>
@@ -25,6 +25,9 @@
             <th>
                 Feels Like °C
             </th>
+            <th>
+                Température
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -39,10 +42,10 @@
                 {{constraint?.humidity}}
             </td>
             <td>
-                {{constraint?.sunRising}}
+                {{constraint?.sunRising | fmTripDate}}
             </td>
             <td>
-                {{constraint?.sunSet}}
+                {{constraint?.sunSet | fmTripDate}}
             </td>
             <td>
                 {{constraint?.clear}}
@@ -51,7 +54,9 @@
                 {{constraint?.feelsLike}}
             </td>
             <td>
-                {{constraint?.weather}}
+                <p>Temp : {{constraint?.weather.name}}</p>
+                <p>Heure : {{constraint?.weather.hour | fmHourLocal }}</p>
+                <p>Temp °C : {{constraint?.weather.tempC}}</p>
             </td>
         </tr>
     </tbody>
