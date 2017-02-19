@@ -46,8 +46,12 @@ namespace Angular2CoreSeed.Services
                 .FirstOrDefault();
             if (User != null)
             {
-                AppUserTrip toRemove = new AppUserTrip() { AppUser = user, Trip = trip, AppUserId = user.Id, TripId = trip.Id };
-                User.AppUserTrips.Remove(toRemove);
+                AppUserTrip tripRemove =
+                    User.AppUserTrips
+                    .Where(aut => aut.AppUser == user && aut.Trip == trip && aut.AppUserId == user.Id && aut.TripId == trip.Id)
+                    .FirstOrDefault();
+
+                User.AppUserTrips.Remove(tripRemove);
             }
         }
 

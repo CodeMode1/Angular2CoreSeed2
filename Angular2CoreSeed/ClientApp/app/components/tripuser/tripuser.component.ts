@@ -40,4 +40,15 @@ export class TripUserComponent {
                 }
             );
     }
+
+    deleteTrip(trip: Trip): Subscription {
+        return this._tripDetailService.deleteTripAPI(trip)
+            .subscribe(
+            data => {
+                this.mesTrips.splice(this.mesTrips.indexOf(trip), 1);
+                console.log("deleted trip successful");
+            },
+                error => console.log("error deleting trip")
+            );
+    }
 }

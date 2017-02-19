@@ -192,24 +192,33 @@ namespace Angular2CoreSeed.Controllers
         {
             try
             {
-                _logger.LogInformation($"Trying to delete a trip by id : {id}");
-                var result = _repository.GetTripById(id);
-                if (result == null)
+                _logger.LogInformation($"Trying to get a trip by id : {id}");
+                var trip = _repository.GetTripById(id);
+                if (trip == null)
                 {
                     return NotFound($"Didnt found trip by id : {id}");
                 }
-                _repository.DeleteTrip(id);
+
+                //  get userName (unique) of logged in user using Identity.
+                // var userName = this.User.Identity.Name;
+                var userNameLoggedIn = this.User.Claims.ElementAt(0).Value;
+
+                // find the logged in user object using the userName.
+                var user = await _usrMng.FindByNameAsync(userNameLoggedIn);
+
+                // trying to delete a trip from the many to many table users-trips passing trip/user
+                _repository.DeleteTripUser(user, trip);
                 if (await _repository.SaveChangesAsync())
                 {
-                    return Ok($"Deleted trip successfull by id {id}");
+                    return Ok($"Deleted trip successfull for the user");
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Cant recuperate from error at delete trip by id : {id}", ex);
+                _logger.LogError($"Cant recuperate from error at delete for user {User.Identity.Name}", ex);
             }
-            _logger.LogWarning($"Could not delete the trip object with id : {id}");
-            return BadRequest($"Bad request to delete trip with id : {id}");
+            _logger.LogWarning($"Could not delete the trip object with for user: {User.Identity.Name}");
+            return BadRequest($"Bad request to delete trip for user {User.Identity.Name}");
         }
     }
 }

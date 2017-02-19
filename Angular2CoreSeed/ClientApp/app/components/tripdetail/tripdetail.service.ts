@@ -52,4 +52,14 @@ export class TripDetailService {
             .map((response: Response) => <ITrip>response.json())
             .catch((error: any) => <any>error.json())
     }
+
+    deleteTripAPI(trip: Trip): Observable<any> {
+        // add authorization header with jwt token
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.delete(this._urlTrip + "/" + trip.id, options)
+            .map((response: Response) => <any>console.log(response))
+            .catch((error: any) => <any>error.json())
+    }
 }
