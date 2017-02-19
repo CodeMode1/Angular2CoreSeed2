@@ -30,7 +30,7 @@ namespace Angular2CoreSeed.Controllers
             try
             {
                 _logger.LogInformation($"Trying to get constraints for a temp id : {id}");
-                var constraint = _repository.GetConstraintById(id);
+                var constraint = _repository.GetConstraintsById(id);
                 if (constraint == null)
                 {
                     return NotFound($"404 cant find constraints for this id : {id}");
@@ -70,7 +70,7 @@ namespace Angular2CoreSeed.Controllers
                     Clear = constraint.Clear,
                     FeelsLike = constraint.FeelsLike
                 };
-                _repository.AddConstraint(id, newConstraint);
+                //_repository.AddConstraint(id, newConstraint);
                 if(await _repository.SaveChangesAsync())
                 {
                     return CreatedAtAction("Post", newConstraint);

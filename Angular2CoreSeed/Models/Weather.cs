@@ -9,6 +9,13 @@ namespace Angular2CoreSeed.Models
 {
     public class Weather
     {
+        private readonly ICollection<Constraint> _constraints;
+
+        public Weather()
+            : base()
+        {
+            _constraints = new List<Constraint>();
+        }
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
@@ -38,6 +45,6 @@ namespace Angular2CoreSeed.Models
         }
         public int StopId { get; set; }
         public Stop Stop { get; set; }
-        public Constraint Constraint { get; set; }
+        public ICollection<Constraint> Constraints { get; set; }
     }
 }

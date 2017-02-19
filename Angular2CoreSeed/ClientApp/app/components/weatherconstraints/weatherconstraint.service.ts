@@ -17,6 +17,6 @@ export class WeatherConstraintsService {
     getConstraintsAPI(id: number): Observable<any[]> {
         return this._http.get('api/weather/' + id + '/constraints')
             .map((resp: Response) => <IConstraint[]>resp.json())
-            .catch((error: any) => error.json())
+            .catch((error: any) => <any>error.json())
     }
 }

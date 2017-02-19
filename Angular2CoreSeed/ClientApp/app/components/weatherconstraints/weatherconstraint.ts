@@ -1,4 +1,6 @@
-﻿export interface IConstraint{
+﻿import { Weather, IWeather } from '../weather/weather';
+
+export interface IConstraint{
     id: number;
     wind?: number;
     gust?: number;
@@ -7,6 +9,7 @@
     sunSet?: Date;
     clear?: Boolean;
     feelsLike?: number;
+    weather?: Weather;
 }
 
 export class Constraint {
@@ -18,6 +21,7 @@ export class Constraint {
         public sunRising: Date,
         public sunSet: Date,
         public clear: Boolean,
-        public feelsLike: number
+        public feelsLike: number,
+        public weather: Weather
     ) {}
 }

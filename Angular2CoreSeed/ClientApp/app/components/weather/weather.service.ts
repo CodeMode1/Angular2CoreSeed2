@@ -6,12 +6,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
+import { LoginService } from '../login/login.service';
 
 @Injectable()
 export class WeatherService {
     private _urlWeather: string;
 
-    constructor(private _http: Http) {
+    constructor(private _http: Http, public _loginService: LoginService) {
         this._urlWeather = "api/weather";
     }
 
@@ -24,22 +25,26 @@ export class WeatherService {
 
     // POST:    1 weather object
     postWeatherAPI(weather: Weather): Observable<IWeather> {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
         let body = JSON.stringify(weather);
 
-        return this._http.post(this._urlWeather, body, { headers })
+        return this._http.post(this._urlWeather, body, options)
             .map((response: Response) => <IWeather>response.json())
             .catch((error: any) => <any>error.json())
     }
 
     // PUT:     1 weather object
     putWeatherAPI(weather: Weather): Observable<IWeather> {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
         let body = JSON.stringify(weather);
 
-        return this._http.put(this._urlWeather, body, { headers })
+        return this._http.put(this._urlWeather, body, options)
             .map((response: Response) => <IWeather>response.json())
             .catch((error: any) => <any>error.json())
     }
@@ -60,9 +65,11 @@ export class WeatherService {
 
     // GET:     1 weather object details by id
     deleteWeatherByIdAPI(id: number): Observable<any> {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        return this._http.delete(this._urlWeather + "/" + id, { headers: headers })
+
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.delete(this._urlWeather + "/" + id, options)
             .map((response: Response) => {
                 console.log("succes delete weather, resp we get in service : ");
                 console.log(response);

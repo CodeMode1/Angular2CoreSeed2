@@ -155,7 +155,7 @@ namespace Angular2CoreSeed.Services
         {
             return _context.Weathers
                 .Where(weather => weather.Id == id)
-                .Include("Constraint")
+                .Include("Constraints")
                 .Include("Stop")
                 .FirstOrDefault();
         }
@@ -165,7 +165,7 @@ namespace Angular2CoreSeed.Services
         {
             return _context.Weathers
                 .Where(weather => weather.Name == name)
-                .Include("Constraint")
+                .Include("Constraints")
                 .FirstOrDefault();
         }
 
@@ -173,7 +173,7 @@ namespace Angular2CoreSeed.Services
         public IEnumerable<Weather> GetAllWeathers()
         {
             _logger.LogInformation("Getting all weathers + its constraint from db");
-            return _context.Weathers.Include("Constraint").Include("Stop").ToList();
+            return _context.Weathers.Include("Constraints").Include("Stop").ToList();
         }
 
         // works
@@ -202,40 +202,36 @@ namespace Angular2CoreSeed.Services
             }
         }
 
-        public Constraint GetConstraintById(int id)
+        public IEnumerable<Constraint> GetConstraintsById(int id)
         {
-            Weather weather =
-                _context.Weathers
-                .Include("Constraint")
-                .Where(w => w.Id == id)
-                .FirstOrDefault();
+            var constraints =
+                _context.Constraints
+                .Where(c => c.WeatherId == id)
+                .Include(c => c.Weather)
+                .ToList();
 
-            if(weather != null)
-            {
-                return weather.Constraint;
-            }
-            return null;
+            return constraints;
         }
 
-        public void AddConstraint(int id, Constraint constraint)
-        {
-            Weather weather =
-                _context.Weathers
-                .Include("Constraint")
-                .Where(w => w.Id == id)
-                .FirstOrDefault();
+        //public void AddConstraint(int id, Constraint constraint)
+        //{
+        //    Weather weather =
+        //        _context.Weathers
+        //        .Include("Constraint")
+        //        .Where(w => w.Id == id)
+        //        .FirstOrDefault();
             
-            if(weather != null)
-            {
-                //ajouter la contrainte pour une certainte temp.
-                weather.Constraint = constraint;
-                // setter les FK de l'entite dependante (constraint)
-                constraint.WeatherId = weather.Id;
-                constraint.Weather = weather;
-                //ajouter la contrainte a la collection.
-                _context.Add(constraint);
-            }
-        }
+        //    if(weather != null)
+        //    {
+        //        //ajouter la contrainte pour une certainte temp.
+        //        weather.Constraint = constraint;
+        //        // setter les FK de l'entite dependante (constraint)
+        //        constraint.WeatherId = weather.Id;
+        //        constraint.Weather = weather;
+        //        //ajouter la contrainte a la collection.
+        //        _context.Add(constraint);
+        //    }
+        //}
 
         // Save to the changes to db 1 time
         public async Task<bool> SaveChangesAsync()
