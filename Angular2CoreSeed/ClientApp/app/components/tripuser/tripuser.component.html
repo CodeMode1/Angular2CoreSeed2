@@ -1,5 +1,7 @@
 ﻿<h2>{{userMessage}}</h2>
 
+<delete [isDelete]="inputDelete" [tripToDelete]="selectedTrip" [objectToDelete]="objectName" (deleteSuccess)="refreshResults($event)"></delete>
+
 <h3>Mes Trips</h3>
 <div *ngFor="let trip of mesTrips" class="col-md-12">
     <ul class="col-md-3">

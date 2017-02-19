@@ -13,11 +13,17 @@ import { ITrip, Trip } from '../trip/trip';
 export class TripUserComponent {
     public userMessage: string;
     public mesTrips: Trip[];
+    public selectedTrip: Trip;
+    public objectName: string;
+    public inputDelete: boolean;
 
     constructor(private _activatedRoute: ActivatedRoute,
         public _tripDetailService: TripDetailService, private _router:Router) {
         this.userMessage = "";
         this.mesTrips = [];
+        this.objectName = "";
+        this.inputDelete = false;
+        this.selectedTrip = null;
     }
 
     ngOnInit() {
@@ -27,6 +33,7 @@ export class TripUserComponent {
     goBack(): void {
         this._router.navigateByUrl('/trips');
     }
+
 
     getUserTrips(): Subscription {
         return this._tripDetailService.getUserTripAPI()
@@ -41,14 +48,22 @@ export class TripUserComponent {
             );
     }
 
-    deleteTrip(trip: Trip): Subscription {
-        return this._tripDetailService.deleteTripAPI(trip)
-            .subscribe(
-            data => {
-                this.mesTrips.splice(this.mesTrips.indexOf(trip), 1);
-                console.log("deleted trip successful");
-            },
-                error => console.log("error deleting trip")
-            );
+    deleteTrip(trip: Trip): void {
+        this.selectedTrip = trip;
+        this.objectName = "usertrip";
+        this.inputDelete = true;        
+    }
+
+    // refresh the results after the child component has emitted the deletion was successfull.
+    refreshResults($event) {
+        if ($event == true) {
+            // delete the weather client side :
+            this.mesTrips.splice(this.mesTrips.indexOf(this.selectedTrip), 1);
+            // update the list accordingly
+            this.getUserTrips();
+        }
+        this.inputDelete = false;
+        this.objectName = "";
     }
 }
+

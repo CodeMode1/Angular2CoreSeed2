@@ -4,7 +4,10 @@ import { StopService } from '../stop/stop.service';
 import { ActivatedRoute } from '@angular/router';
 import { Weather } from '../weather/weather';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/throw';
+import { Trip, ITrip } from '../trip/trip';
+import { TripDetailService } from '../tripdetail/tripdetail.service';
 
 @Component({
     selector: 'delete',
@@ -14,13 +17,14 @@ export class DeleteComponent {
     @Input() isDelete: boolean;
     @Input() weatherToDeleteId: number;
     @Input() objectToDelete: string;
+    @Input() tripToDelete: ITrip;
     @Output() deleteSuccess: EventEmitter<boolean>;
     public idToDelete: number;
-    public isShowDelete: boolean;
+    public isShowNotif: boolean;
     constructor(public _weatherService: WeatherService,
-        private _route: ActivatedRoute, public _stopService: StopService) {
+        private _route: ActivatedRoute, public _stopService: StopService, public _tripDetailService: TripDetailService) {
         this.idToDelete = null;
-        this.isShowDelete = false;
+        this.isShowNotif = false;
         this.deleteSuccess = new EventEmitter<boolean>();
     }
 
@@ -35,7 +39,7 @@ export class DeleteComponent {
     }
 
     hideNotif() {
-        this.isShowDelete = false;
+        this.isShowNotif = false;
     }
 
     onDeleteData() {
@@ -44,6 +48,8 @@ export class DeleteComponent {
             this.deleteStopById(this.idToDelete);
         } else if(this.objectToDelete == "weather") {
             this.deleterWeatherById(this.idToDelete);
+        } else if (this.objectToDelete == "usertrip") {
+            this.deleteUserTrip(this.tripToDelete);
         }
         return;
     }
@@ -57,7 +63,7 @@ export class DeleteComponent {
             .subscribe(
                 result => {
                     this.deleteSuccess.emit(true);
-                    this.isShowDelete = true;
+                    this.isShowNotif = true;
                     console.log("SUCCESS DELETE stop in delete component");
                 },
                 error => {
@@ -71,12 +77,24 @@ export class DeleteComponent {
             .subscribe(
                 result => {
                     this.deleteSuccess.emit(true);
-                    this.isShowDelete = true;
+                    this.isShowNotif = true;
                     console.log("SUCCESS DELETE in component");
                 },
                 error => {
                     console.log("ERROR DELETE in component");
                 }
+            );
+    }
+
+    deleteUserTrip(trip: ITrip): Subscription {
+        return this._tripDetailService.deleteTripAPI(trip)
+            .subscribe(
+            data => {
+                    this.deleteSuccess.emit(true);
+                    this.isShowNotif = true;
+                    console.log("deleted trip successful");
+                },
+                error => console.log("error deleting trip")
             );
     }
 
