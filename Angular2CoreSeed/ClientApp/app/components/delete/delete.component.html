@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <p>Action effectuée.</p>        
     </div>
-    <div class="panel-body">
+    <div class="panel-body" *ngIf="idToDelete">
         <h3>Succès supprimer #</h3>
         <h4>{{idToDelete}}</h4>
     </div>
