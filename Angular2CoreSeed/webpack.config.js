@@ -39,16 +39,18 @@ var clientBundleConfig = merge(sharedConfig, {
     ])
 });
 
-// Configuration for server-side (prerendering) bundle suitable for running in Node
-var serverBundleConfig = merge(sharedConfig, {
-    entry: { 'main-server': './ClientApp/boot-server.ts' },
-    output: {
-        libraryTarget: 'commonjs',
-        path: path.join(__dirname, './ClientApp/dist')
-    },
-    target: 'node',
-    devtool: 'inline-source-map',
-    externals: [nodeExternals({ whitelist: [allFilenamesExceptJavaScript] })] // Don't bundle .js files from node_modules
-});
+// Not used :  if want server prerending, add this build to the exports array.
 
-module.exports = [clientBundleConfig, serverBundleConfig];
+// Configuration for server-side (prerendering) bundle suitable for running in Node
+//var serverBundleConfig = merge(sharedConfig, {
+//    entry: { 'main-server': './ClientApp/boot-server.ts' },
+//    output: {
+//        libraryTarget: 'commonjs',
+//        path: path.join(__dirname, './ClientApp/dist')
+//    },
+//    target: 'node',
+//    devtool: 'inline-source-map',
+//    externals: [nodeExternals({ whitelist: [allFilenamesExceptJavaScript] })] // Don't bundle .js files from node_modules
+//});
+
+module.exports = [clientBundleConfig];

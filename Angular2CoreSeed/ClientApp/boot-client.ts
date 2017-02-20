@@ -1,6 +1,8 @@
-import 'angular2-universal-polyfills/browser';
+import './polyfills';
+
+// imports ci haut, les polyfills pour enabler un nouvel API/web support dans un old browser/environment
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { platformUniversalDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
 import 'bootstrap';
 
@@ -13,7 +15,7 @@ if (module['hot']) {
 }
 
 // Boot the application, either now or when the DOM content is loaded
-const platform = platformUniversalDynamic();
+const platform = platformBrowserDynamic();
 const bootApplication = () => { platform.bootstrapModule(AppModule); };
 if (document.readyState === 'complete') {
     bootApplication();

@@ -34,6 +34,12 @@ namespace Angular2CoreSeed.Models
         public string Country { get; set; }
         public string Continent { get; set; }
         public ICollection<Stop> Stops { get; set; }
-        public ICollection<AppUserTrip> AppUserTrips { get; set; }
+        public ICollection<AppUserTrip> AppUserTrips
+        {
+            get
+            {
+                return _appUserTrips;
+            }
+        }
     }
 }

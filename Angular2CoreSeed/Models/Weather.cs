@@ -45,6 +45,12 @@ namespace Angular2CoreSeed.Models
         }
         public int StopId { get; set; }
         public Stop Stop { get; set; }
-        public ICollection<Constraint> Constraints { get; set; }
+        public ICollection<Constraint> Constraints
+        {
+            get
+            {
+                return _constraints;
+            }
+        }
     }
 }
