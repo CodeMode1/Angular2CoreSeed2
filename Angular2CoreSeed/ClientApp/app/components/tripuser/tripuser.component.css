@@ -15,7 +15,15 @@ div div > ul{
     margin: 0.5%;
 }
 
+.userButtons{
+    padding: 5% 0;
+}
+
 .userActions{
     text-align: center;
-    margin: 1%;
+    float: left;
+}
+
+.userActions:first-child{
+    opacity: 0.8;
 }

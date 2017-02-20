@@ -10,8 +10,10 @@
         <li>Date de départ : {{trip?.leaving | fmTripDate}}</li>
         <li>Pays : {{trip?.country}}</li>
         <li>Continent : {{trip?.continent}}</li>
-        <li><a class="btn btn-md btn-danger col-md-7 userActions" (click)="deleteTrip(trip)">Supprimer</a></li>
-        <li><a class="btn btn-md btn-success col-md-7 userActions" (click)="addStops(trip.id)">Ajouter Stops</a></li>
+        <li class="userButtons">
+            <a class="btn btn-md btn-danger col-md-6 userActions" (click)="deleteTrip(trip)">Supprimer</a>
+            <a class="btn btn-md btn-success col-md-6 userActions" (click)="addStops(trip.id)">Ajouter Stops</a>
+        </li>
     </ul>
 
     <div class="col-md-9">
