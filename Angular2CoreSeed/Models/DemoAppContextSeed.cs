@@ -43,7 +43,8 @@ namespace Angular2CoreSeed.Models
                     Leaving = new DateTime(2017, 5, 9),
                     City = "Fort Lauderdale",
                     Trip = usTrip1,
-                    TripId = usTrip1.Id
+                    TripId = usTrip1.Id,
+                    Quote = 8
                 };
                 _context.Stops.Add(stop1usTrip1);
 
@@ -54,7 +55,8 @@ namespace Angular2CoreSeed.Models
                     Leaving = new DateTime(2017, 5, 13),
                     City = "Miami",
                     Trip = usTrip1,
-                    TripId = usTrip1.Id
+                    TripId = usTrip1.Id,
+                    Quote = 8
                 };
                 _context.Stops.Add(stop2usTrip1);
 
@@ -65,7 +67,8 @@ namespace Angular2CoreSeed.Models
                     Leaving = new DateTime(2017, 4, 5),
                     City = "Orlando",
                     Trip = usTrip2,
-                    TripId = usTrip2.Id
+                    TripId = usTrip2.Id,
+                    Quote = 8
                 };
                 _context.Stops.Add(stop1usTrip2);
 
@@ -76,7 +79,8 @@ namespace Angular2CoreSeed.Models
                     Leaving = new DateTime(2017, 4, 9),
                     City = "Kissimmee",
                     Trip = usTrip2,
-                    TripId = usTrip2.Id
+                    TripId = usTrip2.Id,
+                    Quote = 8
                 };
                 _context.Stops.Add(stop2usTrip2);
 

@@ -20,10 +20,38 @@ namespace Angular2CoreSeed.Services
             _logger = logger;
         }
 
+        // getting trips where theyre own stops average is > that the stops collection average.
         public IEnumerable<Trip> GetAllTrips()
         {
             _logger.LogInformation("Getting all trips + their stops from db");
-            return _context.Trips.ToList();
+
+            // 1 -linq -> average on the quote field of the stops collection.
+            int average =
+                (int)_context.Stops
+                .Average(s => s.Quote);
+
+            // taking the trips where theyre stops collection has a > average on the quote field than the Stop collections average.
+            var trips =
+                _context.Trips
+                .Include(t => t.Stops)
+                .Where(t => (t.Stops.Sum(s => s.Quote) / t.Stops.Count()) >  average )
+                .ToList();
+
+            return trips;
+
+            // 2 - calcul
+            //int sum = 0;
+            //int count = 0;
+            //foreach(var trip in _context.Trips)
+            //{
+            //    if(trip.Stops != null)
+            //    {
+            //        sum += trip.Stops.Sum(s => s.Quote);
+            //        count += trip.Stops.Count();
+            //    }
+            //}
+
+            //int av = (int)sum / count;
         }
 
         public IEnumerable<Trip> GetTripsUser(AppUser user)
@@ -35,7 +63,7 @@ namespace Angular2CoreSeed.Services
                 .ToList();
         }
 
-        // supprimer le trip de la table many to many : users-trips
+        // supprimer le trip de la table many to many : users-trips. Anyone can t
         public void DeleteTripUser(AppUser user, Trip trip)
         {
             AppUser User =
@@ -60,14 +88,46 @@ namespace Angular2CoreSeed.Services
             _context.Add(userTrip);
         }
 
-
         public Trip GetTripById(int id)
         {
-            return _context.Trips
-                .Where(trip => trip.Id == id)
-                .Include("AppUserTrips.AppUser")
-                .Include("Stops")
+            int count =
+                _context.Stops
+                .Where(s => s.TripId == id)
+                .Count();
+
+            if(count > 10)
+            {
+                count = 10;
+            }
+
+            var trip =
+                _context.Trips
+                .Include(t => t.AppUserTrips).ThenInclude(aut => aut.AppUser)
+                .Include(t => t.Stops)
+                .Where(t => t.Id == id)
                 .FirstOrDefault();
+
+            // projection do extension query (take, count, etc)
+
+            //var trip =
+            //    _context.Trips
+            //    .Select(t => new
+            //    {
+            //        Trip = t,
+            //        Id = t.Id,
+            //        Name = t.Name,
+            //        Leaving = t.Leaving,
+            //        Country = t.Country,
+            //        Continent = t.Continent,
+            //        //AppUserTrips = t.AppUserTrips,
+            //        Stops = t.Stops
+            //            .Take(count)
+            //            .ToList()
+            //    })
+            //    .SingleOrDefault(t => t.Id == id)
+            //    .Trip;
+
+            return trip;
         }
 
         public void AddTrip(Trip trip)
@@ -120,7 +180,7 @@ namespace Angular2CoreSeed.Services
                 .FirstOrDefault();
         }
 
-        // admin
+        // admin -> authorize policy, because stops and trips are public.
         public void DeleteStop(int id)
         {
             Stop stopToDelete =
@@ -212,6 +272,8 @@ namespace Angular2CoreSeed.Services
 
             return constraints;
         }
+
+        // to reintegrate
 
         //public void AddConstraint(int id, Constraint constraint)
         //{

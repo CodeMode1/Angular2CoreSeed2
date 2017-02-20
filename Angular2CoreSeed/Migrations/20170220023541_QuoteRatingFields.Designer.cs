@@ -8,9 +8,10 @@ using Angular2CoreSeed.Models;
 namespace Angular2CoreSeed.Migrations
 {
     [DbContext(typeof(DemoAppContext))]
-    partial class Ng2CoreSeedDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170220023541_QuoteRatingFields")]
+    partial class QuoteRatingFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

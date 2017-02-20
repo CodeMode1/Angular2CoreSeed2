@@ -7,6 +7,7 @@
     longitude: number;
     latitude: number;
     order: number;
+    quote: number;
 }
 
 export class Stop implements IStop {
@@ -17,5 +18,6 @@ export class Stop implements IStop {
                 public city: string,
                 public longitude: number,
                 public latitude: number,
-                public order: number) { }
+                public order: number,
+                public quote: number) { }
 }

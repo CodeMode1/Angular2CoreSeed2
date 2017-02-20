@@ -20,7 +20,7 @@ export class StopComponent {
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
         public _stopService: StopService) {
-        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", 0, 0, 0);
+        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", 0, 0, 0, 8);
     }
 
     ngOnInit() {
@@ -64,6 +64,7 @@ export class StopComponent {
                     this.selectedStop.name = data.name;
                     this.selectedStop.arrival = data.arrival;
                     this.selectedStop.leaving = data.leaving;
+                    this.selectedStop.quote = data.quote;
                 },
                 error => {
                     console.log("error cant save stop at trip id : " + this.tripId);

@@ -9,11 +9,13 @@ namespace Angular2CoreSeed.Models
     public class Trip
     {
         private readonly ICollection<AppUserTrip> _appUserTrips;
+        private ICollection<Stop> _stops;
 
         public Trip()
             : base()
         {
             _appUserTrips = new List<AppUserTrip>();
+            _stops = new List<Stop>();
         }
 
         [Key]
@@ -33,7 +35,17 @@ namespace Angular2CoreSeed.Models
         }
         public string Country { get; set; }
         public string Continent { get; set; }
-        public ICollection<Stop> Stops { get; set; }
+        public ICollection<Stop> Stops
+        {
+            get
+            {
+                return _stops;
+            }
+            set
+            {
+                this._stops = value;
+            }
+        }
         public ICollection<AppUserTrip> AppUserTrips
         {
             get

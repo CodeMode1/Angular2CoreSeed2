@@ -40,6 +40,7 @@ namespace Angular2CoreSeed.Models
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int Order { get; set; }
+        public int Quote { get; set; }
         public int TripId { get; set; }
         public Trip Trip { get; set; }
         public ICollection<Weather> Weathers { get; set; }

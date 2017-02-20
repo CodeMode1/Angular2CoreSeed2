@@ -48,6 +48,10 @@ export class TripUserComponent {
             );
     }
 
+    addStops(id: number) {
+        this._router.navigate(['/trips', id, 'stop']);
+    }
+
     deleteTrip(trip: Trip): void {
         this.selectedTrip = trip;
         this.objectName = "usertrip";

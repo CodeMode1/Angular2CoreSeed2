@@ -19,6 +19,6 @@ import 'core-js/es6/weak-set';
 import 'core-js/es6/typed';
 import 'core-js/es6/reflect';
 
-// enable dependency injection in decorator functions. (replaces sep packages reflect-metadata + es6-shim)
+// enable dependency injection in decorator functions. (replaces packages reflect-metadata + es6-shim)
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';

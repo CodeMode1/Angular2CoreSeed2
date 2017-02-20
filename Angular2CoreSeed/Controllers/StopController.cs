@@ -47,7 +47,8 @@ namespace Angular2CoreSeed.Controllers
                     City = stop.City,
                     Longitude = stop.Longitude,
                     Order = stop.Order,
-                    Latitude = stop.Latitude
+                    Latitude = stop.Latitude,
+                    Quote = stop.Quote
                 };
                 _repository.AddStop(id, newStop);
                 if(await _repository.SaveChangesAsync())

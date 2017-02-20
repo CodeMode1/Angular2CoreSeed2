@@ -14,3 +14,8 @@ div div > ul{
     background-color:aliceblue;
     margin: 0.5%;
 }
+
+.userActions{
+    text-align: center;
+    margin: 1%;
+}
