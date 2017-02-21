@@ -1,0 +1,14 @@
+﻿.infos{
+    margin: 30px;
+    text-align: center;
+}
+
+a, p > a{
+    cursor: pointer;
+}
+
+.wrapper{
+    padding: 5%;
+    height: 20%;
+    margin: 5%;
+}

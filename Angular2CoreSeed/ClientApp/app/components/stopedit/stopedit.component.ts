@@ -40,6 +40,19 @@ export class EditStopComponent {
         );
     }
 
+    addStop(stop: Stop) {
+        return this._stopService.postStopByIdAPI(this.selectedTrip.id, stop)
+            .subscribe(
+                data => {
+                    console.log("succes saved stop at trip id : " + this.selectedTrip.id);
+                    console.log(data);
+                },
+                error => {
+                    console.log("error cant save stop at trip id : " + this.selectedTrip.id);
+                }
+            );
+    }
+
     //  POP UP NOT WORKIN?! test in another project
     onTogglePopUp(): void {
         this.showPopUp = !this.showPopUp;

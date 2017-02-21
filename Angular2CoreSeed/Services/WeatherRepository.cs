@@ -34,7 +34,7 @@ namespace Angular2CoreSeed.Services
             var trips =
                 _context.Trips
                 .Include(t => t.Stops)
-                .Where(t => (t.Stops.Sum(s => s.Quote) / t.Stops.Count()) >  average )
+                .Where(t => (t.Stops.Sum(s => s.Quote) / t.Stops.Count()) >=  average )
                 .ToList();
 
             return trips;

@@ -49,7 +49,7 @@ export class TripUserComponent {
     }
 
     addStops(id: number) {
-        this._router.navigate(['/trips', id, 'stop']);
+        this._router.navigate(['/trips', id, 'edit']);
     }
 
     deleteTrip(trip: Trip): void {

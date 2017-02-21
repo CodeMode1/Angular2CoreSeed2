@@ -37,7 +37,12 @@ module.exports = {
             '@progress/kendo-angular-dialog',
             'moment',
             'font-awesome/css/font-awesome.css',
-            'core-js'
+            'core-js',
+            '@progress/kendo-angular-inputs',
+            '@progress/kendo-angular-layout',
+            '@progress/kendo-angular-charts',
+            '@progress/kendo-drawing',
+            'hammerjs'
         ]
     },
     output: {

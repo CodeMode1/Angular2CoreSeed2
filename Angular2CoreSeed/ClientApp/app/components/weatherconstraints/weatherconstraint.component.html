@@ -62,5 +62,15 @@
     </tbody>
 </table>
 
+<kendo-chart [categoryAxis]="{ categories: timeLine }">
+    <kendo-chart-title text="Statistiques Température / Heure"></kendo-chart-title>
+    <kendo-chart-legend position="top" orientation="horizontal"></kendo-chart-legend>
+    <kendo-chart-tooltip format="{0}"></kendo-chart-tooltip>
+    <kendo-chart-series>
+        <kendo-chart-series-item *ngFor="let constraint of constraints" type="line" style="smooth" 
+                                  [data]="constraint.stats" [name]="constraint.weather.name">
+        </kendo-chart-series-item>
+    </kendo-chart-series>
+</kendo-chart>
 
 <button (click)="goBack()" class="btn btn-lg btn-primary">Back</button>

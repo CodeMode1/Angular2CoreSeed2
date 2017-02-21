@@ -22,9 +22,15 @@
             <kendo-calendar name="leaving" id="leaving" [focusedDate]="selectedStop.leaving" [(ngModel)]="selectedStop.leaving" required></kendo-calendar>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label for="city">Ville</label>
             <input type="text" name="city" id="city" [(ngModel)]="selectedStop.city" class="form-control"/>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="quote">Quote</label>
+            <kendo-numerictextbox class="col-md-12" [restrictDecimals]="true" [decimals]="decimals" [min]="min"
+            [max]="max" [spinners]="true" [format]="'n0'" [step]="1" [autoCorrect]="autoCorrect" [(ngModel)]="selectedStop.quote" name="quote" id="quote" required></kendo-numerictextbox>
         </div>
 
         <button type="submit" class="btn btn-lg btn-success">Ajouter</button>

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UniversalModule } from 'angular2-universal';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 // login
 import { LoginComponent } from './components/login/login.component';
@@ -40,7 +41,11 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { FormatHour } from './components/weatherform/weatherform.pipe';
 import { TripDate } from './components/trip/trip.pipe'
 import { DialogModule } from '@progress/kendo-angular-dialog';
-//import { PopupModule } from '@progress/kendo-angular-popup';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { LayoutModule } from '@progress/kendo-angular-layout';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+
+import 'hammerjs';
 //import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
@@ -75,10 +80,15 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
         WeatherConstraintsService
     ],
     imports: [
-        UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        BrowserModule,
+        HttpModule,
+        JsonpModule,
         FormsModule,
         DateInputsModule,
         DialogModule,
+        InputsModule,
+        LayoutModule,
+        ChartsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

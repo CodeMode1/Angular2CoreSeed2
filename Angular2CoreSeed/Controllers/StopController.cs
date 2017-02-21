@@ -2,6 +2,7 @@
 using Angular2CoreSeed.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,11 +18,13 @@ namespace Angular2CoreSeed.Controllers
     {
         private ILogger<StopController> _logger;
         private IWeatherRepository _repository;
+        private UserManager<AppUser> _usMng;
 
-        public StopController(IWeatherRepository repository, ILogger<StopController> logger)
+        public StopController(IWeatherRepository repository, ILogger<StopController> logger, UserManager<AppUser> usrMng)
         {
             _repository = repository;
             _logger = logger;
+            _usMng = usrMng;
         }
 
         // save a stop at a trip's id.
@@ -63,6 +66,7 @@ namespace Angular2CoreSeed.Controllers
             _logger.LogWarning($"Could not save the stop object : {stop} at trip id {id}");
             return BadRequest($"CAnnot save new stop : {stop} at trip id : {id}");
         }
+
 
         [HttpDelete("{id}")]
         [Authorize(Policy = "SuperUsers")]

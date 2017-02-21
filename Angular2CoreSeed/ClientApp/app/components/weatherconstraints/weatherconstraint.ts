@@ -10,6 +10,7 @@ export interface IConstraint{
     clear?: Boolean;
     feelsLike?: number;
     weather?: Weather;
+    stats?: number[];
 }
 
 export class Constraint {
@@ -22,6 +23,10 @@ export class Constraint {
         public sunSet: Date,
         public clear: Boolean,
         public feelsLike: number,
-        public weather: Weather
-    ) {}
+        public weather: Weather,
+        public stats: number[]
+    ) 
+    {
+        this.stats = [];
+    }
 }

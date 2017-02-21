@@ -17,9 +17,17 @@ export class StopComponent {
     public tripId: number;
     public isShowForm: boolean;
     public selectedStop: Stop;
+    public decimals: number;
+    public min: number;
+    public max: number;
+    public autoCorrect: boolean;
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
         public _stopService: StopService) {
+        this.decimals = 0;
+        this.min = 1;
+        this.max = 10;
+        this.autoCorrect = true;
         this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", 0, 0, 0, 8);
     }
 
