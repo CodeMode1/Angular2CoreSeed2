@@ -63,9 +63,18 @@
 </table>
 
 <kendo-chart [categoryAxis]="{ categories: timeLine }">
-    <kendo-chart-title text="Statistiques Température / Heure"></kendo-chart-title>
+
+    <kendo-chart-value-axis>
+        <kendo-chart-value-axis-item [title]="{ text: 'Statistiques' }">
+        </kendo-chart-value-axis-item>
+    </kendo-chart-value-axis>
+
+    <kendo-chart-title text="Statistiques Température / Heure" background="#e3e3e3" font="19pt sans-serif"></kendo-chart-title>
     <kendo-chart-legend position="top" orientation="horizontal"></kendo-chart-legend>
-    <kendo-chart-tooltip format="{0}"></kendo-chart-tooltip>
+    <kendo-chart-tooltip format="{0}" padding="1"  [shared]="true"></kendo-chart-tooltip>
+    <kendo-chart-area background="#f7f7fa" [margin]="30">
+    </kendo-chart-area>
+
     <kendo-chart-series>
         <kendo-chart-series-item *ngFor="let constraint of constraints" type="line" style="smooth" 
                                   [data]="constraint.stats" [name]="constraint.weather.name">
