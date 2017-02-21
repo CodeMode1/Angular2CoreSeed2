@@ -13,11 +13,10 @@ export class WeatherConstraintComponent {
     private sub: any;
     public id: number;
     public constraints: Constraint[];
-    // min
-    public timeLine: number[];
+    public tempConst: string[];
 
     constructor(private _router: Router, private _route: ActivatedRoute, private _weatherConstraintService: WeatherConstraintsService) {
-        this.timeLine = [10, 20, 30, 40, 50, 60]; 
+        this.tempConst = ['Vent', 'Rafale', 'Humidité', 'Présenti']; 
         this.constraints = [];
     }
 

@@ -62,21 +62,21 @@
     </tbody>
 </table>
 
-<kendo-chart [categoryAxis]="{ categories: timeLine }">
+<kendo-chart [categoryAxis]="{ categories: tempConst }">
 
     <kendo-chart-value-axis>
         <kendo-chart-value-axis-item [title]="{ text: 'Statistiques' }">
         </kendo-chart-value-axis-item>
     </kendo-chart-value-axis>
 
-    <kendo-chart-title text="Statistiques Température / Heure" background="#e3e3e3" font="19pt sans-serif"></kendo-chart-title>
+    <kendo-chart-title text="Statistiques Température / Contrainte" background="#e3e3e3" font="19pt sans-serif"></kendo-chart-title>
     <kendo-chart-legend position="top" orientation="horizontal"></kendo-chart-legend>
     <kendo-chart-tooltip format="{0}" padding="1"  [shared]="true"></kendo-chart-tooltip>
     <kendo-chart-area background="#f7f7fa" [margin]="30">
     </kendo-chart-area>
 
     <kendo-chart-series>
-        <kendo-chart-series-item *ngFor="let constraint of constraints" type="line" style="smooth" 
+        <kendo-chart-series-item *ngFor="let constraint of constraints" type="column" 
                                   [data]="constraint.stats" [name]="constraint.weather.name">
         </kendo-chart-series-item>
     </kendo-chart-series>
