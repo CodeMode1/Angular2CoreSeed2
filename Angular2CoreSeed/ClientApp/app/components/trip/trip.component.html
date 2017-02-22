@@ -1,7 +1,8 @@
 ﻿<h1>Bienvenue {{userName}}</h1>
-<a class="btn btn-sm btn-success" [routerLink]="['/trips/perso']">Voir mes trips</a>
+<a class="btn btn-sm btn-success" [routerLink]="['/trips/perso']">Mes trips</a>
 
 <h2>{{titreTrip}}</h2>
+<a class="btn btn-md btn-primary" [routerLink]="['best']">Meilleurs Trips</a>
 <h3>Disponibles présentement</h3>
 
 <main class="col-md-12">
@@ -18,9 +19,14 @@
 
     <section class="col-md-12">
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
-        <a class="btn btn-md btn-primary" [routerLink]="['best']">Voir Best Trips</a>
     </section>
 </main>
+
+<footer>
+    <section class="col-md-12">
+        <a class="btn btn-lg btn-primary" (click)="home()">Accueil</a>
+    </section>
+</footer>
 
 <section class="col-md-12">
     <router-outlet></router-outlet>

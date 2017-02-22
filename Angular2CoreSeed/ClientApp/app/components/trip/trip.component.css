@@ -15,6 +15,7 @@ a{
 main{
     text-align: center;
     width: auto;
+    height: auto;
     display: block;
 }
 
@@ -39,9 +40,9 @@ div > ul{
 .infosTrip:hover{
     opacity: 1;
     transition-property: all;
-    transition-duration: 2.5s;
+    transition-duration: 1.5s;
     transition-delay: 0s;
-    transform: rotateY(10deg);
+    transform: rotateY(15deg);
 }
 .infosTrip:hover, section{
     cursor: pointer;
@@ -51,10 +52,10 @@ section{
     float: left;
     clear: both;
     text-align: left;
+    padding: 0;
 }
 
 pagination-controls{
     text-align: center;
-    margin: 0;
-    padding: 0;
+    padding: 1% 0 1% 0;
 }
