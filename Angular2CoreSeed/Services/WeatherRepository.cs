@@ -20,6 +20,9 @@ namespace Angular2CoreSeed.Services
             _logger = logger;
         }
 
+        // renommer GetBestTrips()
+        // étoiles : représenter le rating
+        // order by
         // getting trips where theyre own stops average is > that the stops collection average.
         public IEnumerable<Trip> GetAllTrips()
         {
@@ -33,9 +36,10 @@ namespace Angular2CoreSeed.Services
             // taking the trips where theyre stops collection has a > average on the quote field than the Stop collections average.
             var trips =
                 _context.Trips
-                .Include(t => t.Stops)
-                .Where(t => (t.Stops.Sum(s => s.Quote) / t.Stops.Count()) >=  average )
+                .Include(t => t.Stops)         
                 .ToList();
+
+            trips.Where(t => (t.Rating >= average));
 
             return trips;
 

@@ -21,20 +21,33 @@ namespace Angular2CoreSeed.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        private DateTime leaving;
+        // membre contient data
+        private DateTime _leaving;
+        // propriété d'accès au data (get, set modifier le membre)
         public DateTime Leaving
         {
             get
             {
-                return this.leaving.ToUniversalTime();
+                return this._leaving.ToUniversalTime();
             }
             set
             {
-                this.leaving = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                this._leaving = DateTime.SpecifyKind(value, DateTimeKind.Utc);
             }
         }
         public string Country { get; set; }
         public string Continent { get; set; }
+        public int Rating
+        {
+            get
+            {
+                if ((Stops != null) && (Stops.Any() == true))
+                {
+                    return (this.Stops.Sum(s => s.Quote) / this.Stops.Count());
+                }
+                return (0);
+            }
+        }
         public ICollection<Stop> Stops
         {
             get
