@@ -1,24 +1,60 @@
-﻿ul{
+﻿html{
+    font-size: 10px;
+}
+
+ul{
     list-style-type: none;
 }
 
 a{
     cursor: pointer;
     text-decoration: none;
+    margin: 1% 0 1% 0;
+}
+
+main{
+    text-align: center;
+    width: auto;
+    display: block;
 }
 
 .infosTrip{
-    width: auto;
-    height: auto;
-    background-color:#9de6ff;
+    width: 20%;
+    height: 20%;
+    background-color:azure;
     color: darkblue;
     border: 1px solid black;
     float: left;
-    margin: 1%;
-    opacity: 0.6;
+    text-align: center;
+    opacity: 0.4;
+    padding: 0;
+    margin: 2.5%;
+}
+
+div > ul{
+    text-align: left;
+    padding: 5%;
 }
 
 .infosTrip:hover{
-    opacity: 0.9;
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 2.5s;
+    transition-delay: 0s;
+    transform: rotateY(10deg);
+}
+.infosTrip:hover, section{
     cursor: pointer;
+}
+
+section{
+    float: left;
+    clear: both;
+    text-align: left;
+}
+
+pagination-controls{
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }

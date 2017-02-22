@@ -69,6 +69,7 @@ export class EditStopComponent {
                         data.leaving,
                         data.continent,
                         data.country,
+                        data.rating,
                         data.stops);
                         console.log("succes get back trip with id : " + id);
                         console.log("trip detail : " + JSON.stringify(data));

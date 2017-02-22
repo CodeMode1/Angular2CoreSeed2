@@ -42,7 +42,8 @@ module.exports = {
             '@progress/kendo-angular-layout',
             '@progress/kendo-angular-charts',
             '@progress/kendo-drawing',
-            'hammerjs'
+            'hammerjs',
+            'ng2-pagination'
         ]
     },
     output: {

@@ -12,6 +12,7 @@ namespace Angular2CoreSeed.Services
         void PutTrip(Trip trip);
         void DeleteTrip(int id);
         IEnumerable<Trip> GetAllTrips();
+        IEnumerable<Trip> GetBestTrips();
         Trip GetTripById(int id);
         void AddUserTrip(AppUserTrip userTrip);
         Stop GetStopById(int id);

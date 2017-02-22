@@ -6,6 +6,7 @@
     <li><i class="fa fa-hourglass"></i><span>{{selectedTrip?.leaving | fmTripDate}}</span></li>
     <li><i class="fa fa-hotel"></i><span>{{selectedTrip?.country}}</span></li>
     <li><i class="fa-home"></i><span>{{selectedTrip?.continent}}</span></li>
+    <li><i class="fa fa-first-order"></i><span>{{selectedTrip?.rating}}</span></li>
     <li><button class="btn btn-sm btn-success" (click)="buyTrip(selectedTrip)" [disabled]="isBought">Ajouter à mes trips</button></li>
     <li><h4>{{isBoughtMessage}}</h4></li>
 </ul>

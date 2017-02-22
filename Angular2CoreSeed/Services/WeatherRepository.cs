@@ -20,18 +20,10 @@ namespace Angular2CoreSeed.Services
             _logger = logger;
         }
 
-        // renommer GetBestTrips()
-        // étoiles : représenter le rating
-        // order by
-        // getting trips where theyre own stops average is > that the stops collection average.
+        // étoiles : représenter le rating        
         public IEnumerable<Trip> GetAllTrips()
         {
             _logger.LogInformation("Getting all trips + their stops from db");
-
-            // 1 -linq -> average on the quote field of the stops collection.
-            int average =
-                (int)_context.Stops
-                .Average(s => s.Quote);
 
             // taking the trips where theyre stops collection has a > average on the quote field than the Stop collections average.
             var trips =
@@ -39,23 +31,29 @@ namespace Angular2CoreSeed.Services
                 .Include(t => t.Stops)         
                 .ToList();
 
-            trips.Where(t => (t.Rating >= average));
-
             return trips;
+        }
 
-            // 2 - calcul
-            //int sum = 0;
-            //int count = 0;
-            //foreach(var trip in _context.Trips)
-            //{
-            //    if(trip.Stops != null)
-            //    {
-            //        sum += trip.Stops.Sum(s => s.Quote);
-            //        count += trip.Stops.Count();
-            //    }
-            //}
+        // getting trips where theyre own stops average is > that the stops collection average.
+        public IEnumerable<Trip> GetBestTrips()
+        {
+            // 1 -linq -> average on the quote field of the stops collection.
+            int average =
+                (int)_context.Stops
+                .Average(s => s.Quote);
 
-            //int av = (int)sum / count;
+            var trips =
+                _context.Trips
+                .Include(t => t.Stops)
+                .ToList();
+
+            var tripsFiltered =
+                trips
+                .FindAll(t => (t.Rating >= average && t.Rating > 0))
+                .OrderByDescending(t => t.Rating)
+                .ToList();
+            _logger.LogInformation("" + tripsFiltered);
+            return tripsFiltered;
         }
 
         public IEnumerable<Trip> GetTripsUser(AppUser user)

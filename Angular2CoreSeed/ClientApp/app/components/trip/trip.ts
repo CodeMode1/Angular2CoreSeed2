@@ -6,6 +6,7 @@ export interface ITrip{
     leaving?: Date;
     country?: string;
     continent?: string;
+    rating?: number;
     stops?: Stop[];
 }
 
@@ -16,5 +17,6 @@ export class Trip implements ITrip {
         public leaving?: Date,
         public country?: string,
         public continent?: string,
+        public rating?: number,
         public stops?: Stop[]) { }
 }

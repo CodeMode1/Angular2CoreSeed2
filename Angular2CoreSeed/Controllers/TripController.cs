@@ -46,8 +46,29 @@ namespace Angular2CoreSeed.Controllers
             {
                 _logger.LogError($"Failed to get all trips : {ex}");
             }
-            _logger.LogWarning($"Could get trip objects");
+            _logger.LogWarning($"Couldn get trip objects");
             return BadRequest($"Error occured getting trips");
+        }
+
+        [HttpGet("bestTrips")]
+        public IActionResult GetBestTrips()
+        {
+            try
+            {
+                _logger.LogInformation("trying get best trips");
+                var trips = _repository.GetBestTrips();
+                if(trips == null)
+                {
+                    return NotFound($"Couldnt get best trips : {trips}");
+                }
+                return Ok(trips);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Failed tp get best trips : {ex}");
+            }
+            _logger.LogWarning($"Couldn get best trips");
+            return BadRequest($"Error occured getting best trips");
         }
 
         [HttpGet("user")]

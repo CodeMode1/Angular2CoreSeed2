@@ -22,6 +22,7 @@ import { WeatherConstraintsComponent } from './components/weatherconstraints/wea
 import { WeatherConstraintComponent } from './components/weatherconstraints/weatherconstraint.component';
 
 import { TripComponent } from './components/trip/trip.component';
+import { BestTripComponent } from './components/tripbest/tripbest.component';
 import { TripDetailComponent } from './components/tripdetail/tripdetail.component';
 import { TripUserComponent } from './components/tripuser/tripuser.component';
 
@@ -46,6 +47,9 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 
 import 'hammerjs';
+
+// paging
+import { Ng2PaginationModule } from 'ng2-pagination';
 //import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
@@ -61,6 +65,7 @@ import 'hammerjs';
         WeatherConstraintsComponent,
         WeatherConstraintComponent,
         TripComponent,
+        BestTripComponent,
         TripDetailComponent,
         TripUserComponent,
         EditStopComponent,
@@ -89,11 +94,17 @@ import 'hammerjs';
         InputsModule,
         LayoutModule,
         ChartsModule,
+        Ng2PaginationModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'login', component: LoginComponent },
-            { path: 'trips', component: TripComponent, canActivate: [AuthGuard] },
+            {
+                path: 'trips', component: TripComponent, canActivate: [AuthGuard], children: [
+                    { path: '', component: BestTripComponent },
+                    { path: 'best', component: BestTripComponent }
+                ]
+            },
             { path: 'trips/perso', component: TripUserComponent, canActivate: [AuthGuard] },          
             {
                 path: 'trips/:id', component: TripDetailComponent, children: [

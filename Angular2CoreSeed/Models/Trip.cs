@@ -45,7 +45,7 @@ namespace Angular2CoreSeed.Models
                 {
                     return (this.Stops.Sum(s => s.Quote) / this.Stops.Count());
                 }
-                return (0);
+                return(0);
             }
         }
         public ICollection<Stop> Stops
