@@ -27,10 +27,13 @@
             </kendo-grid-column>
             <kendo-grid-column field="rating" title="Rating" width="20">
             </kendo-grid-column>
-            <template kendoGridDetailTemplate let-dataItem>
-                <section *ngIf="dataItem">
-                    <p><strong>Détails:</strong> Item</p>
-                </section>
-            </template>
+        <template kendoGridDetailTemplate let-dataItem>
+            <section *ngIf="dataItem">
+                <p><strong>Détails:</strong> Item</p>
+            </section>
+        </template>
+        <kendo-grid-messages groupPanelEmpty="Drag here to group."
+                             noRecords="There no items to display.">
+        </kendo-grid-messages>
 </kendo-grid>
 </section>
