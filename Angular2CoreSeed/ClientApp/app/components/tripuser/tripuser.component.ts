@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TripDetailService } from '../tripdetail/tripdetail.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ITrip, Trip } from '../trip/trip';
+import { IStop, Stop } from '../stop/stop';
 
 @Component({
     selector: 'trip-detail',
@@ -10,12 +11,16 @@ import { ITrip, Trip } from '../trip/trip';
     styles: [require('./tripuser.component.css')]
 })
 
-export class TripUserComponent {
+export class TripUserComponent implements OnInit  {
     public userMessage: string;
     public mesTrips: Trip[];
     public selectedTrip: Trip;
     public objectName: string;
     public inputDelete: boolean;
+
+    // constant for swipe action: left or right
+    SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+
 
     constructor(private _activatedRoute: ActivatedRoute,
         public _tripDetailService: TripDetailService, private _router:Router) {
@@ -25,6 +30,30 @@ export class TripUserComponent {
         this.inputDelete = false;
         this.selectedTrip = null;
     }
+
+    // action triggered when user swipes
+    swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
+        // out of range
+        if (currentIndex > this.mesTrips.length || currentIndex < 0) return;
+
+        let nextIndex = 0;
+
+        // swipe right, next avatar
+        if (action === this.SWIPE_ACTION.RIGHT) {
+            const isLast = currentIndex === this.mesTrips.length - 1;
+            nextIndex = isLast ? 0 : currentIndex + 1;
+        }
+
+        // swipe left, previous avatar
+        if (action === this.SWIPE_ACTION.LEFT) {
+            const isFirst = currentIndex === 0;
+            nextIndex = isFirst ? this.mesTrips.length - 1 : currentIndex - 1;
+        }
+
+        // toggle avatar visibility
+        this.mesTrips.forEach((x, i) => x.visible = (i === nextIndex));
+    }
+
 
     ngOnInit() {
         this.getUserTrips();
@@ -41,6 +70,7 @@ export class TripUserComponent {
                 data => {
                     console.log(data);
                     this.mesTrips = data;
+                    this.mesTrips.forEach((x, i) => i > 0 ? x.visible = false : x.visible = true);
                 },
                 error => {
                     console.log("cant get your trips " + error);

@@ -2,8 +2,12 @@
 
 <delete [isDelete]="inputDelete" [tripToDelete]="selectedTrip" [objectToDelete]="objectName" (deleteSuccess)="refreshResults($event)"></delete>
 
-<h3>Mes Trips</h3>
-<div *ngFor="let trip of mesTrips" class="col-md-12">
+<h1>Mes Trips</h1>
+<h2>Swipe <i class="fa fa-arrow-left"></i> Ou <i class="fa fa-arrow-right"></i></h2>
+
+<div *ngFor="let trip of mesTrips; let idx=index" class="col-md-12 swipe-box" 
+     (swipeleft)="swipe(idx, $event.type)" (swiperight)="swipe(idx, $event.type)"
+     [class.visible]="trip.visible" [class.hidden]="!trip.visible">
     <ul class="col-md-3">
         <li># Réservation : {{trip?.id}}</li>
         <li>Nom : {{trip?.name}}</li>
@@ -11,13 +15,13 @@
         <li>Pays : {{trip?.country}}</li>
         <li>Continent : {{trip?.continent}}</li>
         <li class="userButtons">
-            <a class="btn btn-md btn-danger col-md-6 userActions" (click)="deleteTrip(trip)"><i class="fa fa-trash"></i> Supprimer</a>
-            <a class="btn btn-md btn-success col-md-6 userActions" (click)="addStops(trip.id)"><i class="fa fa-plus"></i> Ajouter Stops</a>
+            <a class="btn btn-md btn-danger active col-md-6 userActions" (click)="deleteTrip(trip)"><i class="fa fa-trash"></i> Supprimer</a>
+            <a class="btn btn-md btn-success active col-md-6 userActions" (click)="addStops(trip.id)"><i class="fa fa-plus"></i> Ajouter Stops</a>
         </li>
     </ul>
 
     <div class="col-md-9">
-        <ul *ngFor="let stop of trip.stops; let i = index">
+        <ul *ngFor="let stop of trip?.stops; let i = index">
             <li>Stop # {{i + 1}}</li>
             <li>Nom : {{stop?.name}}</li>
             <li>Date d'arrivée : {{stop?.arrival | fmTripDate}}</li>
