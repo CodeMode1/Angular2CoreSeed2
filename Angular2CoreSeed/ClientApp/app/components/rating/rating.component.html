@@ -1,0 +1,9 @@
+﻿<div (click)="onClick(rates.length)">
+    <span *ngIf="rates && rates.length > 0">
+        <span *ngFor="let r of rates" class="glyphicon glyphicon-star"></span>
+    </span>
+
+    <span *ngIf="diffRates && diffRates.length > 0">
+        <span *ngFor="let r of diffRates" class="glyphicon glyphicon-star-empty star-empty"></span>
+    </span>
+</div>

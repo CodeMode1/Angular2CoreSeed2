@@ -26,6 +26,8 @@ import { BestTripComponent } from './components/tripbest/tripbest.component';
 import { TripDetailComponent } from './components/tripdetail/tripdetail.component';
 import { TripUserComponent } from './components/tripuser/tripuser.component';
 
+import { RatingComponent } from './components/rating/rating.component';
+
 import { StopComponent } from './components/stop/stop.component';
 import { EditStopComponent } from './components/stopedit/stopedit.component';
 
@@ -71,6 +73,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         EditStopComponent,
         StopComponent,
         LoginComponent,
+        RatingComponent,
         // pipes
         FormatHour,
         TripDate

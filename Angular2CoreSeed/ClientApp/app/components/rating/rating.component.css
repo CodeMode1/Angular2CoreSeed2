@@ -1,0 +1,11 @@
+﻿span {
+    float: left;
+    display: inline-block;
+}
+
+/* Place les étoiles à gauche du container */
+.star, .star-empty{
+    float:left;
+    cursor:pointer;
+}
+

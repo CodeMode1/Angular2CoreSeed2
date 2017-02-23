@@ -35,6 +35,11 @@ export class TripComponent {
         this._router.navigateByUrl('/home');
     }
 
+    clickRating($event) {
+        console.log($event);
+        alert('rating: ' + $event.rating);
+    }
+
     //  get methos sur service.
     getAllTrips() {
             this._tripService.getAllTripsAPI()
@@ -48,6 +53,4 @@ export class TripComponent {
                 }
             );
     }
-
-   
 }

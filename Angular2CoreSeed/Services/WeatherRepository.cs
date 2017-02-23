@@ -20,7 +20,6 @@ namespace Angular2CoreSeed.Services
             _logger = logger;
         }
 
-        // étoiles : représenter le rating        
         public IEnumerable<Trip> GetAllTrips()
         {
             _logger.LogInformation("Getting all trips + their stops from db");
@@ -28,7 +27,8 @@ namespace Angular2CoreSeed.Services
             // taking the trips where theyre stops collection has a > average on the quote field than the Stop collections average.
             var trips =
                 _context.Trips
-                .Include(t => t.Stops)         
+                .Include(t => t.Stops)
+                .OrderByDescending(t => t.Rating)
                 .ToList();
 
             return trips;
