@@ -3,7 +3,12 @@ import { ITrip, Trip } from '../trip/trip';
 import { TripService } from '../trip/trip.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { GroupDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
+import {
+    GridComponent,
+    GridDataResult,
+    PageChangeEvent
+} from '@progress/kendo-angular-grid';
 
 @Component({
     selector: 'best-trip',
@@ -18,18 +23,30 @@ export class BestTripComponent {
     public skip: number;
     public isTrips: boolean;
     public titleBestTrips: string;
-    private hiddenColumns: string[];
-    private columns: string[];
+    public hiddenColumns: string[];
+    public columns: string[];
     public data: Object[];
+
+    // paging infos
+    public buttonCount: number;
+    public info: boolean;
+    public type: string;
+    public pageSizes: boolean;
+    public previousNext: boolean;
 
     constructor(public _tripService: TripService, private _activatedRoute: ActivatedRoute, private _router: Router) {
         this.bestTrips = [];
-        this.pageSize = 2;
+        this.pageSize = 5;
         this.skip = 0;
         this.hiddenColumns = [];
         this.columns = ["id"];
         this.isTrips = false;
         this.titleBestTrips = "";
+        this.buttonCount = 5;
+        this.info = true;
+        this.type = "numeric";
+        this.pageSizes = true;
+        this.previousNext = true;
     }
 
     ngOnInit() {
@@ -50,6 +67,7 @@ export class BestTripComponent {
             data: this.bestTrips.slice(this.skip, this.skip + this.pageSize),
             total: this.bestTrips.length
         };
+
     }
 
     restoreColumns(): void {
