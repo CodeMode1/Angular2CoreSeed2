@@ -120,6 +120,8 @@ namespace Angular2CoreSeed.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("Cuisine");
+
                     b.Property<double>("Latitude");
 
                     b.Property<DateTime>("Leaving");

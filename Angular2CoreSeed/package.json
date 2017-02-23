@@ -15,6 +15,7 @@
     "@progress/kendo-angular-charts": "^0.16.1",
     "@progress/kendo-angular-dateinputs": "^0.3.6",
     "@progress/kendo-angular-dialog": "^0.15.1",
+    "@progress/kendo-angular-dropdowns": "^0.29.1",
     "@progress/kendo-angular-grid": "^0.16.2",
     "@progress/kendo-angular-inputs": "^0.18.7",
     "@progress/kendo-angular-intl": "^0.9.1",

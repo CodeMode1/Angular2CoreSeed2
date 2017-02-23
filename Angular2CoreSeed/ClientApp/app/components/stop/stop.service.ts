@@ -29,6 +29,8 @@ export class StopService {
 
         let options = this.getHeaders();
 
+        stop.cuisine = stop.cuisine["text"];
+
         let body = JSON.stringify(stop);
         return this._http.post(this._urlStop + "/" + id, body, options)
             .map((response: Response) => <IStop>response.json())

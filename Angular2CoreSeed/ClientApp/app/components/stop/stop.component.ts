@@ -21,6 +21,8 @@ export class StopComponent {
     public min: number;
     public max: number;
     public autoCorrect: boolean;
+    public cuisines: Array<{ text: string, value: number }>;
+    public cuisine: { text: string, value: number };
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
         public _stopService: StopService) {
@@ -28,7 +30,12 @@ export class StopComponent {
         this.min = 1;
         this.max = 10;
         this.autoCorrect = true;
-        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", 0, 0, 0, 8);
+        this.cuisine = { text: "Italienne", value: 2 };
+        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", this.cuisine, 0, 0, 0, 8);
+        this.cuisines = [];
+        this.cuisines.push({ text: "Japonaise", value: 1 }, { text: "Italienne", value: 2 }, { text: "Suédoise", value: 3 },
+            { text: "Portuguaise", value: 4 }, { text: "Africaine", value: 5 }, { text: "Allemande", value: 6 },
+            { text: "Britannique", value: 7 }, { text: "Américaine", value: 8 }, { text: "Suédoise", value: 9 });
     }
 
     ngOnInit() {
@@ -72,6 +79,8 @@ export class StopComponent {
                     this.selectedStop.name = data.name;
                     this.selectedStop.arrival = data.arrival;
                     this.selectedStop.leaving = data.leaving;
+                    this.selectedStop.city = data.city;
+                    this.selectedStop.cuisine = data.cuisine;
                     this.selectedStop.quote = data.quote;
                 },
                 error => {

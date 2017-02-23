@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +40,7 @@ namespace Angular2CoreSeed.Controllers
                 {
                     return BadRequest($"Model is not valid, cant save stop : {stop}");
                 }
-                if(stop == null)
+                if (stop == null)
                 {
                     return BadRequest($"Stop is null {stop}, cant save stop");
                 }
@@ -48,6 +50,7 @@ namespace Angular2CoreSeed.Controllers
                     Arrival = stop.Arrival,
                     Leaving = stop.Leaving,
                     City = stop.City,
+                    Cuisine = stop.Cuisine,
                     Longitude = stop.Longitude,
                     Order = stop.Order,
                     Latitude = stop.Latitude,

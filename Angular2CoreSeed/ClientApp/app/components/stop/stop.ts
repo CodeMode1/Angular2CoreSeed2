@@ -4,6 +4,7 @@
     arrival: Date;
     leaving: Date;
     city: string;
+    cuisine: any;
     longitude: number;
     latitude: number;
     order: number;
@@ -16,6 +17,7 @@ export class Stop implements IStop {
                 public arrival: Date,
                 public leaving: Date,
                 public city: string,
+                public cuisine: any,
                 public longitude: number,
                 public latitude: number,
                 public order: number,

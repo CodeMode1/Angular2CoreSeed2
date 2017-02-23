@@ -50,6 +50,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import 'hammerjs';
 
@@ -103,6 +104,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         Ng2PaginationModule,
         GridModule,
         ButtonsModule,
+        DropDownsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

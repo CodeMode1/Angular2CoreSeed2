@@ -46,7 +46,8 @@ module.exports = {
             'ng2-pagination',
             '@progress/kendo-angular-grid',
             '@progress/kendo-data-query',
-            '@progress/kendo-angular-buttons'
+            '@progress/kendo-angular-buttons',
+            '@progress/kendo-angular-dropdowns'
         ]
     },
     output: {
