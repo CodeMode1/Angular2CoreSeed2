@@ -2,7 +2,7 @@
 
 <!-- best trips grid -->
 <section *ngIf="isTrips">
-    <button kendoButton (click)="restoreColumns()">Restaurer</button>
+    <button kendoButton [primary]="true" [icon]="'refresh'" (click)="restoreColumns()">Restaurer</button>
     <kendo-grid [data]="bestTrips" [height]="370">
         <template ngFor [ngForOf]="columns" let-column>
             <kendo-grid-column field="{{column}}"

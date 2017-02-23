@@ -45,7 +45,8 @@ module.exports = {
             'hammerjs',
             'ng2-pagination',
             '@progress/kendo-angular-grid',
-            '@progress/kendo-data-query'
+            '@progress/kendo-data-query',
+            '@progress/kendo-angular-buttons'
         ]
     },
     output: {
