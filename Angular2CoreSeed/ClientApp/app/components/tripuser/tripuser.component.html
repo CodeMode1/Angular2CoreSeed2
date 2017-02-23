@@ -9,6 +9,7 @@
      (swipeleft)="swipe(idx, $event.type)" (swiperight)="swipe(idx, $event.type)"
      [class.visible]="trip.visible" [class.hidden]="!trip.visible">
     <ul class="col-md-3">
+        <li>Trip</li>
         <li># Réservation : {{trip?.id}}</li>
         <li>Nom : {{trip?.name}}</li>
         <li>Date de départ : {{trip?.leaving | fmTripDate}}</li>
