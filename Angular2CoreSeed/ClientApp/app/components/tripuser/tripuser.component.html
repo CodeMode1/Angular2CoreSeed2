@@ -11,8 +11,8 @@
         <li>Pays : {{trip?.country}}</li>
         <li>Continent : {{trip?.continent}}</li>
         <li class="userButtons">
-            <a class="btn btn-md btn-danger col-md-6 userActions" (click)="deleteTrip(trip)">Supprimer</a>
-            <a class="btn btn-md btn-success col-md-6 userActions" (click)="addStops(trip.id)">Ajouter Stops</a>
+            <a class="btn btn-md btn-danger col-md-6 userActions" (click)="deleteTrip(trip)"><i class="fa fa-trash"></i> Supprimer</a>
+            <a class="btn btn-md btn-success col-md-6 userActions" (click)="addStops(trip.id)"><i class="fa fa-plus"></i> Ajouter Stops</a>
         </li>
     </ul>
 

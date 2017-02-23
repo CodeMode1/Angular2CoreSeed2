@@ -3,7 +3,7 @@
 <!-- best trips grid -->
 <section *ngIf="isTrips">
     <button kendoButton [primary]="true" [icon]="'refresh'" (click)="restoreColumns()">Restaurer</button>
-    <kendo-grid [data]="bestTrips" [height]="370">
+    <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" (pageChange)="pageChange($event)" [selectable]="true" [height]="370">
         <template ngFor [ngForOf]="columns" let-column>
             <kendo-grid-column field="{{column}}"
                                *ngIf="hiddenColumns.indexOf(column) === -1" title="ID" width="20">
@@ -27,5 +27,10 @@
             </kendo-grid-column>
             <kendo-grid-column field="rating" title="Rating" width="20">
             </kendo-grid-column>
+            <template kendoGridDetailTemplate let-dataItem>
+                <section *ngIf="dataItem">
+                    <p><strong>Détails:</strong> Item</p>
+                </section>
+            </template>
 </kendo-grid>
 </section>
