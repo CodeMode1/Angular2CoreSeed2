@@ -1,1 +1,31 @@
-﻿
+﻿<h1><a class="btn btn-lg btn-link" (click)="onViewTrips()">{{titleBestTrips}}</a></h1>
+
+<!-- best trips grid -->
+<section *ngIf="isTrips">
+    <button kendoButton (click)="restoreColumns()">Restaurer</button>
+    <kendo-grid [data]="bestTrips" [height]="370">
+        <template ngFor [ngForOf]="columns" let-column>
+            <kendo-grid-column field="{{column}}"
+                               *ngIf="hiddenColumns.indexOf(column) === -1" title="ID" width="20">
+                <template kendoGridHeaderTemplate let-dataItem>
+                    {{dataItem.field}}
+                    <button (click)="hideColumn(dataItem.field)"
+                            class="k-button k-primary"
+                            style="float: right;">
+                        Hide
+                    </button>
+                </template>
+            </kendo-grid-column>
+        </template>
+            <kendo-grid-column field="name" title="Nom" width="30">
+            </kendo-grid-column>
+            <kendo-grid-column field="leaving" title="Départ" width="70">
+            </kendo-grid-column>
+            <kendo-grid-column field="country" title="Pays" width="60">
+            </kendo-grid-column>
+            <kendo-grid-column field="continent" title="Continent" width="60">
+            </kendo-grid-column>
+            <kendo-grid-column field="rating" title="Rating" width="20">
+            </kendo-grid-column>
+</kendo-grid>
+</section>

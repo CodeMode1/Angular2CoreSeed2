@@ -6,6 +6,9 @@
 
 <h2>{{titreTrip}}</h2>
 <a class="btn btn-md btn-primary" [routerLink]="['best']">Meilleurs Trips</a>
+
+<router-outlet></router-outlet>
+
 <h3>Disponibles présentement</h3>
 
 <main class="col-md-12">
@@ -37,6 +40,3 @@
     </section>
 </footer>
 
-<section class="col-md-12">
-    <router-outlet></router-outlet>
-</section>

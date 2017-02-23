@@ -39,14 +39,16 @@ import { StopService } from './components/stop/stop.service';
 import { WeatherService } from './components/weather/weather.service';
 import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
 
-// pipes, external modules
-import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+// pipes
 import { FormatHour } from './components/weatherform/weatherform.pipe';
 import { TripDate } from './components/trip/trip.pipe'
+// kendo UI modules
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { ChartsModule } from '@progress/kendo-angular-charts';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 import 'hammerjs';
 
@@ -98,6 +100,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         LayoutModule,
         ChartsModule,
         Ng2PaginationModule,
+        GridModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
