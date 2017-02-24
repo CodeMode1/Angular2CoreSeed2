@@ -34,6 +34,8 @@
                                 [textField]="'text'"
                                 [valueField]="'value'"
                                 [(ngModel)]="cuisine"
+                                [filterable]="true"
+                                (filterChange)="handleFilter($event)"
                                 class="col-md-12">
                 <template kendoDropDownListItemTemplate let-dataItem>
                     <span class="template">{{ dataItem.value }}</span> {{ dataItem.text }}
@@ -43,6 +45,9 @@
                 </template>
                 <template kendoDropDownListFooterTemplate>
                     <h4>{{cuisines.length}} variétés</h4>
+                </template>
+                <template kendoDropDownListNoDataTemplate>
+                    <h4><span class="k-icon k-i-warning"></span><br /><br />Aucunes Cuisines</h4>
                 </template>
             </kendo-dropdownlist>
         </div>

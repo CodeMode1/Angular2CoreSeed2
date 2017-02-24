@@ -23,6 +23,7 @@ export class StopComponent {
     public max: number;
     public autoCorrect: boolean;
     public cuisines: Array<{ text: string, value: number }>;
+    public source: Array<{ text: string, value: number }>;
     public cuisine: { text: string, value: number };
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
@@ -33,10 +34,13 @@ export class StopComponent {
         this.autoCorrect = true;
         this.cuisine = { text: "Italienne", value: 2 };
         this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", this.cuisine, 0, 0, 0, 8);
+        this.source = [];
         this.cuisines = [];
-        this.cuisines.push({ text: "Japonaise", value: 1 }, { text: "Italienne", value: 2 }, { text: "Suédoise", value: 3 },
+        this.source.push({ text: "Japonaise", value: 1 }, { text: "Italienne", value: 2 }, { text: "Suédoise", value: 3 },
             { text: "Portuguaise", value: 4 }, { text: "Africaine", value: 5 }, { text: "Allemande", value: 6 },
             { text: "Britannique", value: 7 }, { text: "Américaine", value: 8 }, { text: "Suédoise", value: 9 });
+
+        this.cuisines = this.source.slice();
     }
 
     ngOnInit() {
@@ -62,6 +66,11 @@ export class StopComponent {
         console.log(this.tripId);
 
     }
+
+    handleFilter(value) {
+        this.cuisines = this.source.filter((s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+    }
+
 
     onSubmit(createForm: NgForm) {
         this.selectedStop = <IStop>createForm.value;
