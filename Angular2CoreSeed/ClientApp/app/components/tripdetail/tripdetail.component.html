@@ -9,11 +9,23 @@
     <li><i class="fa fa-first-order"></i><span>{{selectedTrip?.rating}}</span></li>
     <li><button class="btn btn-sm btn-success" (click)="buyTrip(selectedTrip)" [disabled]="isBought">Ajouter à mes trips</button></li>
     <li>
-        <h4>{{isBoughtMessage}}<a *ngIf="isBought" [routerLink]="['edit']" class="btn btn-link btn-md">Ajouter Stops</a></h4>    
+        <h4>
+            {{isBoughtMessage}}
+            <span>
+                <a *ngIf="isBought" [routerLink]="['stop']" class="btn btn-link btn-md"><i class="fa fa-arrow-up"></i> Ajouter Stops</a>
+            </span>
+        </h4>    
     </li>   
 </ul>
 <ul class="col-md-6">
-    <li>Créer un nouveau stop<span><a [routerLink]="['stop']" class="btn btn-sm btn-primary"><i class="fa fa-arrow-up"></i></a></span></li>
+    <li>
+        <h4>
+            Visualiser Stops
+            <span>
+                <a [routerLink]="['edit']" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></a>
+            </span>
+        </h4>
+    </li>
 </ul>
 
 <router-outlet></router-outlet>

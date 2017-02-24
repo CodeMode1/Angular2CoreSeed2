@@ -79,7 +79,7 @@ export class TripUserComponent implements OnInit  {
     }
 
     addStops(id: number) {
-        this._router.navigate(['/trips', id, 'edit']);
+        this._router.navigate(['/trips', id, 'stop']);
     }
 
     deleteTrip(trip: Trip): void {

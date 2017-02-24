@@ -15,15 +15,12 @@
 
         <div class="col-md-3">
             <span><a class="btn btn-sm btn-danger active" (click)="deleteStop(stop.id)"><i class="fa fa-trash"></i> Supprimer</a></span>
-            <span><a class="btn btn-sm btn-success active" (click)="addStop(stop)"><i class="fa fa-plus"></i> Ajouter Stop</a></span>
+            <span><a class="btn btn-sm btn-success active" (click)="addStop(stop)"><i class="fa fa-plus"></i> Copier Stop</a></span>
         </div>
         <div class="col-md-3">
             <span>put picture here</span>
         </div>
     </li>
-</ul>
-<ul class="col-md-12">
-    <li>Ou Créez un Stop<a class="btn-md btn btn-link" [routerLink]="'../stop'">Personnalisé</a></li>
 </ul>
 <div class="col-md-12 alert alert-danger alertStops" role="alert" *ngIf="!selectedTrip?.stops.length">
     <h4><i class="fa fa-exclamation-triangle"></i> Aucuns Stops</h4>
