@@ -10,3 +10,8 @@ a{
 span{
     padding: 1%;
 }
+
+footer{
+    clear: both;
+    float: left;
+}

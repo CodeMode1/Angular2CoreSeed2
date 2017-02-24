@@ -23,8 +23,11 @@ export class StopComponent {
     public max: number;
     public autoCorrect: boolean;
     public cuisines: Array<{ text: string, value: number }>;
-    public source: Array<{ text: string, value: number }>;
+    public sourceCuisine: Array<{ text: string, value: number }>;
     public cuisine: { text: string, value: number };
+    public guide: { text: string, value: number };
+
+    public guides: Array<{ text: string, value: number }>;
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
         public _stopService: StopService) {
@@ -32,15 +35,23 @@ export class StopComponent {
         this.min = 1;
         this.max = 10;
         this.autoCorrect = true;
-        this.cuisine = { text: "Italienne", value: 2 };
-        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", this.cuisine, 0, 0, 0, 8);
-        this.source = [];
+        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", this.cuisine, this.guide, 0, 0, 0, 8);
+        // cuisine dropdown 
+        this.cuisine = { text: "Italienne", value: 2 };      
         this.cuisines = [];
-        this.source.push({ text: "Japonaise", value: 1 }, { text: "Italienne", value: 2 }, { text: "Suédoise", value: 3 },
+        this.sourceCuisine = [];
+        this.sourceCuisine.push({ text: "Japonaise", value: 1 }, { text: "Italienne", value: 2 }, { text: "Suédoise", value: 3 },
             { text: "Portuguaise", value: 4 }, { text: "Africaine", value: 5 }, { text: "Allemande", value: 6 },
             { text: "Britannique", value: 7 }, { text: "Américaine", value: 8 }, { text: "Suédoise", value: 9 });
 
-        this.cuisines = this.source.slice();
+        // guide combobox
+        this.guide = { text: "Guide Junior", value: 2 };
+        this.guides = [];
+        this.guides.push({ text: "Guide Michelin", value: 1 }, { text: "Guide Junior", value: 2 },
+            { text: "Guide Senior", value: 3 }, { text: "Guide Privé", value: 4 });
+
+        // filtering cuisines
+        this.cuisines = this.sourceCuisine.slice();
     }
 
     ngOnInit() {
@@ -68,7 +79,7 @@ export class StopComponent {
     }
 
     handleFilter(value) {
-        this.cuisines = this.source.filter((s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+        this.cuisines = this.sourceCuisine.filter((s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1);
     }
 
 
@@ -91,6 +102,7 @@ export class StopComponent {
                     this.selectedStop.leaving = data.leaving;
                     this.selectedStop.city = data.city;
                     this.selectedStop.cuisine = data.cuisine;
+                    this.selectedStop.guide = data.guide;
                     this.selectedStop.quote = data.quote;
                 },
                 error => {

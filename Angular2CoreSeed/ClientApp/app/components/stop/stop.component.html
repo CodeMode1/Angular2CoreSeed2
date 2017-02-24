@@ -53,6 +53,32 @@
         </div>
 
         <div class="form-group col-md-12">
+            <label for="guide">Guide</label>
+            <kendo-combobox name="guide"
+                            [suggest]="true" 
+                            [placeholder]="'e.g. Guide Senior'"
+                            [data]="guides"
+                            [textField]="'text'"
+                            [valueField]="'value'"
+                            [(ngModel)]="guide"
+                            class="col-md-12"
+                            >
+                <template kendoComboBoxItemTemplate let-dataItem>
+                    <span class="template">{{ dataItem.value }}</span> {{ dataItem.text }}
+                </template>
+                <template kendoComboBoxHeaderTemplate>
+                    <h4>Guides</h4>
+                </template>
+                <template kendoComboBoxFooterTemplate>
+                    <h4>{{guides.length}} disponibles</h4>
+                </template>
+                <template kendoDropDownListNoDataTemplate>
+                    <h4><span class="k-icon k-i-warning"></span><br /><br />Aucuns guides</h4>
+                </template>
+            </kendo-combobox>
+        </div>
+
+        <div class="form-group col-md-12">
             <label for="quote">Quote</label>
             <kendo-numerictextbox class="col-md-12" [restrictDecimals]="true" [decimals]="decimals" [min]="min"
             [max]="max" [spinners]="true" [format]="'n0'" [step]="1" [autoCorrect]="autoCorrect" [(ngModel)]="selectedStop.quote" name="quote" id="quote" required></kendo-numerictextbox>

@@ -51,6 +51,7 @@ namespace Angular2CoreSeed.Controllers
                     Leaving = stop.Leaving,
                     City = stop.City,
                     Cuisine = stop.Cuisine,
+                    Guide = stop.Guide,
                     Longitude = stop.Longitude,
                     Order = stop.Order,
                     Latitude = stop.Latitude,

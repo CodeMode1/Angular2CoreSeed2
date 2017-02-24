@@ -8,15 +8,16 @@
     <li><i class="fa-home"></i><span>{{selectedTrip?.continent}}</span></li>
     <li><i class="fa fa-first-order"></i><span>{{selectedTrip?.rating}}</span></li>
     <li><button class="btn btn-sm btn-success" (click)="buyTrip(selectedTrip)" [disabled]="isBought">Ajouter à mes trips</button></li>
-    <li><h4>{{isBoughtMessage}}</h4></li>
+    <li>
+        <h4>{{isBoughtMessage}}<a *ngIf="isBought" [routerLink]="['edit']" class="btn btn-link btn-md">Ajouter Stops</a></h4>    
+    </li>   
 </ul>
 <ul class="col-md-6">
     <li>Créer un nouveau stop<span><a [routerLink]="['stop']" class="btn btn-sm btn-primary"><i class="fa fa-arrow-up"></i></a></span></li>
-    <li><a [routerLink]="['edit']">Éditer Trip</a></li>
 </ul>
 
 <router-outlet></router-outlet>
 
-<div class="col-md-12">
-    <button (click)="goBack()" class="btn btn-lg btn-primary">Back</button>
-</div>
+<footer class="col-md-12">
+    <button (click)="goBack()" class="btn btn-lg btn-primary">Retour</button>
+</footer>

@@ -34,7 +34,7 @@ export class EditStopComponent {
                     var id = +params['id'];
                     this.getStopsById(id);
                 } else {
-                    this._router.navigateByUrl("/trips/"+ id);
+                    this._router.navigateByUrl("/trips/" + id);
                 }
             }
         );

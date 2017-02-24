@@ -37,3 +37,9 @@ height: 70px;
     list-style-type: decimal;
     text-align: left;
 }
+
+.alertStops{
+    text-align: center;
+    padding: 2%;
+    margin: 2% 0;
+}

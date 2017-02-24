@@ -30,6 +30,7 @@ export class StopService {
         let options = this.getHeaders();
 
         stop.cuisine = stop.cuisine["text"];
+        stop.guide = stop.guide["text"];
 
         let body = JSON.stringify(stop);
         return this._http.post(this._urlStop + "/" + id, body, options)
