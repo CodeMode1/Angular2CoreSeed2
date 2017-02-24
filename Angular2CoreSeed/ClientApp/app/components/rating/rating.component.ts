@@ -3,7 +3,7 @@
 @Component({
     selector: 'rating',
     template: require('./rating.component.html'),
-    styleUrls: [require('./rating.component.css')]
+    styles: [require('./rating.component.css')]
 })
 
 export class RatingComponent {

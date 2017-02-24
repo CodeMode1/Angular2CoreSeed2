@@ -35,6 +35,15 @@
                                 [valueField]="'value'"
                                 [(ngModel)]="cuisine"
                                 class="col-md-12">
+                <template kendoDropDownListItemTemplate let-dataItem>
+                    <span class="template">{{ dataItem.value }}</span> {{ dataItem.text }}
+                </template>
+                <template kendoDropDownListHeaderTemplate>
+                    <h4>Cuisines</h4>
+                </template>
+                <template kendoDropDownListFooterTemplate>
+                    <h4>{{cuisines.length}} variétés</h4>
+                </template>
             </kendo-dropdownlist>
         </div>
 

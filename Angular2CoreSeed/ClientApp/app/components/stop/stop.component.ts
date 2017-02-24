@@ -7,7 +7,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'stop',
-    template: require('./stop.component.html')
+    template: require('./stop.component.html'),
+    styles: [require('./stop.component.css')]
 })
 
 export class StopComponent {

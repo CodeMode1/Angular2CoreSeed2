@@ -14,11 +14,13 @@ export class LoginComponent {
     public user: User;
     public loading: boolean;
     public error: string;
+    public msTimeOut: number;
 
     constructor(public _loginService: LoginService, public _router: Router) {
         this.user = new User("DaphDC", "daph@daph.com", "P@ssw0rd!");
         this.loading = false;
         this.error = "";
+        this.msTimeOut = 3000;
     }
 
     ngOnInit() {
@@ -51,9 +53,13 @@ export class LoginComponent {
                     this.user.email = "";
                     this.user.password = "";
                     this.user.userName = "";
-                    this.loading = false;
+                    setTimeout(() => { this.stopLoading(); }, this.msTimeOut);
                     console.log("error log user  : " + this.user);
                 }
             );
+    }
+
+    stopLoading(): void {
+        this.loading = false;
     }
 }

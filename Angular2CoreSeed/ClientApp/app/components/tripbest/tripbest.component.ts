@@ -13,7 +13,7 @@ import {
 @Component({
     selector: 'best-trip',
     template: require('./tripbest.component.html'),
-    styleUrls: [require('./tripbest.component.css')]
+    styles: [require('./tripbest.component.css')]
 })
 
 export class BestTripComponent {

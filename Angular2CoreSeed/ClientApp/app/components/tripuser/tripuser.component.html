@@ -8,18 +8,26 @@
 <div *ngFor="let trip of mesTrips; let idx=index" class="col-md-12 swipe-box" 
      (swipeleft)="swipe(idx, $event.type)" (swiperight)="swipe(idx, $event.type)"
      [class.visible]="trip.visible" [class.hidden]="!trip.visible">
-    <ul class="col-md-3">
-        <li>Trip</li>
-        <li># Réservation : {{trip?.id}}</li>
-        <li>Nom : {{trip?.name}}</li>
-        <li>Date de départ : {{trip?.leaving | fmTripDate}}</li>
-        <li>Pays : {{trip?.country}}</li>
-        <li>Continent : {{trip?.continent}}</li>
-        <li class="userButtons">
-            <a class="btn btn-md btn-secondary active col-md-6 userActions" (click)="deleteTrip(trip)"><i class="fa fa-trash"></i> Supprimer</a>
-            <a class="btn btn-md btn-info active col-md-6 userActions" (click)="addStops(trip.id)"><i class="fa fa-plus"></i> Ajouter Stops</a>
-        </li>
-    </ul>
+    <div class="card col-md-3">
+        <div class="card-header">
+            <h4 class="card-title">Trip</h4>
+        </div>
+        <i class="card-img-top fa fa-picture-o fa-2x" aria-hidden="true"></i>
+        <div class="card card-block">
+            <p class="card-text"># Réservation : {{trip?.id}}</p>
+            <p class="card-text">Nom : {{trip?.name}}</p>
+            <p class="card-text">Date de départ : {{trip?.leaving | fmTripDate}}</p>
+            <p class="card-text">Pays : {{trip?.country}}</p>
+            <p class="card-text">Continent : {{trip?.continent}}</p>
+            <div class="userButtons">
+                <a class="card-link btn btn-md btn-secondary active col-md-6 userActions" (click)="deleteTrip(trip)"><i class="fa fa-trash"></i> Supprimer</a>
+                <a class="card-link btn btn-md btn-info active col-md-6 userActions" (click)="addStops(trip.id)"><i class="fa fa-plus"></i> Ajouter Stops</a>
+            </div>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
 
     <div class="col-md-9">
         <ul *ngFor="let stop of trip?.stops; let i = index">
@@ -32,5 +40,7 @@
         </ul>
     </div>
 </div>
-<h2><i class="fa fa-arrow-up"></i></h2>
-<a class="btn btn-lg btn-primary" (click)="goBack()">Back</a>
+
+
+<a class="btn btn-lg btn-primary backButton" (click)="goBack()"><i class="fa fa-arrow-up"></i> Retour</a>
+
