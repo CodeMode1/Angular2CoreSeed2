@@ -5,26 +5,28 @@
 <ul class="col-md-12">
     <li><h3>Stops</h3></li>
     <li *ngFor="let stop of selectedTrip?.stops">
-        <div class="col-md-6">
-            <span><i class="fa fa-spinner fa-spin"></i></span>
-            <a (click)="onTogglePopUp()">
-                {{stop?.name}}, {{stop?.arrival | fmTripDate}}, {{stop?.leaving | fmTripDate}}, {{stop?.city}}
-            </a>
-  
+        <div class="col-md-6 rowBlock">
+            <span><i class="fa fa-stop"></i></span>
+            <button #anchor class="btn btn-link btn-md" (click)="onTogglePopUp(stop.id)">
+                {{toggleText}} Détails {{stop?.name}}
+            </button>
+            <div class="popUpWrapper">
+                <kendo-popup class="popUpContent" [anchor]="anchor" (anchorViewportLeave)="show = false" *ngIf="stop?.showPopUp">
+                    {{stop?.arrival | fmTripDate}}, {{stop?.leaving | fmTripDate}},  À {{stop?.city}}, Cuisine {{stop?.cuisine}},
+                    {{stop?.guide}}, Quoté {{stop?.quote}}
+                </kendo-popup>
+            </div>
         </div>
-
         <div class="col-md-3">
-            <span><a class="btn btn-sm btn-danger active" (click)="deleteStop(stop.id)"><i class="fa fa-trash"></i> Supprimer</a></span>
-            <span><a class="btn btn-sm btn-success active" (click)="addStop(stop)"><i class="fa fa-plus"></i> Copier Stop</a></span>
+            <span><button [disabled]="!isAdmin" class="btn btn-md btn-danger active" (click)="deleteStop(stop.id)"><i class="fa fa-trash"></i> Supprimer</button></span>
         </div>
         <div class="col-md-3">
             <span>put picture here</span>
         </div>
     </li>
 </ul>
-<div class="col-md-12 alert alert-danger alertStops" role="alert" *ngIf="!selectedTrip?.stops.length">
+<div class="col-md-12 alert alert-danger noStops" role="alert" *ngIf="!selectedTrip?.stops.length">
     <h4><i class="fa fa-exclamation-triangle"></i> Aucuns Stops</h4>
-    <a class="link-active alert-link"  [routerLink]="'../stop'">Créez un stop</a>
 </div>
 
 

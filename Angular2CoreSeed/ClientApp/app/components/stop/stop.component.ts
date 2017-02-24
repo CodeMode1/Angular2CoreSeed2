@@ -35,7 +35,7 @@ export class StopComponent {
         this.min = 1;
         this.max = 10;
         this.autoCorrect = true;
-        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", this.cuisine, this.guide, 0, 0, 0, 8);
+        this.selectedStop = new Stop(1, "Plage", new Date(), new Date(), "Montréal", this.cuisine, this.guide, 0, 0, 0, 8, false);
         // cuisine dropdown 
         this.cuisine = { text: "Italienne", value: 2 };      
         this.cuisines = [];
@@ -59,9 +59,10 @@ export class StopComponent {
         this._activatedRoute.params.subscribe(
             params => {
                 if (params['id'] != null || params['id'] != undefined) {
-                    this.message = "Créer un nouveau stop pour ce trip";
+                    this.message = "";
                     this.isShowForm = false;
                 } else {
+                    this.message = "Créer un nouveau stop pour ce trip";
                     this.isShowForm = true;
                 }
             }

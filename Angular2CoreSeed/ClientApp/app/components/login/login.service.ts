@@ -13,16 +13,11 @@ import 'rxjs/add/observable/throw';
 export class LoginService {
     public token: string;
     public userName: string;
+    public estAdmin: boolean;
     private _urlLogin: string;
 
     constructor(private _http: Http) {
         this._urlLogin = 'api/auth/token';
-
-        if (this.userName != null && typeof(this.userName) != "undefined") {
-            this.userName = this.userName;
-        } else {
-            this.userName = null;
-        }
     }
 
     loginAPI(user: IUser): Observable<any> {
@@ -37,6 +32,7 @@ export class LoginService {
     logout(): void {
         this.token = null;
         this.userName = null;
+        this.estAdmin = null;
         console.log("logout");
     }
 }

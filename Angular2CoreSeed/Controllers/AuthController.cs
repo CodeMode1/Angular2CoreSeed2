@@ -97,7 +97,8 @@ namespace Angular2CoreSeed.Controllers
 
                         return Ok(new {
                             token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiration = token.ValidTo
+                            expiration = token.ValidTo,
+                            role = token.Claims
                         });
                     }
                 }

@@ -10,6 +10,7 @@
     latitude: number;
     order: number;
     quote: number;
+    showPopUp: boolean;
 }
 
 export class Stop implements IStop {
@@ -23,5 +24,9 @@ export class Stop implements IStop {
                 public longitude: number,
                 public latitude: number,
                 public order: number,
-                public quote: number) { }
+                public quote: number,
+                public showPopUp: boolean)
+    {
+        this.showPopUp = false;
+    }
 }

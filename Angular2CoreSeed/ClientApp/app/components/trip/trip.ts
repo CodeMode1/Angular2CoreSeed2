@@ -8,7 +8,7 @@ export interface ITrip{
     continent?: string;
     rating?: number;
     stops?: Stop[];
-    visible: boolean;
+    visible?: boolean;
 }
 
 export class Trip implements ITrip {

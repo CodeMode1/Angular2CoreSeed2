@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripDetailService } from '../tripdetail/tripdetail.service';
+import { LoginService } from '../login/login.service';
 import { StopService } from '../stop/stop.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ITrip, Trip } from '../trip/trip';
@@ -19,12 +20,16 @@ export class EditStopComponent {
     public inputIdDelete: number;
     public objectName: string;
     public showPopUp: boolean;
+    public isAdmin: boolean;
+    public toggleText: string;
     constructor(public _activatedRoute: ActivatedRoute,
-        public _tripdetail: TripDetailService, public _router: Router, public _stopService: StopService) {
+        public _tripdetail: TripDetailService, public _router: Router,
+        public _stopService: StopService, public _loginService: LoginService) {
         this.inputDelete = false;
         this.inputIdDelete = null;
         this.objectName = "";
-        this.showPopUp = false;
+        this.toggleText = "Show";
+        this.isAdmin = this._loginService.estAdmin;
     }
 
     ngOnInit() {
@@ -40,23 +45,14 @@ export class EditStopComponent {
         );
     }
 
-    addStop(stop: Stop) {
-        return this._stopService.postStopByIdAPI(this.selectedTrip.id, stop)
-            .subscribe(
-                data => {
-                    console.log("succes saved stop at trip id : " + this.selectedTrip.id);
-                    console.log(data);
-                },
-                error => {
-                    console.log("error cant save stop at trip id : " + this.selectedTrip.id);
-                }
-            );
-    }
-
     //  POP UP NOT WORKIN?! test in another project
-    onTogglePopUp(): void {
-        this.showPopUp = !this.showPopUp;
-        console.log(this.showPopUp);
+    onTogglePopUp(id: number): void {
+        for (var i = 0; i < this.selectedTrip.stops.length; i++) {
+            if (this.selectedTrip.stops[i].id == id) {
+                this.selectedTrip.stops[i].showPopUp = !this.selectedTrip.stops[i].showPopUp;
+                this.toggleText = this.showPopUp ? "Hidе" : "Show";
+            }
+        }
     }
 
     getStopsById(id: number): Subscription {
@@ -93,7 +89,6 @@ export class EditStopComponent {
         if ($event == true) {
             // refresh the display list after deleting a stop.
             this.getStopsById(this.selectedTrip.id);
-
         } 
         this.objectName = "";
         this.inputDelete = false;

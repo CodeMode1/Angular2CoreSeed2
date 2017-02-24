@@ -15,31 +15,29 @@ a{
     cursor: pointer;
 }
 
-
 .deleteBlock{
     float: left;
     clear: both;
 }
 
-.content {
-padding: 30px;
-color: #787878;
-background-color: #fcf7f8;
-border: 1px solid rgba(0,0,0,.05);
-}
-
-.popup {
-width: 100px;
-height: 70px;
-}
-
-.popup > ul {
-    list-style-type: decimal;
-    text-align: left;
-}
-
-.alertStops{
+.noStops{
     text-align: center;
     padding: 2%;
     margin: 2% 0;
+}
+
+.popUpContent {
+    padding: 30px;
+    color: #787878;
+    background-color: rgba(0,0,0,.05);
+    border: 1px solid rgba(21, 5, 5, 0.12);
+}
+
+.popUpWrapper{
+    min-width: 100px;
+    min-height: 5px;
+}
+
+.rowBlock{
+    box-shadow:2px 2px 2px gray,-1px -1px 2px white;
 }

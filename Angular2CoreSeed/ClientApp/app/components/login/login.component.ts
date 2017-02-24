@@ -46,6 +46,12 @@ export class LoginComponent {
                         this._loginService.token = strippedToken;
                         console.log("token du service : ");
                         console.log(this._loginService.token);
+                        for (var i = 0; i < data.role.length; i++) {
+                            if (data.role[i].type == "SuperUser") {
+                                console.log("SuperUser");
+                                this._loginService.estAdmin = true;
+                            }
+                        }
                         this._router.navigateByUrl("/trips");          
                 },
                 error => {

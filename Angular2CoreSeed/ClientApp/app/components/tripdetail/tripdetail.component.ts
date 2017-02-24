@@ -89,6 +89,7 @@ export class TripDetailComponent {
             data => {
                 console.log("succes creating trip : " + JSON.stringify(data));
                 this.isBought = true;
+                this._router.navigateByUrl("/trips/perso");
             },
             error => {
                 console.log("error creating trip : " + error);
