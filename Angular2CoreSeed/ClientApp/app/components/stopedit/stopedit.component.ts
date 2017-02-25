@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Input, trigger, state, style, transition, animate } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripDetailService } from '../tripdetail/tripdetail.service';
 import { LoginService } from '../login/login.service';
@@ -10,7 +10,30 @@ import { IStop, Stop } from '../stop/stop';
 @Component({
     selector: 'stop-edit',
     template: require('./stopedit.component.html'),
-    styles: [require('./stopedit.component.css')]
+    styles: [require('./stopedit.component.css')],
+    // animation metadata
+    animations: [
+        trigger('animStop', [
+            state('inactive', style({
+                transform: 'scale(1)'
+            })),
+            state('active', style({
+                transform: 'scale(1.1, 1.1)'
+            })),
+            transition('inactive => active', animate('100ms ease-in')),
+            transition('active => inactive', animate('100ms ease-out'))
+        ]),
+        trigger('flyInOut', [
+            state('in', style({ transform: 'translateX(0)' })),
+            transition(':enter', [
+                style({ transform: 'translateX(-100%)' }),
+                animate('200ms 100ms ease-in')
+            ]),
+            transition(':leave', [
+                animate('200ms 200ms ease-out', style({ transform: 'translateX(100%)' }))
+            ])
+        ])
+    ]
 })
 
 export class EditStopComponent {
@@ -30,6 +53,10 @@ export class EditStopComponent {
     public width: string;
     public height: string;
 
+    // animations
+    public state: string;
+    public flyState: string;
+
     constructor(public _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, public _router: Router,
         public _stopService: StopService, public _loginService: LoginService) {
@@ -47,6 +74,10 @@ export class EditStopComponent {
         this.endless = true;
         this.width = "200px";
         this.height = "200px";
+
+        // animations
+        this.state = 'inactive';
+        this.flyState = 'in';
     }
 
     ngOnInit() {
@@ -70,6 +101,18 @@ export class EditStopComponent {
                 this.toggleText = this.showPopUp ? "Hidе" : "Show";
             }
         }
+    }
+
+    toggleState(): void {
+        this.state = (this.state === 'active' ? 'inactive' : 'active');
+    }
+
+    animStopStarted($event): void{
+        console.log($event);
+    }
+
+    animStopDone($event): void {
+        console.log($event);
     }
 
     getStopsById(id: number): Subscription {
