@@ -7,8 +7,8 @@
     <li *ngFor="let stop of selectedTrip?.stops" class="col-md-12">
         <div class="col-md-8 col-sm-12 rowBlock"
              (@flyInOut.start)="animStopStarted($event)"
-             (@flyInOut.done)="animStopDone($event)"
              [@flyInOut]="flyState">
+
             <span><i class="fa fa-stop"></i></span>
             <button #anchor class="btn btn-link btn-md" (click)="onTogglePopUp(stop.id)">
                 {{toggleText}} Détails {{stop?.name}}

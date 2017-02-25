@@ -110,26 +110,6 @@ namespace Angular2CoreSeed.Services
                 .Where(t => t.Id == id)
                 .FirstOrDefault();
 
-            // projection do extension query (take, count, etc)
-
-            //var trip =
-            //    _context.Trips
-            //    .Select(t => new
-            //    {
-            //        Trip = t,
-            //        Id = t.Id,
-            //        Name = t.Name,
-            //        Leaving = t.Leaving,
-            //        Country = t.Country,
-            //        Continent = t.Continent,
-            //        //AppUserTrips = t.AppUserTrips,
-            //        Stops = t.Stops
-            //            .Take(count)
-            //            .ToList()
-            //    })
-            //    .SingleOrDefault(t => t.Id == id)
-            //    .Trip;
-
             return trip;
         }
 
@@ -191,6 +171,7 @@ namespace Angular2CoreSeed.Services
             Stop stopToDelete =
                 _context.Stops
                 .Where(stop => stop.Id == id)
+                .Include(stop => stop.Weathers).ThenInclude(weathers => weathers.Constraints)
                 .FirstOrDefault();
             if(stopToDelete != null)
             {
@@ -198,24 +179,6 @@ namespace Angular2CoreSeed.Services
             }
         }
 
-        //// remove stop from users trip
-        //public void DeleteStopFromUser(Stop stop, int tripId, AppUser user)
-        //{
-        //    // get a trip
-        //    Trip trip =
-        //        _context.Trips
-        //        .Where(t => t.AppUserTrips
-        //        .Any(APT => APT.TripId == tripId && APT.AppUserId == user.Id))
-        //        .Include(APT => APT.Stops)
-        //        .FirstOrDefault();
-
-        //    if(trip != null)
-        //    {
-        //        trip.Stops.Remove(stop);
-        //    }
-        //}
-
-        // Works
         public Weather GetWeatherById(int id)
         {
             return _context.Weathers
@@ -225,40 +188,29 @@ namespace Angular2CoreSeed.Services
                 .FirstOrDefault();
         }
 
-        // works
-        public Weather GetWeatherByName(string name)
-        {
-            return _context.Weathers
-                .Where(weather => weather.Name == name)
-                .Include("Constraints")
-                .FirstOrDefault();
-        }
-
-        // works
         public IEnumerable<Weather> GetAllWeathers()
         {
             _logger.LogInformation("Getting all weathers + its constraint from db");
             return _context.Weathers.Include("Constraints").Include("Stop").ToList();
         }
 
-        // works
         public void AddWeather(Weather newWeather)
         {
             _context.Add(newWeather);
         }
 
-        // works
         public void PutWeather(Weather weather)
         {
             _context.Update(weather);
         }
 
-        //works
+        // Delete weather objects + its child collection : WeatherConstraints.
         public void DeleteWeather(int id)
         {
             Weather weatherToDelete =
                 _context.Weathers
                 .Where(weather => weather.Id == id)
+                .Include(weather => weather.Constraints)
                 .FirstOrDefault();
 
             if (weatherToDelete != null)
@@ -278,29 +230,6 @@ namespace Angular2CoreSeed.Services
             return constraints;
         }
 
-        // to reintegrate
-
-        //public void AddConstraint(int id, Constraint constraint)
-        //{
-        //    Weather weather =
-        //        _context.Weathers
-        //        .Include("Constraint")
-        //        .Where(w => w.Id == id)
-        //        .FirstOrDefault();
-            
-        //    if(weather != null)
-        //    {
-        //        //ajouter la contrainte pour une certainte temp.
-        //        weather.Constraint = constraint;
-        //        // setter les FK de l'entite dependante (constraint)
-        //        constraint.WeatherId = weather.Id;
-        //        constraint.Weather = weather;
-        //        //ajouter la contrainte a la collection.
-        //        _context.Add(constraint);
-        //    }
-        //}
-
-        // Save to the changes to db 1 time
         public async Task<bool> SaveChangesAsync()
         {
             // the result of context.savechanges return the # of rows affected

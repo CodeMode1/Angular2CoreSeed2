@@ -28,9 +28,6 @@ import { IStop, Stop } from '../stop/stop';
             transition(':enter', [
                 style({ transform: 'translateX(-100%)' }),
                 animate('200ms 100ms ease-in')
-            ]),
-            transition(':leave', [
-                animate('200ms 200ms ease-out', style({ transform: 'translateX(100%)' }))
             ])
         ])
     ]
@@ -108,10 +105,6 @@ export class EditStopComponent {
     }
 
     animStopStarted($event): void{
-        console.log($event);
-    }
-
-    animStopDone($event): void {
         console.log($event);
     }
 

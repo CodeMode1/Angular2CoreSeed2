@@ -23,7 +23,6 @@ namespace Angular2CoreSeed.Services
         void DeleteWeather(int id);
         IEnumerable<Weather> GetAllWeathers();
         Weather GetWeatherById(int id);
-        Weather GetWeatherByName(string name);
         IEnumerable<Constraint> GetConstraintsById(int id);
         //void AddConstraint(int id, Constraint constraint);
         Task<bool> SaveChangesAsync();

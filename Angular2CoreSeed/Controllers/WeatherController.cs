@@ -140,27 +140,6 @@ namespace Angular2CoreSeed.Controllers
             return BadRequest($"CAnnot editweather {weather}");
         }
 
-        [HttpGet("ByName/{name}")]
-        public IActionResult Get(String name)
-        {
-            try
-            {
-                _logger.LogInformation($"Trying to get a weather by name : {name}");
-                var result = _repository.GetWeatherByName(name);
-                if (result == null)
-                {
-                    return NotFound($"Couldnt get weather with name : {name}");
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to get Weather {ex}");             
-            }
-            _logger.LogWarning($"Could not put the weather object with name : {name}");
-            return BadRequest($"Error occured cant get weather with name : {name}");
-        }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
