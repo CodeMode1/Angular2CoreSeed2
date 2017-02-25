@@ -15,6 +15,9 @@ export class WeatherFormComponent{
     @Input() modeEdit: boolean;
     public submitted: boolean;
     public onEdit: boolean;
+    public decimals: number;
+    public autoCorrect: boolean;
+    public format: string;
     //form1: NgForm;
 
     constructor() {
@@ -23,6 +26,11 @@ export class WeatherFormComponent{
         this.newWeather = new EventEmitter<Weather>();
         this.edWeather = new EventEmitter<Weather>();
         //this.form1 = new NgForm([], []);
+
+        // number input
+        this.decimals = 0;
+        this.autoCorrect = true;
+        this.format = 'n0';
     }
 
     // on veut soumettre on edit.

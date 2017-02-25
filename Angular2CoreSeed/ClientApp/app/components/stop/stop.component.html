@@ -32,6 +32,7 @@
         <div class="form-group col-md-12">
             <label for="cuisine">Cuisine</label>             
             <kendo-dropdownlist name="cuisine"
+                                style="padding:0"
                                 [data]="cuisines"
                                 [textField]="'text'"
                                 [valueField]="'value'"
@@ -58,6 +59,7 @@
             <label for="guide">Guide</label>
             <kendo-combobox name="guide"
                             [suggest]="true" 
+                            style="padding:0"
                             [placeholder]="'e.g. Guide Senior'"
                             [data]="guides"
                             [textField]="'text'"
@@ -82,7 +84,7 @@
 
         <div class="form-group col-md-12">
             <label for="quote">Quote</label>
-            <kendo-numerictextbox class="col-md-12" [restrictDecimals]="true" [decimals]="decimals" [min]="min"
+            <kendo-numerictextbox class="col-md-12" style="padding:0" [restrictDecimals]="true" [decimals]="decimals" [min]="min"
             [max]="max" [spinners]="true" [format]="'n0'" [step]="1" [autoCorrect]="autoCorrect" [(ngModel)]="selectedStop.quote" name="quote" id="quote" required></kendo-numerictextbox>
         </div>
 

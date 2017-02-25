@@ -65,7 +65,7 @@ export class TripComponent {
                         this._router.navigateByUrl("/trips/" + data.id);
                     },
                     error => {
-                        input.style.backgroundColor = "red";
+                        input.style.backgroundColor = "#ff6b58";
                         input.value = "Impossible de trouver";
                         console.log("error getting trip by id : " + error);
                     }
