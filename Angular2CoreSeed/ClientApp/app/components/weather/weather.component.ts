@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, EventEmitter } from '@angular/core';
+﻿import { Component, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Weather, IWeather } from './weather';
@@ -26,8 +26,9 @@ export class WeatherComponent implements OnInit {
     public titreWeather: string;
     public editForm: boolean;
     public fmDate: any;
+    public sub: any;
 
-    constructor(private _http: Http, private _route: ActivatedRoute,
+    constructor(private _http: Http, private _activatedRoute: ActivatedRoute,
         private _weatherService: WeatherService, private _router: Router) {
         this.editForm = false;
         this.inputDelete = false;
@@ -42,10 +43,21 @@ export class WeatherComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // class weather object to bind to.
-        this.weather1 = new Weather(1, "AutomnWeather", this.fmDate, 14, "Température Automne");
-        // Method to get weather objects
-        this.getAllWeathers();
+        console.log("here");
+        this.sub = this._activatedRoute.params.subscribe(
+            params => {
+                if (params['id'] != null && params['id'] != undefined) {
+                    var id = +params['id'];
+                    console.log("here");
+                    console.log(id);
+                    // class weather object to bind to.
+                    this.weather1 = new Weather(1, "AutomnWeather", this.fmDate, 14, "Température Automne", 24, id);
+                    console.log(this.weather1);
+                }
+                // Method to get weather objects
+                this.getAllWeathers();
+            }
+        );       
     }
 
     // GET : all weather objects from db
@@ -95,7 +107,11 @@ export class WeatherComponent implements OnInit {
 
     // Get the payload weather object from children component weatherform
     postWeather($event) {
-        this.weather1 = $event;
+        // field du form changé
+        this.weather1.name = $event.name;
+        this.weather1.hour = $event.hour;
+        this.weather1.tempC = $event.tempC;
+        this.weather1.summary = $event.summary;
         console.log("new weather to post : ");
         console.log(this.weather1);
 
@@ -105,6 +121,7 @@ export class WeatherComponent implements OnInit {
 
     // edit a weather
     editWeather($event) {
+        // field du form changé
         this.weather1 = $event;
         console.log("editing a weather : ");
         console.log(this.weather1);
@@ -133,6 +150,7 @@ export class WeatherComponent implements OnInit {
                     this.weather1.tempC = data.tempC;
                     this.weather1.summary = data.summary;
                     this.weather1.temperatureF = data.temperatureF;
+                    this.weather1.stopId = data.stopId;
                     console.log("saved new weather : ");
                     console.log(data);
                     // refresh the data in the browser to get he newly sabed weather object.
@@ -156,6 +174,7 @@ export class WeatherComponent implements OnInit {
                     this.weather1.name = data.name;
                     this.weather1.summary = data.summary;
                     this.weather1.tempC = data.tempC;
+                    this.weather1.stopId = data.stopId;
                     console.log("edited weather : ");
                     console.log(data);
                     this.getAllWeathers();
@@ -164,6 +183,11 @@ export class WeatherComponent implements OnInit {
                     console.log("error editing weather : " + error);
                 }
             );
+    }
+
+    ngOnDestroy(): void {
+        console.log("here");
+        this.sub.unsubscribe();
     }
 }
 

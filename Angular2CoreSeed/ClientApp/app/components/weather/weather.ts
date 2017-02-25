@@ -7,6 +7,7 @@ export interface IWeather {
     tempC?: number;
     summary?: string;
     temperatureF?: number;
+    stopId?: number;
     constraints?: Constraint[];
 }
 
@@ -18,5 +19,6 @@ export class Weather implements IWeather {
         public tempC?: number,
         public summary?: string,
         public temperatureF?: number,
+        public stopId?: number,
         public constraints?: Constraint[]) { }
 }

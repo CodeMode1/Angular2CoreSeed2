@@ -4,8 +4,10 @@
     <thead>
         <tr>
             <th>
+                ID
+            </th>
+            <th>
                 Wind km/h
-                <!--<img src="../../../../wwwroot/dist/img/wind.png"/>-->
             </th>
             <th>
                 Gust km/h
@@ -32,6 +34,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let constraint of constraints">
+            <td>
+                {{constraint?.id}}
+            </td>
             <td>
                 {{constraint?.wind}}
             </td>
@@ -77,7 +82,7 @@
 
     <kendo-chart-series>
         <kendo-chart-series-item *ngFor="let constraint of constraints" type="column" 
-                                  [data]="constraint.stats" [name]="constraint.weather.name">
+                                  [data]="constraint.stats" [name]="constraint.id">
         </kendo-chart-series-item>
     </kendo-chart-series>
 </kendo-chart>

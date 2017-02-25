@@ -127,7 +127,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
                 ]
             },
             {
-                path: 'weathers', component: WeatherComponent, children: [
+                path: 'weathers/:id', component: WeatherComponent, children: [
                     { path: '', component: WeatherDetailComponent },
                     { path: 'detail/:id', component: WeatherDetailComponent }
                 ]

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WeatherService } from '../weather/weather.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Weather } from '../weather/weather';
 
 
@@ -9,27 +9,51 @@ import { Weather } from '../weather/weather';
     template: require('./weatherdetail.component.html')
 })
 
-export class WeatherDetailComponent{
-    public id: number;
-    private sub: any;
+export class WeatherDetailComponent implements OnInit, OnDestroy{
+    public sub: any;
     weather: Weather;
     public messageDetails: string;
 
-    constructor(private _weatherService: WeatherService, private _route: ActivatedRoute) {
-        this.id = null;
+    constructor(private _weatherService: WeatherService,
+        private _activatedRoute: ActivatedRoute,
+        private _router: Router) {
         this.messageDetails = "";
+        if (this._activatedRoute.snapshot.url[0] != null &&
+            this._activatedRoute.snapshot.url[0].path == "detail") {
+            this._router.events.subscribe((event) => {
+                console.log(event);
+                var segmentUrl = event.url.split('/');
+                console.log(segmentUrl);
+                let idWeather = +segmentUrl[4];
+                console.log(idWeather);
+                this.getWeatherBydId(idWeather);
+            });
+        }   
     }
 
     ngOnInit() {
-        this.sub = this._route.params.subscribe(params => {
-            if (params['id'] != null || params['id'] != undefined) {
-                this.id = params['id'];
-                this.getWeatherBydId(this.id);
-            } 
-            else {
-                this.messageDetails = "Aucuns détails à afficher";
-            }           
-        });      
+            if (this._activatedRoute.snapshot.url[0] != null &&
+                    this._activatedRoute.snapshot.url[0].path == "detail") {
+                console.log("can use snapshot");
+                    var snapshot = this._activatedRoute.snapshot;
+                    var idWeather = snapshot.url[1].path;
+                    if (idWeather != null && typeof (idWeather) != 'undefined') {
+                        let id = +idWeather;
+                        this.getWeatherBydId(id);
+                    }
+            } else {
+              this.sub =  this._activatedRoute.params.subscribe(
+                    params => {
+                        if (params['id'] != null && params['id'] != 'undefined') {
+                            var id = +params['id'];
+                            console.log("here in parent");
+                            console.log(id);
+                            console.log(this._activatedRoute);
+                            // la route n'est pas activée, la route parente est active (weather component)
+                            this.messageDetails = "Aucuns détails à afficher";
+                        }
+                    });
+            }
     }
 
     getWeatherBydId(id: number) {
@@ -47,7 +71,8 @@ export class WeatherDetailComponent{
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        if (this.sub != null && typeof (this.sub) != 'undefined') {
+            this.sub.unsubscribe();
+        }
     }
-
 }

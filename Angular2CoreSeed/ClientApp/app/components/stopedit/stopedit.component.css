@@ -27,7 +27,7 @@ a{
 }
 
 .popUpContent {
-    padding: 30px;
+    padding: 15px;
     color: #787878;
     background-color: rgba(0,0,0,.05);
     border: 1px solid rgba(21, 5, 5, 0.12);
@@ -40,4 +40,8 @@ a{
 
 .rowBlock{
     box-shadow:2px 2px 2px gray,-1px -1px 2px white;
+}
+
+.crudButtons{
+    float: left;
 }

@@ -68,7 +68,9 @@ namespace Angular2CoreSeed.Controllers
                     SunRising = constraint.SunRising,
                     SunSet = constraint.SunSet,
                     Clear = constraint.Clear,
-                    FeelsLike = constraint.FeelsLike
+                    FeelsLike = constraint.FeelsLike,
+                    Weather = constraint.Weather,
+                    WeatherId = constraint.WeatherId
                 };
                 //_repository.AddConstraint(id, newConstraint);
                 if(await _repository.SaveChangesAsync())

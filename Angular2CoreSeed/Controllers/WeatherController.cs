@@ -88,7 +88,7 @@ namespace Angular2CoreSeed.Controllers
                     Hour = weather.Hour,
                     TempC = weather.TempC,
                     Summary = weather.Summary,
-                    StopId = 41
+                    StopId = weather.StopId
                 };
                 _repository.AddWeather(newWeather);
                 if(await _repository.SaveChangesAsync())
@@ -123,6 +123,8 @@ namespace Angular2CoreSeed.Controllers
                 oldWeather.Hour = weather.Hour;
                 oldWeather.TempC = weather.TempC;
                 oldWeather.Summary = weather.Summary ?? oldWeather.Summary;
+                oldWeather.Id = weather.Id;
+                oldWeather.StopId = weather.StopId;
 
                 _repository.PutWeather(oldWeather);
                 if(await _repository.SaveChangesAsync())

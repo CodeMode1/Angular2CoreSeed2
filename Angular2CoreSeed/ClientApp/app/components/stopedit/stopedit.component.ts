@@ -76,6 +76,11 @@ export class EditStopComponent {
             );
     }
 
+    //  ajouter une temeprature pour ce stop
+    ajouteTemp(id: number): void {
+        this._router.navigateByUrl("/weathers/" + id);
+    }
+
     // delete stop by its id
     deleteStop(id: number) {
         this.inputDelete = true;
