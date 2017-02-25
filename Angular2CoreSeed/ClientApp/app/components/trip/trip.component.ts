@@ -56,9 +56,22 @@ export class TripComponent {
         } else {
             this.searchMessage = "Ok";
             console.log("ok est un nombre");
+            var idToSearch = +id;
+            console.log(idToSearch);
+            this._tripService.getTripByIdAPI(idToSearch)
+                .subscribe(
+                    data => {
+                        console.log("redirect to detail of this particular trip by id");
+                        this._router.navigateByUrl("/trips/" + data.id);
+                    },
+                    error => {
+                        input.style.backgroundColor = "red";
+                        input.value = "Impossible de trouver";
+                        console.log("error getting trip by id : " + error);
+                    }
+                );
         }
-        input.value = "";
-        var idToSearch = +id;
+        input.value = "";   
     }
 
     refreshTrips(): void {
