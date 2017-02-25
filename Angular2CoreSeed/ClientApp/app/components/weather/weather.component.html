@@ -1,7 +1,7 @@
 ﻿<h1>{{titreWeather}}</h1>
 
 <div>
-    <button class="btn btn-primary" (click)="showWeatherForm()">Create new Weather</button>
+    <button class="btn btn-primary" (click)="showWeatherForm()">Enregistrer Température</button>
 </div>
 
 <delete [isDelete]="inputDelete" [weatherToDeleteId]="inputIdDelete" [objectToDelete]="objectName" (deleteSuccess)="refreshResults($event)"></delete>
@@ -16,13 +16,13 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Hour AM/PM</th>
-                <th>TempC</th>
-                <th>Summary</th>
-                <th>Temp F</th>
-                <th>Delete</th>
-                <th>Edit</th>
+                <th>Nom</th>
+                <th>Heure AM/PM</th>
+                <th>Température °C</th>
+                <th>Sommaire</th>
+                <th>Température °F</th>
+                <th>Supprimer</th>
+                <th>Éditer</th>
             </tr>
         </thead>
         <tbody>
@@ -33,8 +33,8 @@
                 <td>{{weather?.tempC}}</td>
                 <td>{{weather?.summary}}</td>
                 <td>{{weather?.temperatureF}}</td>
-                <td><a (click)="goDelete(weather.id)"><i class="glyphicon glyphicon-scissors">Delete</i></a></td>
-                <td><a (click)="goEdit(weather)"><i class="glyphicon glyphicon-pencil">Edit</i></a></td>
+                <td><a (click)="goDelete(weather.id)"><i class="glyphicon glyphicon-scissors"> Supprimer</i></a></td>
+                <td><a (click)="goEdit(weather)"><i class="glyphicon glyphicon-pencil"> Éditer</i></a></td>
             </tr>
         </tbody>
     </table>

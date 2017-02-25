@@ -33,7 +33,7 @@ export class WeatherComponent implements OnInit {
         this.editForm = false;
         this.inputDelete = false;
         this.inputIdDelete = null;
-        this.titreWeather = "Weather Check";
+        this.titreWeather = "Recensement Température";
         this.objectName = "";
         this.showForm = false;
         // moment js format a date with a string format, returns a date.
@@ -186,7 +186,7 @@ export class WeatherComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        console.log("here");
+        console.log("here unsubscribe weather component");
         this.sub.unsubscribe();
     }
 }

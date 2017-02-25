@@ -11,24 +11,31 @@ import { Weather } from '../weather/weather';
 
 export class WeatherDetailComponent implements OnInit, OnDestroy{
     public sub: any;
+    public sub2: any;
     weather: Weather;
     public messageDetails: string;
 
     constructor(private _weatherService: WeatherService,
         private _activatedRoute: ActivatedRoute,
         private _router: Router) {
-        this.messageDetails = "";
+        this.messageDetails = "";  
+
         if (this._activatedRoute.snapshot.url[0] != null &&
             this._activatedRoute.snapshot.url[0].path == "detail") {
-            this._router.events.subscribe((event) => {
+            this.sub2 = this._router.events.subscribe((event) => {
                 console.log(event);
                 var segmentUrl = event.url.split('/');
                 console.log(segmentUrl);
-                let idWeather = +segmentUrl[4];
-                console.log(idWeather);
-                this.getWeatherBydId(idWeather);
+                if (segmentUrl[3] != null && typeof (segmentUrl[3]) != 'undefined' && segmentUrl[3] == 'detail') {
+                    if (segmentUrl[4] != null && typeof (segmentUrl[4]) != 'undefined') {
+                        let idWeather = +segmentUrl[4];
+                        console.log(idWeather);
+                        this.getWeatherBydId(idWeather);
+                    }
+                }
             });
-        }   
+        }
+  
     }
 
     ngOnInit() {
@@ -71,8 +78,12 @@ export class WeatherDetailComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy() {
-        if (this.sub != null && typeof (this.sub) != 'undefined') {
+        console.log("unsub");
+        if (this.sub != null && typeof(this.sub) != 'undefined') {
             this.sub.unsubscribe();
+        }
+        if (this.sub2 != null && typeof(this.sub2) != 'undefined') {
+            this.sub2.unsubscribe();
         }
     }
 }
