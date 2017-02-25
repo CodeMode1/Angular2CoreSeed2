@@ -42,4 +42,15 @@ export class TripService {
             .catch((error: any) => <any>error.json())          
     }
 
+    deleteTripByAdmin(trip: Trip): Observable<ITrip> {
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this._loginService.token, 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        let id = trip.id;
+
+        return this._http.delete(this._urlTrip + "/" + id, options)
+            .map((response: Response) => console.log("success deleting a trip done by SuperUsers"))
+            .catch((error: any) => <any>console.log("error deleting trip by SuperUsers"))
+    }
+
 }

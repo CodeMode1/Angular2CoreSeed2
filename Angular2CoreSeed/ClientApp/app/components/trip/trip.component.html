@@ -16,13 +16,14 @@
         <h3>Aucuns Trips</h3>
     </template>
     <div *ngFor="let trip of trips | paginate: { itemsPerPage: 8, currentPage: p }" class="infosTrip col-md-2">
+        <button (click)="deleteTrip(trip)" kendoButton [primary]="true" class="deleteTripButton"><i class="fa fa-trash"></i></button>
         <ul>
             <li>Nom : {{trip?.name}}</li>
             <li>Pays : {{trip?.country}}</li>
             <li>Continent : {{trip?.continent}}</li>
             <li #anchor>
                 Rating : <rating class="rating" *ngIf="trip?.rating" [rating]='trip.rating' (ratingClick)="clickRating($event)">
-                         </rating>
+                </rating>
             </li>
             <kendo-popup [anchor]="anchor" class="popUpContent" *ngIf="showPopUp">
                 Quoté : {{trip?.rating}}

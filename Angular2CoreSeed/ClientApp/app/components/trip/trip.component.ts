@@ -55,4 +55,18 @@ export class TripComponent {
                 }
             );
     }
+
+    deleteTrip(trip: Trip): void {
+        this._tripService.deleteTripByAdmin(trip)
+            .subscribe(
+                data => {
+                    // supprimer le trip côté client pour actualiser la vue.
+                    this.trips.splice(this.trips.indexOf(trip), 1);
+                    console.log("succes deleting a trip by SuperUsers");
+                },
+                error => {
+                    console.log("error trying delete trip by SuperUsers");
+                }
+            );
+    }
 }

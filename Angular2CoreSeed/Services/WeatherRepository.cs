@@ -143,11 +143,13 @@ namespace Angular2CoreSeed.Services
             _context.Update(trip);
         }
 
+        // SuperUsers (claim) -> authorize policy, because stops and trips are public.
         public void DeleteTrip(int id)
         {
             Trip tripToDelete =
                 _context.Trips
                 .Where(trip => trip.Id == id)
+                .Include(trip => trip.Stops)
                 .FirstOrDefault();
 
             if (tripToDelete != null)
@@ -183,7 +185,7 @@ namespace Angular2CoreSeed.Services
                 .FirstOrDefault();
         }
 
-        // admin -> authorize policy, because stops and trips are public.
+        // SuperUsers (claim) -> authorize policy, because stops and trips are public.
         public void DeleteStop(int id)
         {
             Stop stopToDelete =

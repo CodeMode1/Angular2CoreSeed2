@@ -208,8 +208,34 @@ namespace Angular2CoreSeed.Controllers
             return BadRequest($"CAnnot edit trip {trip}");
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Policy = "SuperUsers")]
+        public async Task<IActionResult> DeleteTrip(int id)
+        {
+            try
+            {
+                _logger.LogInformation($"SuperUser Trying to delele trip with id {id}");
+                var trip = _repository.GetTripById(id);
+                if(trip == null)
+                {
+                    return NotFound($"Didnt foud a trip with id {id}");
+                }
+                _repository.DeleteTrip(trip.Id);
+                if(await _repository.SaveChangesAsync())
+                {
+                    return Ok($"Deleted Trip Success");
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Cant recuperate from error at delete trip with id {id}", ex);
+            }
+            _logger.LogWarning($"Could not delete the trip with id : {id}");
+            return BadRequest($"Bad request to delete trip with id {id}");
+        }
+
         [HttpDelete("userTrip/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteUserTrip(int id)
         {
             try
             {
@@ -231,7 +257,7 @@ namespace Angular2CoreSeed.Controllers
                 _repository.DeleteTripUser(user, trip);
                 if (await _repository.SaveChangesAsync())
                 {
-                    return Ok($"Deleted trip successfull for the user");
+                    return Ok($"Deleted trip success for the user");
                 }
             }
             catch (Exception ex)
