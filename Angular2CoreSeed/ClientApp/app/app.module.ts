@@ -52,6 +52,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PopupModule } from '@progress/kendo-angular-popup';
+import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
 
 import 'hammerjs';
 
@@ -107,6 +108,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         ButtonsModule,
         DropDownsModule,
         PopupModule,
+        ScrollViewModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

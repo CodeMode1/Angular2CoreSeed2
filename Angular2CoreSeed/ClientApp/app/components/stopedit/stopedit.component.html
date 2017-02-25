@@ -2,7 +2,7 @@
     <delete [isDelete]="inputDelete" [weatherToDeleteId]="inputIdDelete" [objectToDelete]="objectName" (deleteSuccess)="refreshResults($event)"></delete>
 </div>
 
-<ul class="col-md-9">
+<ul class="col-md-9 col-sm-12">
     <li><h3>Stops</h3></li>
     <li *ngFor="let stop of selectedTrip?.stops" class="col-md-12">
         <div class="col-md-8 col-sm-12 rowBlock">
@@ -23,8 +23,19 @@
         </div>
     </li>
 </ul>
-<div class="col-md-3 col-sm-6">
-    <span>put picture here</span>
+<div class="col-md-3 col-sm-12">
+    <kendo-scrollview class="col-md-12" [data]="items"
+                      [animate]="animate"
+                      [endless]="endless"
+                      [width]="width"
+                      [height]="height"
+                      [arrows]="true"
+                      [pageable]="true">
+        <template let-item="item">
+            <h2 class="demo-title">{{item.title}}</h2>
+            <img src='{{item.url}}' alt='{{item.title}}' [ngStyle]="{minWidth: width}" draggable="false" />
+        </template>
+    </kendo-scrollview>
 </div>
 <div class="col-md-12 alert alert-danger noStops" role="alert" *ngIf="!selectedTrip?.stops.length">
     <h4><i class="fa fa-exclamation-triangle"></i> Aucuns Stops</h4>

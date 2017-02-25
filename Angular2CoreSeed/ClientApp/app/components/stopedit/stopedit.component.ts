@@ -22,6 +22,14 @@ export class EditStopComponent {
     public showPopUp: boolean;
     public isAdmin: boolean;
     public toggleText: string;
+
+    // scrollview
+    public items: any[];
+    public animate: boolean;
+    public endless: boolean;
+    public width: string;
+    public height: string;
+
     constructor(public _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, public _router: Router,
         public _stopService: StopService, public _loginService: LoginService) {
@@ -30,6 +38,15 @@ export class EditStopComponent {
         this.objectName = "";
         this.toggleText = "Show";
         this.isAdmin = this._loginService.estAdmin;
+
+        // scrollview
+        this.items = [];
+        this.items.push({ title: 'Nature', url: 'http://bit.ly/2cJjYuB' }, { title: 'Excursion', url: 'http://bit.ly/2cTBNaL' },
+            { title: 'Aéronautique', url: 'http://bit.ly/2cJl3Cx' });
+        this.animate = true;
+        this.endless = true;
+        this.width = "200px";
+        this.height = "200px";
     }
 
     ngOnInit() {

@@ -48,7 +48,8 @@ module.exports = {
             '@progress/kendo-data-query',
             '@progress/kendo-angular-buttons',
             '@progress/kendo-angular-dropdowns',
-            '@progress/kendo-angular-popup'
+            '@progress/kendo-angular-popup',
+            '@progress/kendo-angular-scrollview'
         ]
     },
     output: {
