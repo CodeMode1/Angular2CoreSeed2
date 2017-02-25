@@ -16,6 +16,7 @@ export class TripComponent {
     public titreTrip: string;
     public userName: string;
     public showPopUp: boolean;
+    public showPopUpId: boolean;
     public reqTrips: boolean;
 
     constructor(public _tripService: TripService, private _loginService: LoginService,
@@ -23,6 +24,7 @@ export class TripComponent {
         this.titreTrip = "Les Forfaits Voyages";
         this.trips = [];
         this.showPopUp = false;
+        this.showPopUpId = false;
         this.reqTrips = false;
         if (this._loginService.userName != null && typeof (this._loginService.userName) != "undefined") {
             this.userName = this._loginService.userName;
@@ -47,6 +49,10 @@ export class TripComponent {
     refreshTrips(): void {
         console.log("refresh trips");
         this.getAllTrips();
+    }
+
+    onToggleIdPopUp(): void {
+        this.showPopUpId = !this.showPopUpId;
     }
 
     //  get methos sur service.
