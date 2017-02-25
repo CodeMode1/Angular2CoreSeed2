@@ -208,7 +208,7 @@ namespace Angular2CoreSeed.Controllers
             return BadRequest($"CAnnot edit trip {trip}");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("userTrip/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

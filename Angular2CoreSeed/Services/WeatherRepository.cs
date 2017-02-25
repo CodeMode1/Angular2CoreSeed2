@@ -74,7 +74,7 @@ namespace Angular2CoreSeed.Services
                 .Include(u => u.AppUserTrips).ThenInclude(AUT => AUT.Trip)
                                                 .ThenInclude(t => t.Stops)
                 .FirstOrDefault();
-            if (User != null)
+            if (User != null && trip != null)
             {
                 AppUserTrip tripRemove =
                     User.AppUserTrips
@@ -83,6 +83,7 @@ namespace Angular2CoreSeed.Services
 
                 User.AppUserTrips.Remove(tripRemove);
             }
+            _context.Remove(trip);
         }
 
         public void AddUserTrip(AppUserTrip userTrip)
