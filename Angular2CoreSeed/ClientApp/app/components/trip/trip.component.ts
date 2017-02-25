@@ -18,6 +18,7 @@ export class TripComponent {
     public showPopUp: boolean;
     public showPopUpId: boolean;
     public reqTrips: boolean;
+    public searchMessage: string;
 
     constructor(public _tripService: TripService, private _loginService: LoginService,
         private _activatedRoute: ActivatedRoute, private _router: Router) {
@@ -26,6 +27,7 @@ export class TripComponent {
         this.showPopUp = false;
         this.showPopUpId = false;
         this.reqTrips = false;
+        this.searchMessage = "Chercher";
         if (this._loginService.userName != null && typeof (this._loginService.userName) != "undefined") {
             this.userName = this._loginService.userName;
         } else {
@@ -44,6 +46,19 @@ export class TripComponent {
     clickRating($event) {
         console.log($event);
         this.showPopUp = !this.showPopUp;
+    }
+
+    searchTripId(input: any) {
+        var id = input.value;
+        if (id == "" || id == null || typeof(id) == 'undefined' || isNaN(+id)) {
+            this.searchMessage = "Invalide";
+            console.log("pas un nombre");
+        } else {
+            this.searchMessage = "Ok";
+            console.log("ok est un nombre");
+        }
+        input.value = "";
+        var idToSearch = +id;
     }
 
     refreshTrips(): void {

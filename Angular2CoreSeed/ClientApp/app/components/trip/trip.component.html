@@ -20,10 +20,10 @@
     <div class="col-md-8">
         <form class="navbar-form navbar-left" role="Search">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Chercher">
+                <input type="text" #inputIdSearch class="form-control" placeholder="{{searchMessage}}">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-info" #anchor (click)="onToggleIdPopUp()"><i class="fa fa-info"></i></button>
-                    <button type="submit" class="btn btn-default">Go!</button>
+                    <button type="submit" (click)="searchTripId(inputIdSearch)" class="btn btn-default">Go!</button>
                 </div>
                 <kendo-popup class="popUpContent" [anchor]="anchor" (anchorViewportLeave)="show = false" *ngIf="showPopUpId">
                     Rechercher par Id de trip.
