@@ -16,12 +16,14 @@ export class TripComponent {
     public titreTrip: string;
     public userName: string;
     public showPopUp: boolean;
+    public reqTrips: boolean;
 
     constructor(public _tripService: TripService, private _loginService: LoginService,
         private _activatedRoute: ActivatedRoute, private _router: Router) {
         this.titreTrip = "Les Forfaits Voyages";
         this.trips = [];
         this.showPopUp = false;
+        this.reqTrips = false;
         if (this._loginService.userName != null && typeof (this._loginService.userName) != "undefined") {
             this.userName = this._loginService.userName;
         } else {
@@ -42,16 +44,24 @@ export class TripComponent {
         this.showPopUp = !this.showPopUp;
     }
 
+    refreshTrips(): void {
+        console.log("refresh trips");
+        this.getAllTrips();
+    }
+
     //  get methos sur service.
-    getAllTrips() {
+    getAllTrips(): void {
+            this.reqTrips = true;
             this._tripService.getAllTripsAPI()
             .subscribe(
                 data => {
                     console.log("succes get trips from service : " + JSON.stringify(data));
                     this.trips = data;
+                    this.reqTrips = false;
                 },
                 error => {
                     console.log("error getting trips from service : " + error);
+                    this.reqTrips = false;
                 }
             );
     }

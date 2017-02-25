@@ -83,3 +83,8 @@ pagination-controls{
     float: right;
     padding: 4%;
 }
+
+.refreshButton{
+    float: right;
+    margin: 10px 20px;
+}

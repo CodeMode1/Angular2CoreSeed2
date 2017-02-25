@@ -11,6 +11,32 @@
 
 <h3>Disponibles présentement</h3>
 
+<nav class="navbar navbar-default col-md-12 col-sm-12">
+    <div class="navbar-left navbar-header col-md-2">
+        <span class="navbar-brand">
+            <i class="fa fa-search"></i>
+        </span>
+    </div>
+    <div class="col-md-8">
+        <form class="navbar-form navbar-left" role="Search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Chercher">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-info"><i class="fa fa-info"></i></button>
+                    <button type="submit" class="btn btn-default">Go!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="navbar-right col-md-2">
+        <button (click)="refreshTrips()" kendoButton [primary]="true" [icon]="'refresh'" class="refreshButton">Actualiser</button>
+    </div>   
+</nav>
+
+<div class="col-md-12 col-sm-12" style="text-align: center">
+    <i *ngIf="reqTrips" class="fa fa-spinner fa-spin fa-5x"></i>
+</div>
+
 <main class="col-md-12">
     <template *ngIf="!trips.length">
         <h3>Aucuns Trips</h3>
