@@ -20,10 +20,13 @@
             <li>Nom : {{trip?.name}}</li>
             <li>Pays : {{trip?.country}}</li>
             <li>Continent : {{trip?.continent}}</li>
-            <li>
-                Rating : <rating *ngIf="trip?.rating" [rating]='trip.rating' (ratingClick)="clickRating($event)">
+            <li #anchor>
+                Rating : <rating class="rating" *ngIf="trip?.rating" [rating]='trip.rating' (ratingClick)="clickRating($event)">
                          </rating>
             </li>
+            <kendo-popup [anchor]="anchor" class="popUpContent" *ngIf="showPopUp">
+                Quoté : {{trip?.rating}}
+            </kendo-popup>
         </ul>
         <p>Date de Départ : {{trip?.leaving | fmTripDate}}</p>
         <a class="btn btn-sm btn-primary" [routerLink]="[trip.id]">Voir Trip</a>

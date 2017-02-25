@@ -68,3 +68,13 @@ pagination-controls{
     text-align: center;
     padding: 1% 0 1% 0;
 }
+
+.popUpContent{
+    max-width: 100px;
+    height: auto;
+    padding: 10px;
+    color: #787878;
+    background-color: rgba(30,144,255,.3);
+    border: 1px solid rgba(21, 5, 5, 0.12);
+}
+

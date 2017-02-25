@@ -15,11 +15,13 @@ export class TripComponent {
     public trips: Trip[];
     public titreTrip: string;
     public userName: string;
+    public showPopUp: boolean;
 
     constructor(public _tripService: TripService, private _loginService: LoginService,
         private _activatedRoute: ActivatedRoute, private _router: Router) {
         this.titreTrip = "Les Forfaits Voyages";
         this.trips = [];
+        this.showPopUp = false;
         if (this._loginService.userName != null && typeof (this._loginService.userName) != "undefined") {
             this.userName = this._loginService.userName;
         } else {
@@ -37,7 +39,7 @@ export class TripComponent {
 
     clickRating($event) {
         console.log($event);
-        alert('rating: ' + $event.rating);
+        this.showPopUp = !this.showPopUp;
     }
 
     //  get methos sur service.
