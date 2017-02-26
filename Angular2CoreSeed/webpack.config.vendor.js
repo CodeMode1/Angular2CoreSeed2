@@ -49,7 +49,8 @@ module.exports = {
             '@progress/kendo-angular-buttons',
             '@progress/kendo-angular-dropdowns',
             '@progress/kendo-angular-popup',
-            '@progress/kendo-angular-scrollview'
+            '@progress/kendo-angular-scrollview',
+            'angular2-google-maps/core'
         ]
     },
     output: {

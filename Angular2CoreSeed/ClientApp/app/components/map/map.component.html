@@ -1,0 +1,42 @@
+﻿<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+<div class="col-md-12">
+    <sebm-google-map [latitude]="lat"
+                     [longitude]="lng"
+                     [zoom]="zoom"
+                     [disableDefaultUI]="false"
+                     [zoomControl]="false">
+
+        <sebm-google-map-marker *ngFor="let m of markers; let i = index"
+                                (markerClick)="clickedMarker(m.label, i)"
+                                [latitude]="m.lat"
+                                [longitude]="m.lng"
+                                [label]="m.label"
+                                [markerDraggable]="false">
+
+            <sebm-google-map-info-window>
+                <strong>{{infoClickedStop}}</strong>
+            </sebm-google-map-info-window>
+
+        </sebm-google-map-marker>
+
+        <sebm-google-map-circle [latitude]="lat + 0.3" [longitude]="lng"
+                                [radius]="10000"
+                                [fillColor]="'red'"
+                                [circleDraggable]="true"
+                                [editable]="false">
+        </sebm-google-map-circle>
+    </sebm-google-map>
+
+</div>
+<div class="col-md-12 col-xs-12">
+    <div class="input-group">
+        <input type="text" id="address" #address class="form-control" />
+        <div class="input-group-btn">
+            <button type="button" (click)="getAddress(address)" class="btn btn-info"><i class="fa fa-search"></i> Chercher</button>
+        </div>
+    </div>
+</div>

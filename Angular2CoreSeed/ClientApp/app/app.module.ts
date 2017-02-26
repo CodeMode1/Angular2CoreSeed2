@@ -31,6 +31,8 @@ import { RatingComponent } from './components/rating/rating.component';
 import { StopComponent } from './components/stop/stop.component';
 import { EditStopComponent } from './components/stopedit/stopedit.component';
 
+import { MapComponent } from './components/map/map.component';
+
 // services
 import { LoginService } from './components/login/login.service';
 import { TripService } from './components/trip/trip.service';
@@ -38,6 +40,7 @@ import { TripDetailService } from './components/tripdetail/tripdetail.service';
 import { StopService } from './components/stop/stop.service';
 import { WeatherService } from './components/weather/weather.service';
 import { WeatherConstraintsService } from './components/weatherconstraints/weatherconstraint.service';
+import { MapService } from './components/map/map.service';
 
 // pipes
 import { FormatHour } from './components/weatherform/weatherform.pipe';
@@ -54,10 +57,15 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
 
+// Map
+import { AgmCoreModule } from 'angular2-google-maps/core';
+
+// touch, swipe, tap, fragment actions
 import 'hammerjs';
 
 // paging
 import { Ng2PaginationModule } from 'ng2-pagination';
+
 //import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
@@ -80,6 +88,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         StopComponent,
         LoginComponent,
         RatingComponent,
+        MapComponent,
         // pipes
         FormatHour,
         TripDate
@@ -91,7 +100,8 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         TripDetailService,
         StopService,
         WeatherService,
-        WeatherConstraintsService
+        WeatherConstraintsService,
+        MapService
     ],
     imports: [
         BrowserModule,
@@ -109,6 +119,9 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         DropDownsModule,
         PopupModule,
         ScrollViewModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDBrS5tSY6s57jeEO6aH_Si7coVk0_x_IU'
+        }),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -128,6 +141,8 @@ import { Ng2PaginationModule } from 'ng2-pagination';
                                       
                 ]
             },
+            { path: 'map', component: MapComponent, canActivate: [AuthGuard] },
+            { path: 'map/:id', component: MapComponent },
             {
                 path: 'weathers/:id', component: WeatherComponent, children: [
                     { path: '', component: WeatherDetailComponent },
