@@ -1,4 +1,8 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Stop } from '../stop/stop';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { MapService } from './map.service';
 
 declare var google;
 
@@ -15,21 +19,56 @@ interface marker {
     template: require('./map.component.html'),
     styles: [require('./map.component.css')]
 })
-export class MapComponent {
-
+export class MapComponent implements OnInit, OnDestroy {
+    private sub: any;
+    public titleMap: string;
     // google maps zoom level
     public zoom: number = 8;
     public markers: marker[];
     public lat: number;
     public lng: number;
     public infoClickedStop: string;
+    public selectedStop: Stop;
 
-    constructor() {
+    constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private _mapService: MapService) {
+        this.titleMap = "Map";
+        this.selectedStop = null;
         // initial center position for the map
         this.infoClickedStop = "";
         this.lat = 45.5016889;
         this.lng = -73.56725599999999;
         this.markers = [];
+    }
+
+    ngOnInit() {
+        this.sub = this._activatedRoute.params.subscribe(
+            params => {
+                if (params['id'] != null && params['id'] != undefined) {
+                    var id = +params['id'];
+                    this.getStop(id);
+                }
+            }
+        );
+    }
+
+    resetSearchStop(input: any): void {
+        console.log("click");
+        var empty = "";
+        input.value = empty;
+    }
+
+    getStop(id: number): Subscription {
+        return this._mapService.getStopByIdAPI(id)
+            .subscribe(
+                data => {
+                    this.selectedStop = new Stop(data.id, data.name, data.arrival, data.leaving, data.city,
+                        data.cuisine, data.guide, data.longitude, data.latitude, data.order, data.quote, data.showPopUp);
+                    console.log("selected stop : " + this.selectedStop);
+                },
+                error => {
+                    console.log("error cant get stop by id " + error);
+                }
+            );
     }
 
     clickedMarker(label: string, index: number) {
@@ -62,6 +101,16 @@ export class MapComponent {
                     callback({ Status: "OK", Latitude: lat, Longitude: lng });
                 }
             });
+        }
+    }
+
+    goBack(): void {
+        this._router.navigateByUrl("/trips");
+    }
+
+    ngOnDestroy() {
+        if (this.sub != null && typeof(this.sub) != 'undefined') {
+            this.sub.unsubscribe();
         }
     }
 

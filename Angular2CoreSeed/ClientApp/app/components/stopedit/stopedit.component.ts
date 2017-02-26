@@ -129,9 +129,14 @@ export class EditStopComponent {
             );
     }
 
-    //  ajouter une temeprature pour ce stop
+    //  ajouter une temperature pour ce stop
     ajouteTemp(id: number): void {
         this._router.navigateByUrl("/weathers/" + id);
+    }
+
+    // voir le stop sur la map
+    goMap(id: number): void {
+        this._router.navigateByUrl("/map/" + id);
     }
 
     // delete stop by its id

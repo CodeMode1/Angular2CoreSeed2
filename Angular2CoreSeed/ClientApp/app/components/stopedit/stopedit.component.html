@@ -4,8 +4,8 @@
 
 <ul class="col-md-9 col-sm-12">
     <li><h3>Stops</h3></li>
-    <li *ngFor="let stop of selectedTrip?.stops" class="col-md-12">
-        <div class="col-md-8 col-sm-12 rowBlock"
+    <li *ngFor="let stop of selectedTrip?.stops" class="col-md-12 rowStop">
+        <div class="col-md-7 col-sm-12 rowBlock"
              (@flyInOut.start)="animStopStarted($event)"
              [@flyInOut]="flyState">
 
@@ -15,14 +15,14 @@
             </button>
             <div class="popUpWrapper">
                 <kendo-popup class="popUpContent" [anchor]="anchor" (anchorViewportLeave)="show = false" *ngIf="stop?.showPopUp">
-                    {{stop?.arrival | fmTripDate}}, {{stop?.leaving | fmTripDate}},  À {{stop?.city}}, Cuisine {{stop?.cuisine}},
-                    {{stop?.guide}}, Quoté {{stop?.quote}}
+                    {{stop?.arrival | fmTripDate}} À {{stop?.leaving | fmTripDate}}, {{stop?.city}}. Quoté {{stop?.quote}}
                 </kendo-popup>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12">
-            <span><button [disabled]="!isAdmin" class="btn btn-md btn-danger active crudButtons" (click)="deleteStop(stop.id)"><i class="fa fa-trash"></i> Supprimer</button></span>
-            <span><button class="btn btn-md btn-success active crudButtons" (click)="ajouteTemp(stop.id)"><i class="fa fa-plus"></i> Température</button></span>
+        <div class="col-md-5 col-sm-12">
+            <span><button [disabled]="!isAdmin" class="btn btn-sm btn-danger active crudButtons" (click)="deleteStop(stop.id)"><i class="fa fa-trash"></i> Supprimer</button></span>
+            <span><button class="btn btn-sm btn-success active crudButtons" (click)="ajouteTemp(stop.id)"><i class="fa fa-plus"></i> Température</button></span>
+            <span><button class="btn btn-sm btn-primary active crudButtons" (click)="goMap(stop.id)"><i class="fa fa-map"></i> Map</button></span>
         </div>
     </li>
 </ul>

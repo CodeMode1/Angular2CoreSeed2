@@ -141,8 +141,8 @@ import { Ng2PaginationModule } from 'ng2-pagination';
                                       
                 ]
             },
-            { path: 'map', component: MapComponent, canActivate: [AuthGuard] },
-            { path: 'map/:id', component: MapComponent },
+            { path: 'map', component: MapComponent },
+            { path: 'map/:id', component: MapComponent, canActivate: [AuthGuard] },
             {
                 path: 'weathers/:id', component: WeatherComponent, children: [
                     { path: '', component: WeatherDetailComponent },

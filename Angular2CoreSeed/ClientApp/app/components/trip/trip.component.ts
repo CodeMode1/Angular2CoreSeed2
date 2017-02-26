@@ -39,10 +39,6 @@ export class TripComponent {
         this.getAllTrips();
     }
 
-    home() {
-        this._router.navigateByUrl('/home');
-    }
-
     clickRating($event) {
         console.log($event);
         this.showPopUp = !this.showPopUp;

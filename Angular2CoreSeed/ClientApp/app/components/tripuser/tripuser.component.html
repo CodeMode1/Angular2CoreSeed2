@@ -11,7 +11,7 @@
     <div class="card col-md-3">
         <div class="card-header">
             <h4 class="card-title">Trip</h4>
-            <h5 class="text-muted">Contient {{trip?.stops.length}} stops</h5>
+            <h5 class="text-muted">Contient <span class="badge">{{trip?.stops.length}}</span> stops</h5>
         </div>
         <i class="card-img-top fa fa-picture-o fa-2x" aria-hidden="true"></i>
         <div class="card card-block">
@@ -32,7 +32,10 @@
 
     <div class="col-md-9">
         <ul *ngFor="let stop of trip?.stops; let i = index">
-            <li>Stop # {{i + 1}}</li>
+            <li>
+                Stop # {{i + 1}}
+                <span style="float: right;"><button class="btn btn-sm btn-primary active" (click)="goMap(stop.id)"><i class="fa fa-map"></i> Map</button></span>
+            </li>
             <li>Nom : {{stop?.name}}</li>
             <li>Date d'arrivée : {{stop?.arrival | fmTripDate}}</li>
             <li>Date de départ : {{stop?.leaving | fmTripDate}}</li>
@@ -45,5 +48,5 @@
 </div>
 
 
-<a class="btn btn-lg btn-primary backButton" (click)="goBack()"><i class="fa fa-arrow-up"></i> Retour</a>
+<a class="btn btn-md btn-primary backButton" (click)="goBack()"><i class="fa fa-arrow-up"></i> Retour</a>
 

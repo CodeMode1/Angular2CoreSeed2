@@ -114,7 +114,7 @@ namespace Angular2CoreSeed.Controllers
                 _logger.LogError($"Failed to get trip with id : {id} , ex : {ex}");
             }
             _logger.LogWarning($"Could get trip object with id : {id}");
-            return BadRequest($"Error occured getting weather with id  : {id}");
+            return BadRequest($"Error occured getting trip with id  : {id}");
         }
 
         [HttpPost("")]

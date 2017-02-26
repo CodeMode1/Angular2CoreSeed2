@@ -31,6 +31,10 @@ export class TripUserComponent implements OnInit  {
         this.selectedTrip = null;
     }
 
+    goMap(id: number): void {
+        this._router.navigateByUrl("/map/" + id);
+    }
+
     // action triggered when user swipes
     swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
         // out of range

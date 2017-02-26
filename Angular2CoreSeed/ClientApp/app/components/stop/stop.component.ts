@@ -55,10 +55,10 @@ export class StopComponent {
     }
 
     ngOnInit() {
-        //check if were not in /stop yet, jsut display a message for the user
+        // if not in /stop yet, just display a message for the user (still in parent route with the id property)
         this._activatedRoute.params.subscribe(
             params => {
-                if (params['id'] != null || params['id'] != undefined) {
+                if (params['id'] != null && params['id'] != undefined) {
                     this.message = "";
                     this.isShowForm = false;
                 } else {

@@ -1,4 +1,6 @@
-﻿<h2>Détails Trip</h2>
+﻿<div class="col-md-12">
+    <h2>Détails Trip</h2>
+</div>
 
 <ul *ngIf="selectedTrip" class="col-md-6">
     <li><i class="fa fa-address-book"></i><span>{{selectedTrip?.id}}</span></li>
@@ -23,13 +25,13 @@
             Visualiser Stops
             <span>
                 <a [routerLink]="['edit']" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></a>
+                <button (click)="goBack()" class="btn btn-sm btn-primary"><i class="fa fa-arrow-up"></i> Retour</button>
+                <button (click)="refreshTrip()" kendoButton [primary]="true" [icon]="'refresh'" class="refreshButton"> Actualiser</button>
             </span>
+            <a *ngIf="isRefreshTrip"><i class="fa fa-spinner fa-spin fa-3x"></i></a>
         </h4>
     </li>
 </ul>
 
 <router-outlet></router-outlet>
 
-<footer class="col-md-12">
-    <button (click)="goBack()" class="btn btn-lg btn-primary">Retour</button>
-</footer>

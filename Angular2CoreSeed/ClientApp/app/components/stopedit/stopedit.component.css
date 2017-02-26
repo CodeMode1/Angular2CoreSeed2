@@ -27,15 +27,20 @@ a{
 }
 
 .popUpContent {
-    padding: 15px;
+    padding: 4px;
     color: #787878;
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(255, 255, 255, .4);
     border: 1px solid rgba(21, 5, 5, 0.12);
 }
 
 .popUpWrapper{
-    min-width: 100px;
+    max-width: 100px;
     min-height: 5px;
+    max-height: 20px;
+}
+
+.rowStop{
+    margin: 1% 0;
 }
 
 .rowBlock{

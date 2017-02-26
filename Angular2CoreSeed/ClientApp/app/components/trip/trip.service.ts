@@ -12,7 +12,7 @@ import 'rxjs/add/observable/throw';
 export class TripService {
     private _urlTrip: string;
 
-    constructor(public _http: Http, private _loginService: LoginService) {
+    constructor(private _http: Http, private _loginService: LoginService) {
         this._urlTrip = 'api/trip';
     }
 
@@ -37,7 +37,7 @@ export class TripService {
         let options = new RequestOptions({ headers: headers });
 
         return this._http.get(this._urlTrip + "/" + id, options)
-            .map((response: Response) => <ITrip[]>response.json())
+            .map((response: Response) => <ITrip>response.json())
             .catch((error: any) => <any>error.json())
     }
 

@@ -8,3 +8,9 @@
         cursor: pointer;
     }
 }
+
+#buttonHome{
+    margin: 5% 0;
+    clear: both;
+    float: left;
+}

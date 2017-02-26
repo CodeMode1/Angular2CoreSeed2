@@ -29,6 +29,27 @@ namespace Angular2CoreSeed.Controllers
             _usMng = usrMng;
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                _logger.LogInformation($"trying get trip with id {id}");
+                var stop = _repository.GetStopById(id);
+                if (stop == null)
+                {
+                    return NotFound($"couldnt find stop with id : {id}");
+                }
+                return Ok(stop);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get stop with id : {id} , ex : {ex}");
+            }
+            _logger.LogWarning($"Could get stop object with id : {id}");
+            return BadRequest($"Error occured getting stop with id  : {id}");
+        }
+
         // save a stop at a trip's id.
         [HttpPost("{id}")]
         public async Task<IActionResult> Post(int id, [FromBody]Stop stop)

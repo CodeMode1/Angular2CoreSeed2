@@ -1,7 +1,11 @@
-﻿<h1>{{ title }}</h1>
-
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
+﻿<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-3">{{titleMap}}</h1>
+        <p class="lead">Voir un Stop de mes Trips</p>
+        <p class="lead">Ou faire une recherche aléatoire</p>
+        <a class="btn btn-md btn-primary" (click)="goBack()"><i class="fa fa-arrow-up"></i> Retour</a>
+    </div>
+</div>
 
 <div class="col-md-12">
     <sebm-google-map [latitude]="lat"
@@ -33,10 +37,41 @@
 
 </div>
 <div class="col-md-12 col-xs-12">
-    <div class="input-group">
-        <input type="text" id="address" #address class="form-control" />
+    <div class="input-group col-md-12">
+        <input type="text" id="address" [ngModel]="selectedStop?.city" #address class="form-control" placeholder="Chercher..."/>
         <div class="input-group-btn">
             <button type="button" (click)="getAddress(address)" class="btn btn-info"><i class="fa fa-search"></i> Chercher</button>
+            <button kendoButton (click)="resetSearchStop(address)" type="button" class="btn btn-secondary"><i class="fa fa-eraser"></i> Reset</button>
         </div>
     </div>
 </div>
+
+
+<div *ngIf="selectedStop" class="col-md-12 col-xs-12 center-block stopSelectedContent">
+    <dl class="dl-horizontal">
+        <dt>Nom</dt>
+        <dd>{{selectedStop?.name}}</dd>
+
+        <dt>Arrivé</dt>
+        <dd>{{selectedStop?.arrival | fmTripDate}}</dd>
+
+        <dt>Départ</dt>
+        <dd>{{selectedStop?.leaving | fmTripDate}}</dd>
+
+        <dt>Ville</dt>
+        <dd><h4 style="color:steelblue;">{{selectedStop?.city}}</h4></dd>
+
+        <dt><strong>Cuisine</strong></dt>
+        <dd>{{selectedStop?.cuisine}}</dd>
+
+        <dt><strong>Guide</strong></dt>
+        <dd>{{selectedStop?.guide}}</dd>
+
+        <dt><strong>Quote</strong></dt>
+        <dd>{{selectedStop?.quote}}</dd>
+    </dl>
+</div>
+
+
+
+

@@ -16,10 +16,12 @@ export class TripDetailComponent {
     public isBought: boolean;
     public userTrips: Trip[];
     public isBoughtMessage: string;
+    public isRefreshTrip: boolean;
 
     constructor(private _activatedRoute: ActivatedRoute,
         public _tripdetail: TripDetailService, private _router: Router) {
         this.isBought = false;
+        this.isRefreshTrip = false;
         this.userTrips = [];
         this.isBoughtMessage = "";
     }
@@ -37,7 +39,14 @@ export class TripDetailComponent {
         );
     }
 
+    refreshTrip(): void {
+        if (this.selectedTrip != null) {
+            this.getTripById(this.selectedTrip.id);
+        }    
+    }
+
     getTripById(id: number): Subscription {
+        this.isRefreshTrip = true;
         return this._tripdetail.getTripByIdAPI(id)
             .subscribe(
             data => {
@@ -51,10 +60,12 @@ export class TripDetailComponent {
                     data.stops);
                     console.log("succes get back trip with id : " + id);
                     console.log("trip detail : " + JSON.stringify(data));
+                    this.isRefreshTrip = false;
                     this.getTripsForUser();
                 },
                 error => {
-                    console.log("error get back trip with id : " + id + error );     
+                    console.log("error get back trip with id : " + id + error);
+                    this.isRefreshTrip = false;     
                 }
             );
     }

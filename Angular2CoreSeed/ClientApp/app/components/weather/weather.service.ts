@@ -12,7 +12,7 @@ import { LoginService } from '../login/login.service';
 export class WeatherService {
     private _urlWeather: string;
 
-    constructor(private _http: Http, public _loginService: LoginService) {
+    constructor(private _http: Http, private _loginService: LoginService) {
         this._urlWeather = "api/weather";
     }
 
