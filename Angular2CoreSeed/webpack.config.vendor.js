@@ -50,7 +50,9 @@ module.exports = {
             '@progress/kendo-angular-dropdowns',
             '@progress/kendo-angular-popup',
             '@progress/kendo-angular-scrollview',
-            'angular2-google-maps/core'
+            'angular2-google-maps/core',
+            '@progress/kendo-angular-upload',
+            '@progress/kendo-angular-sortable'
         ]
     },
     output: {

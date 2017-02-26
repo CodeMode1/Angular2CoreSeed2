@@ -32,6 +32,7 @@ import { StopComponent } from './components/stop/stop.component';
 import { EditStopComponent } from './components/stopedit/stopedit.component';
 
 import { MapComponent } from './components/map/map.component';
+import { DemoComponent } from './components/demo/demo.component';
 
 // services
 import { LoginService } from './components/login/login.service';
@@ -56,6 +57,9 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+import { SortableModule } from '@progress/kendo-angular-sortable';
+import { UploadModule } from '@progress/kendo-angular-upload';
+
 
 // Map
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -89,6 +93,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         LoginComponent,
         RatingComponent,
         MapComponent,
+        DemoComponent,
         // pipes
         FormatHour,
         TripDate
@@ -119,6 +124,8 @@ import { Ng2PaginationModule } from 'ng2-pagination';
         DropDownsModule,
         PopupModule,
         ScrollViewModule,
+        SortableModule,
+        UploadModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDBrS5tSY6s57jeEO6aH_Si7coVk0_x_IU'
         }),
@@ -149,6 +156,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
                     { path: 'detail/:id', component: WeatherDetailComponent }
                 ]
             },
+            { path: 'demo', component: DemoComponent },
             { path: 'weatherConstraints', component: WeatherConstraintsComponent },
             { path: 'weatherConstraints/:id', component: WeatherConstraintComponent },
             { path: '**', redirectTo: 'home' }
